@@ -1,6 +1,7 @@
 # recipemanager/models.py
 from recipemanager import db
 from datetime import datetime
+from sqlalchemy.orm import relationship
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -10,18 +11,22 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)
 
+    
+    recipes = relationship('Recipe', backref='author', lazy=True)
+
 class Recipe(db.Model):
     __tablename__ = 'recipes'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
     instructions = db.Column(db.Text)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id')) 
     category_name = db.Column(db.String(50)) 
     image_url = db.Column(db.String(255))
     preparation_time = db.Column(db.Integer)
     cook_time = db.Column(db.Integer)
     created_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)
+
 
 
 class Rating(db.Model):

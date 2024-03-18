@@ -44,3 +44,14 @@
 .recipe-details {
     margin-bottom: 10px;
 }
+
+
+.carousel-item {
+    height: 400px; 
+}
+
+
+.carousel-item img {
+    margin: auto;
+    height: 100%;
+}

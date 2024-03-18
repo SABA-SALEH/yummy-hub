@@ -1,6 +1,6 @@
 # recipemanager/routes.py
 import os
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 from recipemanager import app, db
 from recipemanager.models import User, Recipe, Rating, Comment
 from datetime import datetime
@@ -14,7 +14,8 @@ def inject_categories():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    recipes = Recipe.query.all()  
+    return render_template('home.html', recipes=recipes)
 
 @app.route('/category/<category>')
 def category(category):
@@ -136,6 +137,74 @@ def view_recipes():
     user_recipes = Recipe.query.filter_by(user_id=user_id).all()
     
     return render_template('view_recipes.html', username=username, recipes=user_recipes)
+
+@app.route('/manage_recipes')
+def manage_recipes():
+    if 'username' not in session:
+        return redirect(url_for('login')) 
+
+    username = session['username']
+    user_id = session.get('user_id')
+    
+    user_recipes = Recipe.query.filter_by(user_id=user_id).all()
+    
+    return render_template('manage_recipes.html', username=username, recipes=user_recipes)
+
+
+@app.route('/edit_recipe/<int:recipe_id>', methods=['GET', 'POST'])
+def edit_recipe(recipe_id):
+    if 'username' not in session:
+        return redirect(url_for('login')) 
+    username = session['username']
+    user_id = session.get('user_id')
+    
+    recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
+    
+    if not recipe:
+        flash('Recipe not found or you do not have permission to edit this recipe.', 'danger')
+        return redirect(url_for('manage_recipes'))
+    
+    if request.method == 'POST':
+        recipe.title = request.form['title']
+        recipe.description = request.form['description']
+        recipe.instructions = request.form['instructions']
+        recipe.category_name = request.form['category']
+        recipe.preparation_time = request.form['preparation_time']
+        recipe.cook_time = request.form['cook_time']
+        recipe.image_url = request.form['image_url'] 
+
+        db.session.commit()
+        
+        flash('Recipe updated successfully!', 'success')
+        return redirect(url_for('manage_recipes'))
+    
+    categories = [
+        {'id': 1, 'name': 'Around the World'},
+        {'id': 2, 'name': 'Quick & Easy'},
+        {'id': 3, 'name': 'Healthy Food'},
+        {'id': 4, 'name': 'Sweet Treats'}
+    ]
+    
+    return render_template('edit_recipe.html', username=username, recipe=recipe, categories=categories)
+
+@app.route('/delete_recipe/<int:recipe_id>', methods=['POST'])
+def delete_recipe(recipe_id):
+    if 'username' not in session:
+        return redirect(url_for('login')) 
+    
+    user_id = session.get('user_id')
+    
+    recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
+    
+    if not recipe:
+        flash('Recipe not found or you do not have permission to delete this recipe.', 'danger')
+        return redirect(url_for('manage_recipes'))
+    
+    db.session.delete(recipe)
+    db.session.commit()
+    
+    flash('Recipe deleted successfully!', 'success')
+    return redirect(url_for('manage_recipes'))
 
 
 if __name__ == "__main__":
