@@ -1,0 +1,46 @@
+.section-bg {
+    background-color: #9A616D;
+}
+
+.card-border-radius {
+    border-radius: 1rem;
+}
+
+.card-img-radius {
+    border-radius: 1rem 0 0 1rem;
+}
+
+.logo-color {
+    color: #ff6219;
+}
+
+.text-color {
+    color: #393f81;
+}
+
+.card-text-black {
+    color: black;
+}
+
+.form-label-spacing {
+    letter-spacing: 1px;
+}
+
+.recipe-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.recipe-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.recipe-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.recipe-details {
+    margin-bottom: 10px;
+}

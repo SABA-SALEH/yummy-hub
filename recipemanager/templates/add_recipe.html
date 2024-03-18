@@ -1,0 +1,50 @@
+<!-- add_recipe.html -->
+{% extends "base2.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Add Recipe</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="instructions" class="form-label">Instructions</label>
+                    <textarea class="form-control" id="instructions" name="instructions" rows="6" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="preparation_time" class="form-label">Preparation Time (minutes)</label>
+                    <input type="number" class="form-control" id="preparation_time" name="preparation_time" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cook_time" class="form-label">Cook Time (minutes)</label>
+                    <input type="number" class="form-control" id="cook_time" name="cook_time" required>
+                </div>
+                <div class="mb-3">
+                    <label for="image_url" class="form-label">Image URL</label>
+                    <input type="text" class="form-control" id="image_url" name="image_url" required>
+                </div>
+              
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select class="form-select" id="category" name="category" required>
+                        <option selected disabled>Select a category</option>
+                        {% for category in categories %}
+                            <option value="{{ category['name'] }}">{{ category['name'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Add Recipe</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

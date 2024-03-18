@@ -2,11 +2,9 @@
 from recipemanager import db
 from datetime import datetime
 
-
-
 class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
@@ -19,17 +17,12 @@ class Recipe(db.Model):
     description = db.Column(db.Text)
     instructions = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    category_name = db.Column(db.String(50)) 
     image_url = db.Column(db.String(255))
     preparation_time = db.Column(db.Integer)
     cook_time = db.Column(db.Integer)
     created_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)
 
-class Category(db.Model):
-    __tablename__ = 'categories'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    recipes = db.relationship('Recipe', backref='category', lazy=True)
 
 class Rating(db.Model):
     __tablename__ = 'ratings'
