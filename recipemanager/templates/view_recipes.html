@@ -9,6 +9,16 @@
     <div class="recipe-details">
         <p><strong>Category:</strong> {{ recipe.category_name }}</p>
         <p><strong>Description:</strong> {{ recipe.description }}</p>
+        <h6><strong>Ingredients:</strong></h6>
+        {% if recipe.ingredients %}
+            <ul> 
+                {% for ingredient in recipe.ingredients %}
+                    <li>{{ ingredient.name }}{% if ingredient.quantity %} - {{ ingredient.quantity }}{% endif %}</li>
+                {% endfor %}
+            </ul> 
+        {% else %}
+            <p>No ingredients found.</p>
+        {% endif %}
         <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
         <p><strong>Preparation Time:</strong> {{ recipe.preparation_time }} minutes</p>
         <p><strong>Cook Time:</strong> {{ recipe.cook_time }} minutes</p>

@@ -1,4 +1,3 @@
-<!-- edit_recipe.html -->
 {% extends "base2.html" %}
 
 {% block content %}
@@ -39,8 +38,29 @@
                 {% endfor %}
             </select>
         </div>
+
+        {% for ingredient in recipe.ingredients|default([]) %}
+        <div class="mb-3">
+            <label for="ingredient_name_{{ loop.index0 }}" class="form-label">Ingredient Name</label>
+            <input type="text" class="form-control" id="ingredient_name_{{ loop.index0 }}" name="ingredient_name_{{ loop.index0 }}" value="{{ ingredient.name }}">
+        </div>
+        <div class="mb-3">
+            <label for="ingredient_quantity_{{ loop.index0 }}" class="form-label">Ingredient Quantity</label>
+            <input type="text" class="form-control" id="ingredient_quantity_{{ loop.index0 }}" name="ingredient_quantity_{{ loop.index0 }}" value="{{ ingredient.quantity }}">
+        </div>
+        {% endfor %}
         
-        <button type="submit" class="btn btn-primary">Update Recipe</button>
-    </form>
+    
+
+   
+    <div id="ingredientFields"></div>
+    <button type="button" class="btn btn-primary" onclick="addIngredientField2()">Add Ingredient</button>
+    
+   
+    <button type="submit" class="btn btn-primary" onclick="validateForm()">Update Recipe</button>
+</form>
 </div>
+
+
+
 {% endblock %}

@@ -83,9 +83,9 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('home'))
 
+
 @app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
-
     if 'username' not in session:
         return redirect(url_for('login')) 
 
@@ -95,28 +95,37 @@ def add_recipe():
         title = request.form['title']
         description = request.form['description']
         instructions = request.form['instructions']
-        category_name = request.form['category']  
+        category_name = request.form['category']
         preparation_time = request.form['preparation_time']
         cook_time = request.form['cook_time']
-        image_url = request.form['image_url']  
+        image_url = request.form['image_url']
         
         user_id = session.get('user_id')
-        
         new_recipe = Recipe(
             title=title,
             description=description,
             instructions=instructions,
             user_id=user_id,
-            category_name=category_name, 
+            category_name=category_name,
             image_url=image_url,
             preparation_time=preparation_time,
             cook_time=cook_time
         )
         
+        ingredients = []
+        for i in range(1, 11):  
+            ingredient_name = request.form.get(f'ingredient_name_{i}')
+            ingredient_quantity = request.form.get(f'ingredient_quantity_{i}')
+            if ingredient_name and ingredient_quantity:
+                ingredients.append({"name": ingredient_name, "quantity": ingredient_quantity})
+        
+        for ingredient in ingredients:
+            new_recipe.add_ingredient(ingredient['name'], ingredient['quantity'])
+        
         db.session.add(new_recipe)
         db.session.commit()
-        
-        return redirect(url_for('user'))  
+
+        return redirect(url_for('user'))
     
     categories = [
         {'id': 1, 'name': 'Around the World'},
@@ -127,6 +136,7 @@ def add_recipe():
     
     return render_template('add_recipe.html', categories=categories, username=username)
 
+
 @app.route('/view_recipes')
 def view_recipes():
     if 'username' not in session:
@@ -135,8 +145,13 @@ def view_recipes():
     username = session['username']
     user_id = session.get('user_id')
     user_recipes = Recipe.query.filter_by(user_id=user_id).all()
+   
+    for recipe in user_recipes:
+        if recipe.ingredients is None:
+            recipe.ingredients = []  
     
     return render_template('view_recipes.html', username=username, recipes=user_recipes)
+
 
 @app.route('/manage_recipes')
 def manage_recipes():
@@ -155,15 +170,14 @@ def manage_recipes():
 def edit_recipe(recipe_id):
     if 'username' not in session:
         return redirect(url_for('login')) 
-    username = session['username']
+
     user_id = session.get('user_id')
-    
     recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
-    
+
     if not recipe:
         flash('Recipe not found or you do not have permission to edit this recipe.', 'danger')
         return redirect(url_for('manage_recipes'))
-    
+
     if request.method == 'POST':
         recipe.title = request.form['title']
         recipe.description = request.form['description']
@@ -172,6 +186,23 @@ def edit_recipe(recipe_id):
         recipe.preparation_time = request.form['preparation_time']
         recipe.cook_time = request.form['cook_time']
         recipe.image_url = request.form['image_url'] 
+
+        recipe.ingredients = []
+        index = 0
+        while True:
+            ingredient_name = request.form.get(f'ingredient_name_{index}')
+            ingredient_quantity = request.form.get(f'ingredient_quantity_{index}')
+            if ingredient_name is not None and ingredient_quantity is not None:
+                recipe.ingredients.append({"name": ingredient_name, "quantity": ingredient_quantity})
+                index += 1
+            else:
+                break
+
+        new_ingredient_names = request.form.getlist('new_ingredient_name')
+        new_ingredient_quantities = request.form.getlist('new_ingredient_quantity')
+        for name, quantity in zip(new_ingredient_names, new_ingredient_quantities):
+            if name.strip() and quantity.strip():
+                recipe.ingredients.append({"name": name, "quantity": quantity})
 
         db.session.commit()
         
@@ -185,7 +216,8 @@ def edit_recipe(recipe_id):
         {'id': 4, 'name': 'Sweet Treats'}
     ]
     
-    return render_template('edit_recipe.html', username=username, recipe=recipe, categories=categories)
+    return render_template('edit_recipe.html', username=session['username'], recipe=recipe, categories=categories, ingredientCounter=len(recipe.ingredients))
+
 
 @app.route('/delete_recipe/<int:recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):
@@ -193,7 +225,6 @@ def delete_recipe(recipe_id):
         return redirect(url_for('login')) 
     
     user_id = session.get('user_id')
-    
     recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
     
     if not recipe:

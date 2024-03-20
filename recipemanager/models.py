@@ -2,6 +2,7 @@
 from recipemanager import db
 from datetime import datetime
 from sqlalchemy.orm import relationship
+import json
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -26,7 +27,15 @@ class Recipe(db.Model):
     preparation_time = db.Column(db.Integer)
     cook_time = db.Column(db.Integer)
     created_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)
-
+    ingredients = db.Column(db.JSON)  
+    
+    def add_ingredient(self, name, quantity):
+        if not self.ingredients:
+            self.ingredients = []
+        self.ingredients.append({"name": name, "quantity": quantity})
+    
+    def get_ingredients(self):
+        return self.ingredients if self.ingredients else []
 
 
 class Rating(db.Model):
