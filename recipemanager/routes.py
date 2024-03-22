@@ -52,8 +52,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'username' in session:
-        return redirect(url_for('user'))  
-    
+        return redirect(url_for('home'))  
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -63,11 +62,12 @@ def login():
         if user and user.password == password:
             session['username'] = username  
             session['user_id'] = user.id  
-            return redirect(url_for('user'))  
+            return redirect(url_for('home'))  
         else:
             return render_template('login.html', error='Invalid username or password')
 
     return render_template('login.html')
+
 
 @app.route('/user')
 def user():
@@ -81,7 +81,9 @@ def user():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('home'))
+    session.pop('user_id', None)  
+    return redirect(url_for('home'))  
+
 
 
 @app.route('/add_recipe', methods=['GET', 'POST'])
@@ -237,6 +239,37 @@ def delete_recipe(recipe_id):
     flash('Recipe deleted successfully!', 'success')
     return redirect(url_for('manage_recipes'))
 
+@app.route('/recipe/<int:recipe_id>', methods=['GET', 'POST'])
+def recipe_details(recipe_id):
+    recipe = Recipe.query.get(recipe_id)
+    comments = Comment.query.filter_by(recipe_id=recipe_id).all()
+    
+    if request.method == 'POST':
+        if 'user_id' in session:  
+            user_id = session.get('user_id')
+            content = request.form.get('comment_content')
+            if content:
+                new_comment = Comment(content=content, user_id=user_id, recipe_id=recipe_id)
+                db.session.add(new_comment)
+                db.session.commit()
+                flash('Comment added successfully!', 'success')
+            else:
+                flash('Comment cannot be empty!', 'warning')
+        else:
+           
+            name = request.form.get('name')
+            email = request.form.get('email')
+            content = request.form.get('comment_content')
+            if name and email and content:
+            
+                new_comment = Comment(content=content, name=name, email=email, recipe_id=recipe_id)
+                db.session.add(new_comment)
+                db.session.commit()
+                flash('Comment added successfully!', 'success')
+            else:
+                flash('Name, email, and comment content are required!', 'danger')
+    
+    return render_template('recipe_details.html', recipe=recipe, comments=comments)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ recipe.title }}</h2>
+<p>{{ recipe.description }}</p>
+<p>Preparation Time: {{ recipe.preparation_time }} minutes</p>
+<p>Cook Time: {{ recipe.cook_time }} minutes</p>
+<p>Category: {{ recipe.category_name }}</p>
+<p>Ingredients:</p>
+<ul>
+  {% for ingredient in recipe.get_ingredients() %}
+  <li>{{ ingredient.name }} - {{ ingredient.quantity }}</li>
+  {% endfor %}
+</ul>
+<p>Instructions: {{ recipe.instructions }}</p>
+
+<h3>Comments</h3>
+<ul>
+  {% for comment in comments %}
+  <li>{{ comment.content }}</li>
+  {% if comment.user %}
+  <p>Posted by: {{ comment.user.username }} on {{ comment.created_at }}</p>
+  {% else %}
+  <p>Posted by: {{ comment.name }} on {{ comment.created_at }}</p>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+{% if 'user_id' in session %}
+
+<form action="{{ url_for('recipe_details', recipe_id=recipe.id) }}" method="POST">
+  <textarea name="comment_content" placeholder="Add your comment here"></textarea>
+  <button type="submit">Submit</button>
+</form>
+{% else %}
+
+<form action="{{ url_for('recipe_details', recipe_id=recipe.id) }}" method="POST">
+  <input type="text" name="name" placeholder="Your Name">
+  <input type="email" name="email" placeholder="Your Email">
+  <textarea name="comment_content" placeholder="Add your comment here"></textarea>
+  <button type="submit">Submit</button>
+</form>
+{% endif %}
+{% endblock %}
