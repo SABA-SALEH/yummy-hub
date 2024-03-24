@@ -1,0 +1,65 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+<h3>Your Comments</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Recipe Name</th>
+      <th>Comment Content</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for comment in user_comments %}
+    <tr>
+      <td>{{ comment.recipe.title }}</td>
+      <td>{{ comment.content }}</td>
+      <td>
+        <form action="{{ url_for('delete_comment', comment_id=comment.id) }}" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <a href="{{ url_for('edit_comment', comment_id=comment.id) }}" class="btn btn-primary">Edit</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h3>Recipe Comments</h3>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Recipe Title</th>
+        <th>User/Commenter Name</th>
+        <th>User/Commenter Email</th>
+        <th>Comment Content</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for comment in recipe_comments %}
+      <tr>
+        <td>{{ comment.recipe.title }}</td>
+        {% if comment.user %}
+        <td>{{ comment.user.username }}</td>
+        <td>{{ comment.user.email }}</td>
+        {% else %}
+        <td>{{ comment.name }}</td>
+        <td>{{ comment.email }}</td>
+        {% endif %}
+        <td>{{ comment.content }}</td>
+        <td>
+            {% if comment.recipe.user_id == session['user_id'] %}
+          <form action="{{ url_for('delete_comment', comment_id=comment.id) }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+                  {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

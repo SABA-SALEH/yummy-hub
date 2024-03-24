@@ -47,6 +47,7 @@ class Rating(db.Model):
     created_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)
 
 class Comment(db.Model):
+    __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

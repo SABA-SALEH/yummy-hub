@@ -177,7 +177,6 @@ def edit_recipe(recipe_id):
     recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
 
     if not recipe:
-        flash('Recipe not found or you do not have permission to edit this recipe.', 'danger')
         return redirect(url_for('manage_recipes'))
 
     if request.method == 'POST':
@@ -208,7 +207,6 @@ def edit_recipe(recipe_id):
 
         db.session.commit()
         
-        flash('Recipe updated successfully!', 'success')
         return redirect(url_for('manage_recipes'))
     
     categories = [
@@ -221,6 +219,7 @@ def edit_recipe(recipe_id):
     return render_template('edit_recipe.html', username=session['username'], recipe=recipe, categories=categories, ingredientCounter=len(recipe.ingredients))
 
 
+
 @app.route('/delete_recipe/<int:recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):
     if 'username' not in session:
@@ -230,13 +229,20 @@ def delete_recipe(recipe_id):
     recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
     
     if not recipe:
-        flash('Recipe not found or you do not have permission to delete this recipe.', 'danger')
         return redirect(url_for('manage_recipes'))
     
-    db.session.delete(recipe)
-    db.session.commit()
-    
-    flash('Recipe deleted successfully!', 'success')
+    try:
+        comment_ids = [comment.id for comment in recipe.comments]
+        comments_deleted = Comment.query.filter_by(recipe_id=recipe_id).delete()
+       
+        db.session.commit()
+
+        db.session.delete(recipe)
+        db.session.commit()
+
+    except Exception as e:
+        db.session.rollback()
+
     return redirect(url_for('manage_recipes'))
 
 @app.route('/recipe/<int:recipe_id>', methods=['GET', 'POST'])
@@ -271,5 +277,67 @@ def recipe_details(recipe_id):
     
     return render_template('recipe_details.html', recipe=recipe, comments=comments)
 
+
+@app.route('/manage_comments')
+def manage_comments():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    username = session.get('username')  
+    
+    user_comments = Comment.query.filter_by(user_id=user_id).all()
+    recipe_comments = Comment.query.join(Recipe).filter(Recipe.user_id == user_id).all()
+
+    return render_template('manage_comments.html', user_comments=user_comments, recipe_comments=recipe_comments, username=username)
+
+@app.route('/delete_comment/<int:comment_id>', methods=['POST'])
+def delete_comment(comment_id):
+
+    comment = Comment.query.get(comment_id)
+    if comment:
+        db.session.delete(comment)
+        db.session.commit()
+        flash('Comment deleted successfully!', 'success')
+    else:
+        flash('Comment not found.', 'danger')
+
+    return redirect(url_for('manage_comments')) 
+
+@app.route('/edit_comment/<int:comment_id>', methods=['GET', 'POST'])
+def edit_comment(comment_id):
+    comment = Comment.query.get(comment_id)
+    if not comment:
+        flash('Comment not found.', 'danger')
+        return redirect(url_for('manage_comments'))
+
+    comment_content = comment.content
+
+    return render_template('edit_comment.html', comment_id=comment_id, comment_content=comment_content)
+
+
+
+@app.route('/update_comment/<int:comment_id>', methods=['POST'])
+def update_comment(comment_id):
+    if request.method == 'POST':
+       
+        updated_content = request.form.get('content')
+        comment = Comment.query.get(comment_id)
+        if comment:
+            comment.content = updated_content
+            db.session.commit()
+            flash('Comment updated successfully!', 'success')
+        else:
+            flash('Comment not found.', 'danger')
+
+    return redirect(url_for('manage_comments'))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
