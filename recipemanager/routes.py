@@ -333,6 +333,18 @@ def update_comment(comment_id):
     return redirect(url_for('manage_comments'))
 
 
+@app.route('/search', methods=['GET'])
+def search():
+    return render_template('search.html')
+
+
+@app.route('/search_results', methods=['GET'])
+def search_results():
+    query = request.args.get('query')
+    search_results = Recipe.query.filter(Recipe.title.ilike(f'%{query}%')).all()
+
+    return render_template('search_results.html', search_results=search_results, query=query)
+
 if __name__ == "__main__":
     app.run(debug=True)
 
