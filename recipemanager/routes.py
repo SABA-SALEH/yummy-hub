@@ -236,7 +236,6 @@ def delete_recipe(recipe_id):
         comments_deleted = Comment.query.filter_by(recipe_id=recipe_id).delete()
        
         db.session.commit()
-
         db.session.delete(recipe)
         db.session.commit()
 
@@ -245,47 +244,62 @@ def delete_recipe(recipe_id):
 
     return redirect(url_for('manage_recipes'))
 
-@app.route('/recipe/<int:recipe_id>', methods=['GET', 'POST'])
-def recipe_details(recipe_id):
-    recipe = Recipe.query.get(recipe_id)
-    comments = Comment.query.filter_by(recipe_id=recipe_id).all()
+from flask import request, redirect
+
+@app.route('/recipe/<unique_identifier>', methods=['GET', 'POST'])
+def recipe_details(unique_identifier):
+    recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
+    if not recipe:
+        flash('Recipe not found!', 'danger')
+        return redirect(url_for('home')) 
+    
+    comments = Comment.query.filter_by(recipe_id=recipe.id).all()
+    authenticated = 'user_id' in session
     
     if request.method == 'POST':
-        if 'user_id' in session:  
+        if authenticated:
             user_id = session.get('user_id')
             content = request.form.get('comment_content')
             if content:
-                new_comment = Comment(content=content, user_id=user_id, recipe_id=recipe_id)
+                new_comment = Comment(content=content, user_id=user_id, recipe_id=recipe.id)
                 db.session.add(new_comment)
                 db.session.commit()
                 flash('Comment added successfully!', 'success')
             else:
                 flash('Comment cannot be empty!', 'warning')
         else:
-           
             name = request.form.get('name')
             email = request.form.get('email')
             content = request.form.get('comment_content')
             if name and email and content:
-            
-                new_comment = Comment(content=content, name=name, email=email, recipe_id=recipe_id)
+                new_comment = Comment(content=content, name=name, email=email, recipe_id=recipe.id)
                 db.session.add(new_comment)
                 db.session.commit()
                 flash('Comment added successfully!', 'success')
             else:
                 flash('Name, email, and comment content are required!', 'danger')
-    
-    return render_template('recipe_details.html', recipe=recipe, comments=comments)
+
+    return render_template('recipe_details.html', recipe=recipe, comments=comments, authenticated=authenticated)
+
+
+@app.route('/share_recipe/<unique_identifier>', methods=['GET'])
+def share_recipe(unique_identifier):
+    print("Share Recipe Route Accessed")
+    recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
+
+    if recipe:
+        return render_template('shareable_link.html', unique_identifier=unique_identifier)
+    else:
+        flash('Recipe not found!', 'danger')
+        return redirect(url_for('home')) 
 
 
 @app.route('/manage_comments')
 def manage_comments():
     if 'user_id' not in session:
         return redirect(url_for('login'))
-
     user_id = session['user_id']
     username = session.get('username')  
-    
     user_comments = Comment.query.filter_by(user_id=user_id).all()
     recipe_comments = Comment.query.join(Recipe).filter(Recipe.user_id == user_id).all()
 
@@ -293,7 +307,6 @@ def manage_comments():
 
 @app.route('/delete_comment/<int:comment_id>', methods=['POST'])
 def delete_comment(comment_id):
-
     comment = Comment.query.get(comment_id)
     if comment:
         db.session.delete(comment)
@@ -310,7 +323,6 @@ def edit_comment(comment_id):
     if not comment:
         flash('Comment not found.', 'danger')
         return redirect(url_for('manage_comments'))
-
     comment_content = comment.content
 
     return render_template('edit_comment.html', comment_id=comment_id, comment_content=comment_content)
@@ -320,7 +332,6 @@ def edit_comment(comment_id):
 @app.route('/update_comment/<int:comment_id>', methods=['POST'])
 def update_comment(comment_id):
     if request.method == 'POST':
-       
         updated_content = request.form.get('content')
         comment = Comment.query.get(comment_id)
         if comment:
@@ -335,15 +346,54 @@ def update_comment(comment_id):
 
 @app.route('/search', methods=['GET'])
 def search():
-    return render_template('search.html')
+    username = session.get('username')
+    return render_template('search.html', username=username)
 
 
 @app.route('/search_results', methods=['GET'])
 def search_results():
+    username = session.get('username')
     query = request.args.get('query')
     search_results = Recipe.query.filter(Recipe.title.ilike(f'%{query}%')).all()
 
-    return render_template('search_results.html', search_results=search_results, query=query)
+    return render_template('search_results.html', search_results=search_results, query=query, username=username)
+
+
+
+@app.route('/profile')
+def view_profile():
+    username = session.get('username')
+    if username:
+        user = User.query.filter_by(username=username).first()
+        if user:
+            user_profile = {
+                'username': user.username,
+                'email': user.email,
+                'created_at': user.created_at, 
+            }
+            return render_template('profile.html', profile=user_profile, username=username)
+   
+    return redirect(url_for('login'))  
+
+
+@app.route('/update_profile', methods=['POST'])
+def update_profile():
+    if 'username' in session:
+        username = session['username']
+        new_username = request.form['username']
+        new_email = request.form['email']
+        
+        user = User.query.filter_by(username=username).first()
+        if user:
+            user.username = new_username
+            user.email = new_email
+            db.session.commit()
+            session.clear()
+            return redirect(url_for('login'))
+    
+    return redirect(url_for('error_page'))
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

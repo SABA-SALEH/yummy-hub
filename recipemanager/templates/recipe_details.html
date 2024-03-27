@@ -1,11 +1,17 @@
+<!--recipe_details.html-->
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card mb-4">
         <div class="card-body">
+
+          <div class="mt-4">
+            <a href="{{ url_for('share_recipe', unique_identifier=recipe.unique_identifier) }}"
+              class="btn btn-primary">Generate Shareable Link</a>
+          </div>
+
           <h2 class="card-title">{{ recipe.title }}</h2>
           <img src="{{ recipe.image_url }}" alt="Recipe Image" class="card-img-top recipe-image">
           <div class="recipe-details">
@@ -13,11 +19,11 @@
             <p><strong>Description:</strong> {{ recipe.description }}</p>
             <h6><strong>Ingredients:</strong></h6>
             {% if recipe.ingredients %}
-            <ul class="list-unstyled"> 
+            <ul class="list-unstyled">
               {% for ingredient in recipe.ingredients %}
               <li>{{ ingredient.name }}{% if ingredient.quantity %} - {{ ingredient.quantity }}{% endif %}</li>
               {% endfor %}
-            </ul> 
+            </ul>
             {% else %}
             <p>No ingredients found.</p>
             {% endif %}
@@ -27,7 +33,7 @@
           </div>
         </div>
       </div>
-      
+
       <h3 class="text-center mt-5"><strong>Comments</strong></h3>
       <div class="mb-3">
         {% for comment in comments %}
@@ -52,14 +58,18 @@
       </div>
 
       {% if 'user_id' in session %}
-      <form action="{{ url_for('recipe_details', recipe_id=recipe.id) }}" method="POST" class="mt-4">
+      <form action="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" method="POST"
+        class="mt-4">
+
         <div class="mb-3">
           <textarea class="form-control" name="comment_content" placeholder="Add your comment here" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
       {% else %}
-      <form action="{{ url_for('recipe_details', recipe_id=recipe.id) }}" method="POST" class="mt-4">
+      <form action="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" method="POST"
+        class="mt-4">
+
         <div class="mb-3">
           <input type="text" class="form-control" name="name" placeholder="Your Name">
         </div>
@@ -76,19 +86,18 @@
   </div>
 </div>
 
-
 <div class="container mt-3">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div>
         {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              <div class="alert alert-{{ category }}">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
       </div>
     </div>

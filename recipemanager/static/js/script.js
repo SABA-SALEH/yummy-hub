@@ -69,4 +69,9 @@ function validateForm() {
     return true;
 }
 
-
+function copyShareableLink() {
+    const input = document.getElementById('shareableLink');
+    input.select();
+    document.execCommand('copy');
+    alert('Shareable link copied to clipboard!');
+  }

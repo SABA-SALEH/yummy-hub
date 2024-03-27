@@ -50,7 +50,8 @@
                 <p class="card-text">{{ recipe.description }}</p>
                 <p class="card-text"><small class="text-muted">Posted on {{ recipe.created_at.strftime('%Y-%m-%d') }} by
                         {{ recipe.author.username }}</small></p>
-                <a href="{{ url_for('recipe_details', recipe_id=recipe.id) }}" class="btn btn-primary">Read More</a>
+                <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}"
+                    class="btn btn-primary">Read More</a>
 
             </div>
         </div>
