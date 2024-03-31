@@ -75,3 +75,7 @@ function copyShareableLink() {
     document.execCommand('copy');
     alert('Shareable link copied to clipboard!');
   }
+
+
+
+  

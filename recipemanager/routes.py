@@ -4,6 +4,8 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 from recipemanager import app, db
 from recipemanager.models import User, Recipe, Rating, Comment
 from datetime import datetime
+from sqlalchemy import func
+from werkzeug.routing import UUIDConverter
 
 app.secret_key = 'saba'
 
@@ -244,11 +246,15 @@ def delete_recipe(recipe_id):
 
     return redirect(url_for('manage_recipes'))
 
-from flask import request, redirect
 
-@app.route('/recipe/<unique_identifier>', methods=['GET', 'POST'])
+
+app.url_map.converters['uuid'] = UUIDConverter
+
+@app.route('/recipe/<uuid:unique_identifier>', methods=['GET', 'POST'])
 def recipe_details(unique_identifier):
     recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
+    average_rating = Rating.query.filter_by(recipe_id=recipe.id).with_entities(func.avg(Rating.rating)).scalar()
+
     if not recipe:
         flash('Recipe not found!', 'danger')
         return redirect(url_for('home')) 
@@ -279,7 +285,7 @@ def recipe_details(unique_identifier):
             else:
                 flash('Name, email, and comment content are required!', 'danger')
 
-    return render_template('recipe_details.html', recipe=recipe, comments=comments, authenticated=authenticated)
+    return render_template('recipe_details.html', recipe=recipe, comments=comments, authenticated=authenticated, average_rating=average_rating)
 
 
 @app.route('/share_recipe/<unique_identifier>', methods=['GET'])
@@ -359,6 +365,14 @@ def search_results():
     return render_template('search_results.html', search_results=search_results, query=query, username=username)
 
 
+@app.route('/search_results_home', methods=['GET'])
+def search_results_home():
+    username = session.get('username')
+    query = request.args.get('query')
+    search_results = Recipe.query.filter(Recipe.title.ilike(f'%{query}%')).all()
+
+    return render_template('search_results_home.html', search_results=search_results, query=query, username=username)
+
 
 @app.route('/profile')
 def view_profile():
@@ -392,6 +406,28 @@ def update_profile():
             return redirect(url_for('login'))
     
     return redirect(url_for('error_page'))
+
+
+
+@app.route('/recipe/<unique_identifier>/rate', methods=['POST'])
+def submit_rating(unique_identifier):
+    if 'user_id' in session:  
+        user_id = session['user_id']
+    else:
+        user_id = None  
+
+    rating_value = int(request.form.get('rating'))
+    recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
+
+    if recipe:
+        rating = Rating(rating=rating_value, user_id=user_id, recipe_id=recipe.id)
+        db.session.add(rating)
+        db.session.commit()
+        flash('Thank you for rating this recipe!', 'success')
+    else:
+        flash('Recipe not found!', 'error')
+
+    return redirect(url_for('recipe_details', unique_identifier=unique_identifier))
 
 
 

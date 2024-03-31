@@ -10,11 +10,13 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3" required>{{ recipe.description }}</textarea>
+            <textarea class="form-control" id="description" name="description" rows="3"
+                required>{{ recipe.description }}</textarea>
         </div>
         <div class="mb-3">
             <label for="instructions" class="form-label">Instructions</label>
-            <textarea class="form-control" id="instructions" name="instructions" rows="6" required>{{ recipe.instructions }}</textarea>
+            <textarea class="form-control" id="instructions" name="instructions" rows="6"
+                required>{{ recipe.instructions }}</textarea>
         </div>
         <div class="mb-3">
             <label for="image_url" class="form-label">Image URL</label>
@@ -22,19 +24,22 @@
         </div>
         <div class="mb-3">
             <label for="preparation_time" class="form-label">Preparation Time (minutes)</label>
-            <input type="number" class="form-control" id="preparation_time" name="preparation_time" value="{{ recipe.preparation_time }}" required>
+            <input type="number" class="form-control" id="preparation_time" name="preparation_time"
+                value="{{ recipe.preparation_time }}" required>
         </div>
         <div class="mb-3">
             <label for="cook_time" class="form-label">Cook Time (minutes)</label>
-            <input type="number" class="form-control" id="cook_time" name="cook_time" value="{{ recipe.cook_time }}" required>
+            <input type="number" class="form-control" id="cook_time" name="cook_time" value="{{ recipe.cook_time }}"
+                required>
         </div>
-        
+
         <div class="mb-3">
             <label for="category" class="form-label">Category</label>
             <select class="form-select" id="category" name="category" required>
                 <option disabled>Select a category</option>
                 {% for category in categories %}
-                    <option value="{{ category.name }}" {% if recipe.category_name == category.name %} selected {% endif %}>{{ category.name }}</option>
+                <option value="{{ category.name }}" {% if recipe.category_name == category.name %} selected {% endif %}>
+                    {{ category.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -42,23 +47,25 @@
         {% for ingredient in recipe.ingredients|default([]) %}
         <div class="mb-3">
             <label for="ingredient_name_{{ loop.index0 }}" class="form-label">Ingredient Name</label>
-            <input type="text" class="form-control" id="ingredient_name_{{ loop.index0 }}" name="ingredient_name_{{ loop.index0 }}" value="{{ ingredient.name }}">
+            <input type="text" class="form-control" id="ingredient_name_{{ loop.index0 }}"
+                name="ingredient_name_{{ loop.index0 }}" value="{{ ingredient.name }}">
         </div>
         <div class="mb-3">
             <label for="ingredient_quantity_{{ loop.index0 }}" class="form-label">Ingredient Quantity</label>
-            <input type="text" class="form-control" id="ingredient_quantity_{{ loop.index0 }}" name="ingredient_quantity_{{ loop.index0 }}" value="{{ ingredient.quantity }}">
+            <input type="text" class="form-control" id="ingredient_quantity_{{ loop.index0 }}"
+                name="ingredient_quantity_{{ loop.index0 }}" value="{{ ingredient.quantity }}">
         </div>
         {% endfor %}
-        
-    
 
-   
-    <div id="ingredientFields"></div>
-    <button type="button" class="btn btn-primary" onclick="addIngredientField2()">Add Ingredient</button>
-    
-   
-    <button type="submit" class="btn btn-primary" onclick="validateForm()">Update Recipe</button>
-</form>
+
+
+
+        <div id="ingredientFields"></div>
+        <button type="button" class="btn btn-primary" onclick="addIngredientField2()">Add Ingredient</button>
+
+
+        <button type="submit" class="btn btn-primary" onclick="validateForm()">Update Recipe</button>
+    </form>
 </div>
 
 

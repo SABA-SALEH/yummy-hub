@@ -8,33 +8,34 @@
     <div class="row">
         <div class="col-md-8">
             {% if recipes %}
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for recipe in recipes %}
-                            <tr>
-                                <td>{{ recipe.title }}</td>
-                                <td>{{ recipe.description }}</td>
-                                <td>
-                                    <a href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}" class="btn btn-primary">Edit</a>
-                                    <form action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}" method="post" style="display: inline-block;">
-                                        <input type="hidden" name="confirm_delete" value="yes">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                    
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipe in recipes %}
+                    <tr>
+                        <td>{{ recipe.title }}</td>
+                        <td>{{ recipe.description }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}" class="btn btn-primary">Edit</a>
+                            <form action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}" method="post"
+                                style="display: inline-block;">
+                                <input type="hidden" name="confirm_delete" value="yes">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             {% else %}
-                <p>No recipes found.</p>
+            <p>No recipes found.</p>
             {% endif %}
         </div>
     </div>

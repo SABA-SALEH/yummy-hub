@@ -1,13 +1,25 @@
 <!-- home.html -->
 {% extends "base.html" %}
 
-{% block title %}Home - Food Fair{% endblock %}
+{% block title %}Home - Yummy Hub{% endblock %}
 
 {% block content %}
-<h1>Yummy Hub: Where Every Bite Tells a Story</h1>
 
 
-<div id="carouselExampleIndicators" class="carousel slide mb-5" data-bs-ride="carousel">
+
+<div class="input-group mt-3 justify-content-end">
+    <div class="form-outline" data-mdb-input-init>
+        <form action="{{ url_for('search_results_home') }}" method="GET" class="d-flex">
+            <input id="search-input" type="text" class="form-control me-1" name="query"
+                placeholder="Enter your search query" />
+            <button id="search-button" type="submit" class="btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
             aria-current="true" aria-label="Slide 1"></button>
@@ -38,10 +50,9 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
-<h2>Featured Recipes</h2>
 <div class="row">
-    {% for recipe in recipes %}
+    <h1 class="card-title1">Featured Recipes</h1>
+    {% for recipe in recipes[:3] %}
     <div class="col-md-4 mb-4">
         <div class="card">
             <img src="{{ recipe.image_url }}" class="card-img-top" alt="{{ recipe.title }}">
@@ -50,8 +61,8 @@
                 <p class="card-text">{{ recipe.description }}</p>
                 <p class="card-text"><small class="text-muted">Posted on {{ recipe.created_at.strftime('%Y-%m-%d') }} by
                         {{ recipe.author.username }}</small></p>
-                <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}"
-                    class="btn btn-primary">Read More</a>
+                <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" class="btn">Read
+                    More</a>
 
             </div>
         </div>
