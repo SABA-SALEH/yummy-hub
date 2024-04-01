@@ -14,6 +14,7 @@ body {
 }
 
 .navbar-brand,
+.navbar-brand:hover,
 #button-addon2 {
     color: #E8D8C4;
 }
@@ -155,17 +156,15 @@ strong {
 }
 
 .badge {
-    font-size: 0.8rem;
-}
-
-
-.badge {
     width: 30px;
     height: 30px;
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    font-size: 0.8rem;
+    background-color: #561C24;
+    color: #E8D8C4;
 }
 
 .form-control {
@@ -206,4 +205,41 @@ a {
 #password {
     background-color: #C7B7A3;
     margin: 10px;
+}
+
+.nav-link,
+.nav-link:hover,
+.nav-link:focus {
+    color: #E8D8C4;
+}
+
+
+.list-group,
+.list-group-item {
+    background-color: #E8D8C4;
+}
+
+.list-group-item:active , option{
+    background-color: #C7B7A3;
+}
+
+
+#category option:hover {
+    background-color: #C7B7A3; 
+}
+
+
+
+#dashboard {
+    background-color: #561C24;
+    border: none;
+    color: #E8D8C4;
+}
+
+.btn-group a {
+    margin-right: 10px;
+}
+
+.btn-group button {
+    margin-left: 10px;
 }

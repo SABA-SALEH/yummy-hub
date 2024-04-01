@@ -30,7 +30,7 @@ class Recipe(db.Model):
     cook_time = db.Column(db.Integer)
     created_at = db.Column(db.TIMESTAMP, default=datetime.utcnow)
     ingredients = db.Column(db.JSON)  
-    unique_identifier = db.Column(db.String(36), unique=True, nullable=False, default=str(uuid.uuid4()))
+    unique_identifier = db.Column(db.String(36), unique=True, nullable=False, default=uuid.uuid4)
 
     def add_ingredient(self, name, quantity):
         if not self.ingredients:
@@ -39,7 +39,6 @@ class Recipe(db.Model):
     
     def get_ingredients(self):
         return self.ingredients if self.ingredients else []
-
 
 
 class Rating(db.Model):

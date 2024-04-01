@@ -19,9 +19,6 @@ def home():
     recipes = Recipe.query.all()  
     return render_template('home.html', recipes=recipes)
 
-@app.route('/category/<category>')
-def category(category):
-    return render_template('categories.html')
 
 @app.route('/about')
 def about():
@@ -221,31 +218,32 @@ def edit_recipe(recipe_id):
     return render_template('edit_recipe.html', username=session['username'], recipe=recipe, categories=categories, ingredientCounter=len(recipe.ingredients))
 
 
-
 @app.route('/delete_recipe/<int:recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):
+   
     if 'username' not in session:
         return redirect(url_for('login')) 
     
     user_id = session.get('user_id')
+    
     recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
     
     if not recipe:
         return redirect(url_for('manage_recipes'))
     
     try:
-        comment_ids = [comment.id for comment in recipe.comments]
-        comments_deleted = Comment.query.filter_by(recipe_id=recipe_id).delete()
+       
+        Comment.query.filter_by(recipe_id=recipe_id).delete()
+        Rating.query.filter_by(recipe_id=recipe_id).delete()
        
         db.session.commit()
         db.session.delete(recipe)
         db.session.commit()
 
     except Exception as e:
+       
         db.session.rollback()
-
     return redirect(url_for('manage_recipes'))
-
 
 
 app.url_map.converters['uuid'] = UUIDConverter
@@ -429,6 +427,11 @@ def submit_rating(unique_identifier):
 
     return redirect(url_for('recipe_details', unique_identifier=unique_identifier))
 
+
+@app.route('/recipes/<category>', methods=['GET'])
+def recipes_by_category(category):
+    recipes = Recipe.query.filter_by(category_name=category).all()
+    return render_template('recipes_by_category.html', recipes=recipes, category=category)
 
 
 if __name__ == "__main__":

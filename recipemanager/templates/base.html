@@ -34,16 +34,17 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categories
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Categories
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% for category in categories %}
-                            <a class="dropdown-item"
-                                href="{{ url_for('category', category=category) }}">{{ category }}</a>
+                            <a class="dropdown-item" id="category_{{ loop.index }}" href="{{ url_for('recipes_by_category', category=category) }}">{{ category }}</a>
                             {% endfor %}
                         </div>
                     </li>
+                    
+
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if 'username' in session %}
@@ -115,8 +116,6 @@
         </div>
     </footer>
     <!-- Footer -->
-
-
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

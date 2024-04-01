@@ -1,8 +1,9 @@
 {% extends "base2.html" %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2>Edit Recipe</h2>
+<div class="container mt-3 mb-3 col-md-9">
+    <h2 class="mb-3">Edit Recipe</h2>
+    <hr>
     <form method="POST">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -61,10 +62,10 @@
 
 
         <div id="ingredientFields"></div>
-        <button type="button" class="btn btn-primary" onclick="addIngredientField2()">Add Ingredient</button>
+        <button type="button" class="btn" onclick="addIngredientField2()">Add Ingredient</button>
 
 
-        <button type="submit" class="btn btn-primary" onclick="validateForm()">Update Recipe</button>
+        <button type="submit" class="btn" onclick="validateForm()">Update Recipe</button>
     </form>
 </div>
 

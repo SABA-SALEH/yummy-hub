@@ -78,4 +78,37 @@ function copyShareableLink() {
 
 
 
-  
+
+document.addEventListener("DOMContentLoaded", function() {
+    var categorySelect = document.getElementById('categorySelect');
+    var categoryForm = document.getElementById('categoryForm');
+
+    if (categorySelect && categoryForm) {
+        categorySelect.addEventListener('change', function () {
+            var category = this.value;
+            console.log("Selected category:", category);
+
+            var baseUrl = categoryForm.getAttribute('data-base-url');
+            var routeName = categoryForm.getAttribute('data-route-name');
+            var url = baseUrl + "/" + category;
+
+            categoryForm.action = url;
+            categoryForm.submit();
+        });
+    }
+
+    document.addEventListener("click", function(event) {
+        if (event.target && event.target.classList.contains("delete-comment")) {
+            var button = event.target;
+            var commentId = button.dataset.commentId;
+            var formAction = "/delete_comment/" + commentId;
+            document.getElementById("deleteCommentForm").setAttribute("action", formAction);
+            var bsModal = new bootstrap.Modal(document.getElementById("confirmDeleteModal"));
+            bsModal.show();
+        }
+    });
+});
+
+
+
+

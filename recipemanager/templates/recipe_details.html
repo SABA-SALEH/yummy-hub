@@ -6,28 +6,17 @@
     <div class="col-md-8">
       <div class="card mb-4">
         <div class="card-body">
-
-
           <h2 class="card-title">{{ recipe.title }} <a
               href="{{ url_for('share_recipe', unique_identifier=recipe.unique_identifier) }}" class="btn"><i
                 class="fa-solid fa-share"></i></a></h2>
           <img src="{{ recipe.image_url }}" alt="Recipe Image" class="card-img-top recipe-image">
           <div class="recipe-details">
-
             {% if average_rating is not none %}
             <p><strong>Average Rating:</strong> {{ '%.1f' % average_rating }}<i
                 class="fa-sharp fa-solid fa-star"></i></i></p>
             {% else %}
             <p><strong>No ratings yet</strong></p>
             {% endif %}
-
-
-
-
-
-
-
-
             <p><strong>Category:</strong> {{ recipe.category_name }}</p>
             <p><strong>Description:</strong> {{ recipe.description }}</p>
             <h6><strong>Ingredients:</strong></h6>
@@ -46,8 +35,6 @@
           </div>
         </div>
       </div>
-
-
       <form action="{{ url_for('submit_rating', unique_identifier=recipe.unique_identifier) }}" method="POST"
         class="mt-4">
         <div class="mb-3">
@@ -55,9 +42,6 @@
         </div>
         <button type="submit" class="btn">Submit Rating</button>
       </form>
-
-
-
       <h3 class="text-center mt-5"><strong>Comments</strong></h3>
       <div class="mb-3">
         {% for comment in comments %}
@@ -66,10 +50,10 @@
             <div class="d-flex justify-content-between align-items-center mb-2">
               <div>
                 {% if comment.user %}
-                <span class="badge bg-secondary me-2">{{ comment.user.username[0] }}</span>
+                <span class="badge  me-2">{{ comment.user.username[0] }}</span>
                 <span class="fw-bold">{{ comment.user.username }}</span>
                 {% else %}
-                <span class="badge bg-secondary me-2">U</span>
+                <span class="badge  me-2">U</span>
                 <span class="fw-bold">{{ comment.name }}</span>
                 {% endif %}
               </div>
@@ -80,7 +64,6 @@
         </div>
         {% endfor %}
       </div>
-
       {% if 'user_id' in session %}
       <form action="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" method="POST"
         class="mt-4">
