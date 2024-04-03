@@ -4,41 +4,46 @@
 <div class="container mt-3 mb-3">
     <div class="row">
         <div class="col-md-9 offset-md-1">
-            <h2 class="mb-3">Add Recipe</h2>
+            <h2 class="mb-3"><i class="fas fa-plus"></i> Add Recipe</h2>
             <hr>
             <form id="addRecipeForm" method="POST" onsubmit="return validateForm()">
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
+                    <label for="title" class="form-label"><i class="fas fa-heading"></i> Title</label>
                     <input type="text" class="form-control" id="title" name="title" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
+                    <label for="description" class="form-label"><i class="fas fa-info-circle"></i> Description</label>
                     <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label for="instructions" class="form-label">Instructions</label>
+                    <label for="instructions" class="form-label"><i class="fas fa-list"></i> Instructions</label>
                     <textarea class="form-control" id="instructions" name="instructions" rows="6" required></textarea>
                 </div>
 
-                <div class="mb-3">
-                    <label for="preparation_time" class="form-label">Preparation Time (minutes)</label>
-                    <input type="number" class="form-control" id="preparation_time" name="preparation_time" required>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="preparation_time" class="form-label"><i class="fas fa-stopwatch"></i> Preparation Time (minutes)</label>
+                            <input type="number" class="form-control" id="preparation_time" name="preparation_time" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="cook_time" class="form-label"><i class="fas fa-utensils"></i> Cook Time (minutes)</label>
+                            <input type="number" class="form-control" id="cook_time" name="cook_time" required>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="cook_time" class="form-label">Cook Time (minutes)</label>
-                    <input type="number" class="form-control" id="cook_time" name="cook_time" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="image_url" class="form-label">Image URL</label>
+                    <label for="image_url" class="form-label"><i class="fas fa-image"></i> Image URL</label>
                     <input type="text" class="form-control" id="image_url" name="image_url" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="category" class="form-label">Category</label>
+                    <label for="category" class="form-label"><i class="fas fa-tag"></i> Category</label>
                     <select class="form-select" id="category" name="category" required>
                         <option selected disabled>Select a category</option>
                         {% for category in categories %}
@@ -48,22 +53,26 @@
                 </div>
 
                 <div id="ingredientFields">
-                    <div class="mb-3">
-                        <label for="ingredient_name_1" class="form-label">Ingredient Name</label>
-                        <input type="text" class="form-control" id="ingredient_name_1" name="ingredient_name_1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="ingredient_quantity_1" class="form-label">Ingredient Quantity</label>
-                        <input type="text" class="form-control" id="ingredient_quantity_1" name="ingredient_quantity_1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="ingredient_name_1" class="form-label"><i class="fas fa-shopping-basket"></i> Ingredient Name</label>
+                                <input type="text" class="form-control" id="ingredient_name_1" name="ingredient_name_1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="ingredient_quantity_1" class="form-label"><i class="fas fa-weight-hanging"></i> Ingredient Quantity</label>
+                                <input type="text" class="form-control" id="ingredient_quantity_1" name="ingredient_quantity_1">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button type="button" class="btn" onclick="addIngredientField()">Add Ingredient</button>
+                <button type="button" class="btn " onclick="addIngredientField()"><i class="fas fa-plus"></i> Add Ingredient</button>
 
-                <button type="submit" class="btn" onclick="validateForm()">Add Recipe</button>
+                <button type="submit" class="btn " onclick="validateForm()"><i class="fas fa-save"></i> Add Recipe</button>
             </form>
         </div>
     </div>
 </div>
-
-
 {% endblock %}

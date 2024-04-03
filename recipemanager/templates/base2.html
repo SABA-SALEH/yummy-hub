@@ -10,67 +10,81 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="https://kit.fontawesome.com/45b8f34d90.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-
+</head>
 
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}">YUMMY HUB</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Welcome, {{ username }}</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Profile
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ url_for('view_profile') }}">View Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Change Password</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{{ url_for('logout') }}">Sign Out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active" id="dashboard">Dashboard</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="collapse"
-                        data-bs-target="#myRecipes">My Recipes</a>
-                    <div class="collapse" id="myRecipes">
-                        <a href="{{ url_for('view_recipes') }}" class="list-group-item list-group-item-action">View
-                            Recipes</a>
-                        <a href="{{ url_for('add_recipe') }}" class="list-group-item list-group-item-action">Add
-                            Recipe</a>
-                        <a href="{{ url_for('manage_recipes') }}" class="list-group-item list-group-item-action">Manage
-                            Recipes</a>
-                    </div>
-                    <a href="{{ url_for('manage_comments') }}"
-                        class="list-group-item list-group-item-action">Comments</a>
-                    <a href="{{ url_for('search') }}" class="list-group-item list-group-item-action">Search</a>
-                </div>
-            </div>
-            <div class="col-md-10">
-                {% block content %}{% endblock %}
-            </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark ">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('home') }}">YUMMY HUB</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Welcome, {{ username }}</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Profile
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ url_for('view_profile') }}">View Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Sign Out</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
         </div>
     </div>
+</nav>
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="{{ url_for('user_dashboard', user_id=session['user_id']) }}"
+                    class="list-group-item list-group-item-action active" id="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="#myRecipes" class="list-group-item list-group-item-action" data-bs-toggle="collapse">
+                    <i class="fas fa-utensils"></i> My Recipes
+                </a>
+                <div class="collapse" id="myRecipes">
+                    <a href="{{ url_for('view_recipes') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-list"></i> View Recipes
+                    </a>
+                    <a href="{{ url_for('add_recipe') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-plus"></i> Add Recipe
+                    </a>
+                    <a href="{{ url_for('manage_recipes') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-cogs"></i> Manage Recipes
+                    </a>
+                </div>
+                <a href="{{ url_for('manage_comments') }}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-comments"></i> Comments
+                </a>
+                <a href="{{ url_for('search') }}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-search"></i> Search
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

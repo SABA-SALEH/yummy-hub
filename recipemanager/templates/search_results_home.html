@@ -1,4 +1,3 @@
-<!--search_results_home-->
 {% extends "base.html" %}
 
 {% block title %}Home - Yummy Hub{% endblock %}
@@ -6,6 +5,7 @@
 {% block content %}
 <div class="container mt-4">
     <h2 class="mb-4">Search Results for "{{ query }}"</h2>
+    <hr>
     {% if search_results %}
     <div class="row">
         {% for recipe in search_results %}
@@ -17,7 +17,7 @@
                     <p class="card-text"><strong>Preparation Time:</strong> {{ recipe.preparation_time }} minutes</p>
                     <p class="card-text"><strong>Cook Time:</strong> {{ recipe.cook_time }} minutes</p>
                     <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}"
-                        class="btn">View Recipe</a>
+                        class="btn "><i class="fas fa-utensils"></i> View Recipe</a>
 
                 </div>
             </div>

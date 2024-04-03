@@ -3,7 +3,7 @@
 {% block content %}
 <h2 class="mt-4 mb-3">Recipes in category: {{ category }}</h2>
 <hr>
-<ul>
+<div class="row">
   {% for recipe in recipes %}
   <div class="col-md-4 mb-4 mt-4">
     <div class="card">
@@ -11,15 +11,16 @@
       <div class="card-body">
         <h5 class="card-title">{{ recipe.title }}</h5>
         <p class="card-text">{{ recipe.description }}</p>
-        <p class="card-text"><small class="text-muted">Posted on {{ recipe.created_at.strftime('%Y-%m-%d') }} by
-            {{ recipe.author.username }}</small></p>
-        <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" class="btn">Read
-          More</a>
-
+        <p class="card-text">
+          <small class="text-muted">
+            <i class="fas fa-calendar-alt"></i> Posted on {{ recipe.created_at.strftime('%Y-%m-%d') }} by
+            <i class="fas fa-user"></i> {{ recipe.author.username }}
+          </small>
+        </p>
+        <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" class="btn "><i class="fas fa-book"></i> Read More</a>
       </div>
     </div>
   </div>
-
   {% endfor %}
-</ul>
+</div>
 {% endblock %}

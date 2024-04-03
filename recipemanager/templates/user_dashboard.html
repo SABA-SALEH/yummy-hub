@@ -1,0 +1,77 @@
+{% extends "base2.html" %}
+
+{% block content %}
+<h2 class="mb-3 mt-5">Dashboard Statistics</h2>
+<hr>
+<div class="row">
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-book"></i> Total Recipes</h5>
+                <p class="card-text">The total number of recipes you've created</p>
+                <p class="card-value"><strong>{{ stats.total_recipes }}</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-star"></i> Recipe with Highest Rating</h5>
+                <p class="card-text">The recipe that has the highest average rating</p>
+                <p class="card-value"><strong>{{ stats.recipe_highest_rating }}</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-comment"></i> Recipe with Most Comments</h5>
+                <p class="card-text">The recipe that has received the most comments</p>
+                <p class="card-value"><strong>{{ stats.recipe_most_comments }}</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-chart-pie"></i> Most Popular Category</h5>
+                <p class="card-text">Your most explored recipe category</p>
+                <p class="card-value"><strong>{% if stats.most_popular_category %} {{ stats.most_popular_category }} {% else %} None {% endif %}</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-star"></i> Average Rating</h5>
+                <p class="card-text">The average rating received by your recipes</p>
+                <p class="card-value"><strong>{{ stats.average_rating }}</strong></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-comments"></i> Total Comments</h5>
+                <p class="card-text">The total number of comments you've made</p>
+                <p class="card-value"><strong>{{ stats.total_comments }}</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-star-half-alt"></i> Total Ratings Given</h5>
+                <p class="card-text">The number of ratings you've provided to other recipes</p>
+                <p class="card-value"><strong>{{ stats.total_ratings_given }}</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

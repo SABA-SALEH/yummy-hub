@@ -11,7 +11,7 @@
           <div class="input-group mb-3">
             <input type="text" class="form-control" id="shareableLink"
               value="{{ url_for('recipe_details', unique_identifier=unique_identifier, _external=True) }}" readonly>
-            <button class="btn btn-outline-secondary" type="button" onclick="copyShareableLink()">Copy</button>
+            <button class="btn btn-outline-secondary" type="button" onclick="copyShareableLink()"> <i class="fas fa-copy"></i> Copy</button>
           </div>
         </div>
       </div>

@@ -68,15 +68,6 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/user')
-def user():
-    if 'username' not in session:
-        return redirect(url_for('login')) 
-    
-    username = session['username']
-    
-    return render_template('user.html', username=username)
-
 @app.route('/logout')
 def logout():
     session.pop('username', None)
@@ -126,7 +117,8 @@ def add_recipe():
         db.session.add(new_recipe)
         db.session.commit()
 
-        return redirect(url_for('user'))
+        return redirect(url_for('user_dashboard', user_id=user_id))
+
     
     categories = [
         {'id': 1, 'name': 'Around the World'},
@@ -146,11 +138,13 @@ def view_recipes():
     username = session['username']
     user_id = session.get('user_id')
     user_recipes = Recipe.query.filter_by(user_id=user_id).all()
-   
+
     for recipe in user_recipes:
         if recipe.ingredients is None:
             recipe.ingredients = []  
-    
+        average_rating = Rating.query.filter_by(recipe_id=recipe.id).with_entities(func.avg(Rating.rating)).scalar()
+        recipe.average_rating = average_rating
+
     return render_template('view_recipes.html', username=username, recipes=user_recipes)
 
 
@@ -432,6 +426,69 @@ def submit_rating(unique_identifier):
 def recipes_by_category(category):
     recipes = Recipe.query.filter_by(category_name=category).all()
     return render_template('recipes_by_category.html', recipes=recipes, category=category)
+
+
+
+def get_user_dashboard_stats(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return None
+
+    total_recipes = len(user.recipes)
+
+    total_comments = Comment.query.filter_by(user_id=user_id).count()
+
+    most_popular_category_query = db.session.query(Recipe.category_name, func.count(Recipe.id).label('count')) \
+        .filter_by(user_id=user_id) \
+        .group_by(Recipe.category_name) \
+        .order_by(func.count(Recipe.id).desc()) \
+        .first()
+
+    most_popular_category = most_popular_category_query[0] if most_popular_category_query else None
+
+    total_ratings = 0
+    total_recipe_ratings = 0
+    for recipe in user.recipes:
+        recipe_ratings = Rating.query.filter_by(recipe_id=recipe.id).all()
+        total_recipe_ratings += len(recipe_ratings)
+        for rating in recipe_ratings:
+            total_ratings += rating.rating
+    average_rating = total_ratings / total_recipe_ratings if total_recipe_ratings > 0 else 0
+
+    total_ratings_given = Rating.query.filter_by(user_id=user_id).count()
+
+    recipe_most_comments = max(user.recipes, key=lambda x: len(x.comments)).title if user.recipes else None
+
+    recipe_highest_rating_query = db.session.query(Recipe.title, func.avg(Rating.rating).label('avg_rating')) \
+        .join(Rating, Recipe.id == Rating.recipe_id) \
+        .filter(Recipe.user_id == user_id) \
+        .group_by(Recipe.id) \
+        .order_by(func.avg(Rating.rating).desc()) \
+        .first()
+
+    recipe_highest_rating = recipe_highest_rating_query[0] if recipe_highest_rating_query else None
+
+    return {
+        'total_recipes': total_recipes,
+        'total_comments': total_comments,
+        'most_popular_category': most_popular_category,
+        'average_rating': average_rating,
+        'total_ratings_given': total_ratings_given,
+        'recipe_most_comments': recipe_most_comments,
+        'recipe_highest_rating': recipe_highest_rating
+    }
+
+
+@app.route('/dashboard/<int:user_id>')
+def user_dashboard(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return "User not found", 404
+
+    username = user.username  
+
+    stats = get_user_dashboard_stats(user_id)
+    return render_template('user_dashboard.html', user=user, stats=stats, username=username)
 
 
 if __name__ == "__main__":

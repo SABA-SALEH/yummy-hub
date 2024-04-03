@@ -1,4 +1,3 @@
-<!--base.html-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,25 +33,25 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Categories
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% for category in categories %}
-                            <a class="dropdown-item" id="category_{{ loop.index }}" href="{{ url_for('recipes_by_category', category=category) }}">{{ category }}</a>
+                            <a class="dropdown-item" id="category_{{ loop.index }}"
+                                href="{{ url_for('recipes_by_category', category=category) }}">{{ category }}</a>
                             {% endfor %}
                         </div>
                     </li>
-                    
-
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if 'username' in session %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('user') }}">Welcome, {{ session['username'] }}</a>
+                        <a class="nav-link" href="{{ url_for('user_dashboard', user_id=session['user_id']) }}">Welcome,
+                            {{ session['username'] }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('user') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('user_dashboard', user_id=session['user_id']) }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
@@ -67,63 +66,45 @@
         </div>
     </nav>
 
-
-
-    <!-- Page content -->
     <div class="container">
         {% block content %}{% endblock %}
     </div>
 
-    <!-- Footer -->
     <footer class="text-center footer">
-
         <section class="mb-4">
-            <a href="https://www.facebook.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-twitter"></i></a>
-            <a href="https://www.google.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-google"></i></a>
-            <a href="https://www.instagram.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.google.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i class="fab fa-google"></i></a>
+            <a href="https://www.instagram.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         </section>
-
-
-
+    
         <section class="mb-4">
             <form>
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <p class="text-center join"><strong class="important">Don't Miss Out!</strong> Join our mailing
-                            list to receive all of our delicious recipes</p>
+                        <p class="text-center join"><strong class="important">Don't Miss Out!</strong> Join our mailing list to receive all of our delicious recipes</p>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-4">
                         <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Enter your email here"
-                                aria-label="Email" aria-describedby="button-addon2">
+                            <input type="email" class="form-control" placeholder="Enter your email here" aria-label="Email" aria-describedby="button-addon2">
                             <button class="btn subscribebtn" type="submit" id="button-addon2">Subscribe</button>
                         </div>
                     </div>
                 </div>
             </form>
         </section>
-
+    
         <div class="text-center p-3 copyright">
             © 2020 Copyright:
             <a href="{{ url_for('home') }}">Yummy Hub</a>
         </div>
     </footer>
-    <!-- Footer -->
-
-
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
     {% block javascript %}{% endblock %}
 </body>
 

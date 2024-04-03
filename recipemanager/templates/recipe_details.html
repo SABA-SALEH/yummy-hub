@@ -1,4 +1,4 @@
-<!--recipe_details.html-->
+<!-- recipe_details.html -->
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-5">
@@ -12,14 +12,14 @@
           <img src="{{ recipe.image_url }}" alt="Recipe Image" class="card-img-top recipe-image">
           <div class="recipe-details">
             {% if average_rating is not none %}
-            <p><strong>Average Rating:</strong> {{ '%.1f' % average_rating }}<i
-                class="fa-sharp fa-solid fa-star"></i></i></p>
+            <p><strong><i
+              class="fa-sharp fa-solid fa-star"></i> Average Rating:</strong> {{ '%.1f' % average_rating }}</p>
             {% else %}
             <p><strong>No ratings yet</strong></p>
             {% endif %}
-            <p><strong>Category:</strong> {{ recipe.category_name }}</p>
-            <p><strong>Description:</strong> {{ recipe.description }}</p>
-            <h6><strong>Ingredients:</strong></h6>
+            <p><strong><i class="fas fa-folder-open"></i> Category:</strong> {{ recipe.category_name }}</p>
+            <p><strong><i class="fas fa-align-left"></i> Description:</strong> {{ recipe.description }}</p>
+            <h6><strong><i class="fas fa-utensils"></i> Ingredients:</strong></h6>
             {% if recipe.ingredients %}
             <ul>
               {% for ingredient in recipe.ingredients %}
@@ -29,9 +29,9 @@
             {% else %}
             <p>No ingredients found.</p>
             {% endif %}
-            <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
-            <p><strong>Preparation Time:</strong> {{ recipe.preparation_time }} minutes</p>
-            <p><strong>Cook Time:</strong> {{ recipe.cook_time }} minutes</p>
+            <p><strong><i class="fas fa-list-ul"></i> Instructions:</strong> {{ recipe.instructions }}</p>
+            <p><strong><i class="far fa-clock"></i> Preparation Time:</strong> {{ recipe.preparation_time }} minutes</p>
+            <p><strong><i class="far fa-clock"></i> Cook Time:</strong> {{ recipe.cook_time }} minutes</p>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
         <div class="mb-3">
           <input type="number" class="form-control" name="rating" min="1" max="5" placeholder="Rate this recipe (1-5)">
         </div>
-        <button type="submit" class="btn">Submit Rating</button>
+        <button type="submit" class="btn"><i class="fa-solid fa-solid fa-star"></i> Submit Rating</button>
       </form>
       <h3 class="text-center mt-5"><strong>Comments</strong></h3>
       <div class="mb-3">
@@ -67,16 +67,14 @@
       {% if 'user_id' in session %}
       <form action="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" method="POST"
         class="mt-4">
-
         <div class="mb-3">
           <textarea class="form-control" name="comment_content" placeholder="Add your comment here" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn">Submit</button>
+        <button type="submit" class="btn"><i class="fa-solid fa-solid fa-comment-alt"></i> Submit</button>
       </form>
       {% else %}
       <form action="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" method="POST"
         class="mt-4">
-
         <div class="mb-3">
           <input type="text" class="form-control" name="name" placeholder="Your Name">
         </div>
@@ -86,7 +84,7 @@
         <div class="mb-3">
           <textarea class="form-control" name="comment_content" placeholder="Add your comment here" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn">Submit</button>
+        <button type="submit" class="btn"><i class="fa-solid fa-solid fa-comment-alt"></i> Submit</button>
       </form>
       {% endif %}
     </div>
@@ -110,5 +108,4 @@
     </div>
   </div>
 </div>
-
 {% endblock %}

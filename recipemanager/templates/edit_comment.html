@@ -1,10 +1,19 @@
 {% extends "base2.html" %}
 
 {% block content %}
-<h1>Edit Comment</h1>
-<form action="{{ url_for('update_comment', comment_id=comment_id) }}" method="POST">
-    <label for="content">Content:</label><br>
-    <textarea id="content" name="content" rows="4" cols="50">{{ comment_content }}</textarea><br>
-    <button type="submit">Update Comment</button>
-</form>
+<div class="container mt-3">
+    <h2 class="mb-4">Edit Comment</h2>
+    <hr>
+    <div class="row">
+        <div class="col-md-8">
+            <form action="{{ url_for('update_comment', comment_id=comment_id) }}" method="POST">
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content:</label>
+                    <textarea id="content" name="content" class="form-control" rows="4">{{ comment_content }}</textarea>
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-edit"></i> Update Comment</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
