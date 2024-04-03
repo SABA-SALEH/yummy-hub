@@ -1,110 +1,143 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Yummy Hub Recipe Manager
 
-Welcome SABA SALEH,
+Welcome to Yummy Hub Recipe Manager! This is a web application designed to help you organize and discover delicious recipes from around the world.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Table of Contents
+1. [Introduction](#introduction)
+2. [UX and UI](#ux-and-ui)
+3. [Features](#features)
+4. [Future Features](#future-features)
+5. [Information Structure](#information-structure)
+6. [Presentation](#presentation)
+7. [Look and Feel](#look-and-feel)
+8. [Technologies Used](#technologies-used)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
 
-## Gitpod Reminders
+## Introduction
+Yummy Hub Recipe Manager is a convenient tool for storing, managing, and exploring recipes. Whether you're a cooking enthusiast, a professional chef, or someone looking to try out new dishes, this platform has got you covered.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## UX and UI
+### Project and Customer Goals:
+- **Project Goal:** Develop a web application named "Yummy Hub Recipe Manager" to help users organize, discover, and share recipes.
 
-`python3 -m http.server`
+- **Customer Goal:** Provide users with a user-friendly platform where they can easily manage their recipe collections, explore new recipes, and engage with other users.
 
-A blue button should appear to click: _Make Public_,
+### Business Goal:
+The business goal of Yummy Hub Recipe Manager is to attract and retain users by offering a comprehensive and intuitive recipe management solution. By providing valuable features such as recipe management, categorization, search functionality, user accounts, recipe sharing, rate recipe and a responsive design, the platform aims to enhance user satisfaction and engagement.
 
-Another blue button should appear to click: _Open Browser_.
+### User Stories:
+- As a user, I want to register an account, so I can save my favorite recipes and interact with the community.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+- As a user, I want to add, edit, and delete recipes, so I can manage my recipe collection according to my preferences.
 
-A blue button should appear to click: _Make Public_,
+- As a user, I want to search for recipes based on keywords, so I can easily find recipes that match my preferences.
 
-Another blue button should appear to click: _Open Browser_.
+- As a user, I want to rate recipes and add comments, so I can share my feedback and experiences with other users.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+- As a user, I want to view statistics and insights about my recipe usage, so I can track my activity and engagement on the platform.
 
-To log into the Heroku toolbelt CLI:
+### Features
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+**User Authentication:**
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+- Users can register accounts with unique usernames and email addresses.
+- Existing users can log in securely using their credentials.
+- Sessions are managed to keep users authenticated across different pages.
 
-------
+**Recipe Management:**
 
-## Release History
+- Users can add new recipes with titles, descriptions, instructions, images, preparation time, and cooking time.
+- Recipes can be edited or deleted by the user who created them.
+- Ingredients can be added to recipes, including names and quantities.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+**Recipe Viewing and Browsing:**
 
-**September 20 2023:** Update Python version to 3.9.17.
+- Recipes are displayed on the home page for users to browse.
+- Users can view detailed information about each recipe, including ingredients, instructions, and images.
+- Recipes can be categorized into predefined categories for easier browsing.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+**Search Functionality:**
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+- Users can search for recipes using keywords, which returns relevant results matching the search query.
+- Search results are displayed in a user-friendly format, allowing users to quickly find recipes of interest.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+**User Interaction:**
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+- Users can rate recipes to provide feedback on their experiences.
+- Comments can be added to recipes, allowing users to share tips, modifications, and reviews.
+- Comments are associated with user accounts and displayed alongside recipes.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+**User Dashboard:**
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+- Users have access to a personalized dashboard where they can view statistics and insights about their recipe usage.
+- Statistics may include total recipes, total comments, average rating, most commented recipe, etc.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+**User Profile:**
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+- Users can view and edit their profile information, including username and email address.
+- Profile information is stored securely and can be updated as needed.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+**Session Management:**
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+- Sessions are managed securely to ensure user data privacy and prevent unauthorized access.
+- Users are redirected to appropriate pages based on their authentication status and actions performed.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+**Error Handling:**
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+- Error handling is implemented to provide users with clear and informative error messages in case of invalid inputs or other issues.
+- Flash messages are used to display notifications, such as successful actions or errors, to users.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+**Responsive Design:**
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+- The web application is designed with a responsive layout, ensuring optimal viewing and interaction experiences across various devices and screen sizes.
 
-------
+These features collectively contribute to the functionality and usability of the Yummy Hub Recipe Manager web application, providing users with a seamless experience for managing, exploring, and sharing recipes.
 
-## FAQ about the uptime script
+### Future Features:
+- **Social Sharing:** Integrate social media sharing functionality to allow users to share their favorite recipes with their friends and followers.
 
-**Why have you added this script?**
+- **Recipe Recommendations:** Implement recommendation algorithms to suggest recipes based on user behavior, preferences, and ratings.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+- **Advanced Search Filters:** Enhance the search functionality with advanced filters such as dietary restrictions, cooking techniques, and recipe ratings.
 
-**How will this affect me?**
+- **Collaborative Features:** Introduce collaborative features such as recipe collections, group meal planning, and community forums to foster interaction and collaboration among users.
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+- **Enhanced User Profiles:** Expand profiles with more details and customization.
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+- **Notification System:** Alert users about comments, recommendations, and updates.
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+### Information Structure:
+The application is structured around the following key components:
 
-**So….?**
+- **Users:** Users can register, log in, and manage their accounts to access personalized features and interact with the platform.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+- **Recipes:** Recipes serve as the core content of the application, allowing users to add, edit, delete, rate, and comment on recipes.
 
-**Can I opt out?**
+- **Categories:** Recipes are organized into categories such as "Around the World," "Quick & Easy," "Healthy Food," and "Sweet Treats" to facilitate browsing and discovery.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+- **Comments:** Users can add comments to recipes to share their thoughts, tips, and modifications with other users.
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+- **Search:** The search functionality enables users to search for recipes based on keywords,to find recipes that match their preferences.
 
-**Anything more?**
+### Presentation:
+The application is presented through a web interface with a clean and modern design. Users can navigate through different pages, view recipes, add comments, and interact with various features through intuitive user interfaces and interactive components.
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+### Look and Feel:
+The application features a visually appealing design with a clean layout, modern typography, and vibrant colors. The user interface is designed to be user-friendly and accessible, with clear navigation, intuitive controls, and consistent visual elements throughout the application.
 
----
+### Technologies Used:
+The application is developed using the following technologies and frameworks:
 
-Happy coding!
+- **Python Flask:** Flask is utilized as the web framework for constructing the backend server and handling HTTP requests.
+
+- **SQLAlchemy:** SQLAlchemy serves as the Object-Relational Mapping (ORM) tool for interacting with the database and managing data models.
+
+- **HTML/CSS:** HTML and CSS are employed for structuring and styling the web pages to create the user interface.
+
+- **JavaScript:** JavaScript is integrated to add interactivity and dynamic behavior to the web pages, including form validation and asynchronous requests.
+
+- **Jinja2:** Jinja2 is the template engine used for generating dynamic HTML content with data from the backend.
+
+- **PostgreSQL** (ElephantSQL): ElephantSQL provides a PostgreSQL database for storing user accounts, recipes, comments, and other application data. It enhances scalability and performance compared to SQLite, facilitating seamless application operation.
+
+- **Heroku:** Heroku is utilized as the deployment platform, enabling easy deployment and scaling of the Flask application. It also hosts the PostgreSQL database add-on provided by ElephantSQL, ensuring robustness and reliability of the application's data storage.
