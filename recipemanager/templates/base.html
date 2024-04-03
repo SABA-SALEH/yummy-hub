@@ -47,11 +47,15 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if 'username' in session %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('user_dashboard', user_id=session['user_id']) }}">Welcome,
-                            {{ session['username'] }}</a>
+                        {% if 'user_id' in session %}
+                            <a class="nav-link" href="{{ url_for('user_dashboard', user_id=session['user_id']) }}">Welcome, {{ session['username'] }}</a>
+                        {% endif %}
                     </li>
                     <li class="nav-item">
+                        {% if 'user_id' in session %}
                         <a class="nav-link" href="{{ url_for('user_dashboard', user_id=session['user_id']) }}">Dashboard</a>
+                    {% endif %}
+                    
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>

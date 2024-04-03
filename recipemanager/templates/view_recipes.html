@@ -4,35 +4,41 @@
 <h2 class="mb-3 mt-5">Recipes</h2>
 <hr>
 <div class="row">
-    {% for recipe in recipes %}
-    <div class="col-md-6 col-lg-6 mb-4">
-        <div class="card">
-            <img src="{{ recipe.image_url }}" class="card-img-top" alt="Recipe Image">
-            <div class="card-body">
-                <h5 class="card-title">{{ recipe.title }}</h5>
-                {% if recipe.average_rating is not none %}
-                <p><strong><i class="fa-sharp fa-solid fa-star"></i> Average Rating:</strong> {{ '%.1f' % recipe.average_rating }}</p>
-                {% else %}
-                <p><strong>No ratings yet</strong></p>
-                {% endif %}
-                <p class="card-text"><i class="fas fa-folder-open"></i> <strong>Category:</strong> {{ recipe.category_name }}</p>
-                <p class="card-text"><i class="fas fa-align-left"></i> <strong>Description:</strong> {{ recipe.description }}</p>
-                <h6><i class="fas fa-utensils"></i> <strong>Ingredients:</strong></h6>
-                {% if recipe.ingredients %}
-                <ul>
-                    {% for ingredient in recipe.ingredients %}
-                    <li>{{ ingredient.name }}{% if ingredient.quantity %} - {{ ingredient.quantity }}{% endif %}</li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p>No ingredients found.</p>
-                {% endif %}
-                <p class="card-text"><i class="fas fa-list-ul"></i> <strong>Instructions:</strong> {{ recipe.instructions }}</p>
-                <p class="card-text"><i class="far fa-clock"></i> <strong>Preparation Time:</strong> {{ recipe.preparation_time }} minutes</p>
-                <p class="card-text"><i class="far fa-clock"></i> <strong>Cook Time:</strong> {{ recipe.cook_time }} minutes</p>
+    {% if recipes %}
+        {% for recipe in recipes %}
+        <div class="col-md-6 col-lg-6 mb-4">
+            <div class="card">
+                <img src="{{ recipe.image_url }}" class="card-img-top" alt="Recipe Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ recipe.title }}</h5>
+                    {% if recipe.average_rating is not none %}
+                    <p><strong><i class="fa-sharp fa-solid fa-star"></i> Average Rating:</strong> {{ '%.1f' % recipe.average_rating }}</p>
+                    {% else %}
+                    <p><strong>No ratings yet</strong></p>
+                    {% endif %}
+                    <p class="card-text"><i class="fas fa-folder-open"></i> <strong>Category:</strong> {{ recipe.category_name }}</p>
+                    <p class="card-text"><i class="fas fa-align-left"></i> <strong>Description:</strong> {{ recipe.description }}</p>
+                    <h6><i class="fas fa-utensils"></i> <strong>Ingredients:</strong></h6>
+                    {% if recipe.ingredients %}
+                    <ul>
+                        {% for ingredient in recipe.ingredients %}
+                        <li>{{ ingredient.name }}{% if ingredient.quantity %} - {{ ingredient.quantity }}{% endif %}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No ingredients found.</p>
+                    {% endif %}
+                    <p class="card-text"><i class="fas fa-list-ul"></i> <strong>Instructions:</strong> {{ recipe.instructions }}</p>
+                    <p class="card-text"><i class="far fa-clock"></i> <strong>Preparation Time:</strong> {{ recipe.preparation_time }} minutes</p>
+                    <p class="card-text"><i class="far fa-clock"></i> <strong>Cook Time:</strong> {{ recipe.cook_time }} minutes</p>
+                </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <div class="col-12 card p-3">
+            <p>No recipes found.</p>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

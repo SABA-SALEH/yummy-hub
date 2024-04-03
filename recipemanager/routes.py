@@ -43,8 +43,12 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             
+            
+            
             session['username'] = username
-            return redirect(url_for('user'))
+            session['user_id'] = new_user.id
+            
+            return redirect(url_for('user_dashboard', user_id=new_user.id))
     
     return render_template('register.html')
 
