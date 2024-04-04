@@ -84,14 +84,14 @@
         </section>
     
         <section class="mb-4">
-            <form>
+            <form action="{{ url_for('subscribe') }}" method="POST">
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <p class="text-center join"><strong class="important">Don't Miss Out!</strong> Join our mailing list to receive all of our delicious recipes</p>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Enter your email here" aria-label="Email" aria-describedby="button-addon2">
+                            <input type="email" class="form-control" name="email" placeholder="Enter your email here" aria-label="Email" aria-describedby="button-addon2" required>
                             <button class="btn subscribebtn" type="submit" id="button-addon2">Subscribe</button>
                         </div>
                     </div>
@@ -100,6 +100,16 @@
         </section>
     
         <div class="text-center p-3 copyright">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
             © 2020 Copyright:
             <a href="{{ url_for('home') }}">Yummy Hub</a>
         </div>

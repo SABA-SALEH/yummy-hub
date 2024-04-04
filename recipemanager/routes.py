@@ -539,6 +539,15 @@ def change_password():
     return render_template('change_password.html', username=username)
 
 
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    email = request.form.get('email')
+
+    flash('You have successfully subscribed to our mailing list!', 'success')
+    return redirect(url_for('home'))
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
