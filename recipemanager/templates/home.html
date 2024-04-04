@@ -48,13 +48,13 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
+<section class=""></section>
 <div class="row justify-content-center">
     <h1 class="card-title justify-content-center mb-4 mt-3">
-        Featured Recipes 
-        <i class="fas fa-utensils"></i> 
+        Featured Recipes
+        <i class="fas fa-utensils"></i>
     </h1>
-    
+
     <hr>
     {% for recipe in recipes[:3] %}
     <div class="col-md-4 mb-4">
@@ -66,9 +66,10 @@
                 <small class="text-muted ">
                     <i class="fas fa-calendar-alt"></i> Posted on {{ recipe.created_at.strftime('%Y-%m-%d') }} by
                     <i class="fas fa-user"></i> {{ recipe.author.username }}
-                  </small>
-                  <br>
-                <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" class="btn mt-3">Read
+                </small>
+                <br>
+                <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}"
+                    class="btn mt-3">Read
                     More <i class="fas fa-chevron-right"></i></a>
             </div>
         </div>

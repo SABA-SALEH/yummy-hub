@@ -3,26 +3,35 @@
 {% block content %}
 <h2 class="mt-5 mb-4 card-title">User Profile</h2>
 <hr>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Warning!</strong> Updating your profile may log you out of the current session.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
 <div class="card col-md-9 mb-4">
     <div class="card-body">
         <form action="{{ url_for('update_profile') }}" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label"><i class="fas fa-user"></i> Username</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="username" name="username" value="{{ profile.username }}" required>
+                    <input type="text" class="form-control" id="username" name="username" value="{{ profile.username }}"
+                        required>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label"><i class="fas fa-envelope"></i> Email</label>
                 <div class="input-group">
-                    <input type="email" class="form-control" id="email" name="email" value="{{ profile.email }}" required>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ profile.email }}"
+                        required>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="created_at" class="form-label"><i class="fas fa-calendar-alt"></i> Registration Date</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="created_at" value="{{ profile.created_at.strftime('%Y-%m-%d %H:%M:%S') }}" readonly>
+                    <input type="text" class="form-control" id="created_at"
+                        value="{{ profile.created_at.strftime('%Y-%m-%d %H:%M:%S') }}" readonly>
                 </div>
             </div>
 

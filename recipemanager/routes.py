@@ -425,7 +425,18 @@ def submit_rating(unique_identifier):
     else:
         user_id = None  
 
-    rating_value = int(request.form.get('rating'))
+    rating_value = request.form.get('rating')
+
+    if rating_value is None or rating_value.strip() == '':
+        flash('Please provide a rating.', 'error')
+        return redirect(url_for('recipe_details', unique_identifier=unique_identifier))
+
+    try:
+        rating_value = int(rating_value)
+    except ValueError:
+        flash('Invalid rating value.', 'error')
+        return redirect(url_for('recipe_details', unique_identifier=unique_identifier))
+
     recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
 
     if recipe:
@@ -539,14 +550,25 @@ def change_password():
     return render_template('change_password.html', username=username)
 
 
+from flask import flash, redirect, url_for
+
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
     email = request.form.get('email')
 
-    flash('You have successfully subscribed to our mailing list!', 'success')
+    flash('You have successfully subscribed to our mailing list!', 'subscription_success')
     return redirect(url_for('home'))
 
 
+
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form.get('email')
+
+        flash('A password reset link has been sent to your email.', 'success')
+        return redirect(url_for('login')) 
+    return render_template('forgot_password.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

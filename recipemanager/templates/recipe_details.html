@@ -1,6 +1,35 @@
 <!-- recipe_details.html -->
 {% extends 'base.html' %}
 {% block content %}
+
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div
+          class="alert {% if category == 'success' %}alert-success{% elif category == 'error' %}alert-danger{% elif category == 'warning' %}alert-warning{% elif category == 'danger' %}alert-danger{% endif %} d-flex justify-content-between align-items-center"
+          role="alert">
+
+          <div>{{ message }}</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -12,8 +41,8 @@
           <img src="{{ recipe.image_url }}" alt="Recipe Image" class="card-img-top recipe-image">
           <div class="recipe-details">
             {% if average_rating is not none %}
-            <p><strong><i
-              class="fa-sharp fa-solid fa-star"></i> Average Rating:</strong> {{ '%.1f' % average_rating }}</p>
+            <p><strong><i class="fa-sharp fa-solid fa-star"></i> Average Rating:</strong> {{ '%.1f' % average_rating }}
+            </p>
             {% else %}
             <p><strong>No ratings yet</strong></p>
             {% endif %}
@@ -94,18 +123,7 @@
 <div class="container mt-3">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{ category }} d-flex justify-content-between align-items-center" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-    </div>
+
     </div>
   </div>
 </div>
