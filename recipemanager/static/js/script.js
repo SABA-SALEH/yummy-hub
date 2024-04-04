@@ -3,27 +3,34 @@ var ingredientCounter = 1;
 function addIngredientField() {
     ingredientCounter++;
 
+    var ingredientRow = document.createElement("div");
+    ingredientRow.classList.add("row"); 
 
     var ingredientNameField = document.createElement("div");
-    ingredientNameField.classList.add("mb-3");
+    ingredientNameField.classList.add("col-md-6"); 
     ingredientNameField.innerHTML = `
-            <label for="ingredient_name_${ingredientCounter}" class="form-label">Ingredient Name</label>
+        <div class="mb-3">
+            <label for="ingredient_name_${ingredientCounter}" class="form-label"><i class="fas fa-shopping-basket"></i> Ingredient Name</label>
             <input type="text" class="form-control" id="ingredient_name_${ingredientCounter}" name="ingredient_name_${ingredientCounter}">
-        `;
-
+        </div>
+    `;
 
     var ingredientQuantityField = document.createElement("div");
-    ingredientQuantityField.classList.add("mb-3");
+    ingredientQuantityField.classList.add("col-md-6"); 
     ingredientQuantityField.innerHTML = `
-            <label for="ingredient_quantity_${ingredientCounter}" class="form-label">Ingredient Quantity</label>
+        <div class="mb-3">
+            <label for="ingredient_quantity_${ingredientCounter}" class="form-label"><i class="fas fa-weight-hanging"></i> Ingredient Quantity</label>
             <input type="text" class="form-control" id="ingredient_quantity_${ingredientCounter}" name="ingredient_quantity_${ingredientCounter}">
-        `;
+        </div>
+    `;
 
+    ingredientRow.appendChild(ingredientNameField);
+    ingredientRow.appendChild(ingredientQuantityField);
 
     var ingredientFieldsContainer = document.getElementById("ingredientFields");
-    ingredientFieldsContainer.appendChild(ingredientNameField);
-    ingredientFieldsContainer.appendChild(ingredientQuantityField);
+    ingredientFieldsContainer.appendChild(ingredientRow);
 }
+
 
 
 
@@ -33,23 +40,31 @@ var ingredientCounter2 = 1;
 
 
 function addIngredientField2() {
+    var ingredientRow = document.createElement("div");
+    ingredientRow.classList.add("row"); 
+
     var ingredientNameField = document.createElement("div");
-    ingredientNameField.classList.add("mb-3");
-    ingredientNameField.innerHTML = '<label for="new_ingredient_name_' + ingredientCounter2 + '" class="form-label">New Ingredient Name</label>' +
-        '<input type="text" class="form-control" id="new_ingredient_name_' + ingredientCounter2 + '" name="new_ingredient_name">';
+    ingredientNameField.classList.add("col-md-6"); 
+    ingredientNameField.innerHTML = '<div class="mb-3">' +
+        '<label for="new_ingredient_name_' + ingredientCounter2 + '" class="form-label"><i class="fas fa-shopping-basket"></i> New Ingredient Name</label>' +
+        '<input type="text" class="form-control" id="new_ingredient_name_' + ingredientCounter2 + '" name="new_ingredient_name">' +
+        '</div>';
 
     var ingredientQuantityField = document.createElement("div");
-    ingredientQuantityField.classList.add("mb-3");
-    ingredientQuantityField.innerHTML = '<label for="new_ingredient_quantity_' + ingredientCounter2 + '" class="form-label">New Ingredient Quantity</label>' +
-        '<input type="text" class="form-control" id="new_ingredient_quantity_' + ingredientCounter2 + '" name="new_ingredient_quantity">';
+    ingredientQuantityField.classList.add("col-md-6"); 
+    ingredientQuantityField.innerHTML = '<div class="mb-3">' +
+        '<label for="new_ingredient_quantity_' + ingredientCounter2 + '" class="form-label"><i class="fas fa-weight-hanging"></i> New Ingredient Quantity</label>' +
+        '<input type="text" class="form-control" id="new_ingredient_quantity_' + ingredientCounter2 + '" name="new_ingredient_quantity">' +
+        '</div>';
+
+    ingredientRow.appendChild(ingredientNameField);
+    ingredientRow.appendChild(ingredientQuantityField);
 
     var ingredientFieldsContainer = document.getElementById("ingredientFields");
-    ingredientFieldsContainer.appendChild(ingredientNameField);
-    ingredientFieldsContainer.appendChild(ingredientQuantityField);
+    ingredientFieldsContainer.appendChild(ingredientRow);
 
     ingredientCounter2++;
 }
-
 
 
 function validateForm() {
@@ -74,12 +89,12 @@ function copyShareableLink() {
     input.select();
     document.execCommand('copy');
     alert('Shareable link copied to clipboard!');
-  }
+}
 
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var categorySelect = document.getElementById('categorySelect');
     var categoryForm = document.getElementById('categoryForm');
 
@@ -97,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    document.addEventListener("click", function(event) {
+    document.addEventListener("click", function (event) {
         if (event.target && event.target.classList.contains("delete-comment")) {
             var button = event.target;
             var commentId = button.dataset.commentId;
@@ -108,7 +123,3 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-
-
-
-

@@ -7,6 +7,7 @@ from datetime import datetime
 from sqlalchemy import func
 from werkzeug.routing import UUIDConverter
 
+
 app.secret_key = 'saba'
 
 @app.context_processor
@@ -35,19 +36,18 @@ def register():
         existing_email = User.query.filter_by(email=email).first()
         
         if existing_user:
-            return render_template('register.html', error='Username already exists')
+            flash('Username already exists', 'danger')
         elif existing_email:
-            return render_template('register.html', error='Email already exists')
+            flash('Email already exists', 'danger')
         else:
             new_user = User(username=username, email=email, password=password)
             db.session.add(new_user)
             db.session.commit()
             
-            
-            
             session['username'] = username
             session['user_id'] = new_user.id
             
+            flash('Registration successful! Welcome, ' + username, 'success')
             return redirect(url_for('user_dashboard', user_id=new_user.id))
     
     return render_template('register.html')
@@ -121,7 +121,7 @@ def add_recipe():
         db.session.add(new_recipe)
         db.session.commit()
 
-        return redirect(url_for('user_dashboard', user_id=user_id))
+        return redirect(url_for('view_recipes', user_id=user_id))
 
     
     categories = [
@@ -165,18 +165,23 @@ def manage_recipes():
     return render_template('manage_recipes.html', username=username, recipes=user_recipes)
 
 
+
+
 @app.route('/edit_recipe/<int:recipe_id>', methods=['GET', 'POST'])
 def edit_recipe(recipe_id):
     if 'username' not in session:
+        flash('You must be logged in to edit a recipe', 'danger')
         return redirect(url_for('login')) 
 
     user_id = session.get('user_id')
     recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
 
     if not recipe:
+        flash('Recipe not found or you do not have permission to edit it', 'danger')
         return redirect(url_for('manage_recipes'))
 
     if request.method == 'POST':
+        
         recipe.title = request.form['title']
         recipe.description = request.form['description']
         recipe.instructions = request.form['instructions']
@@ -185,6 +190,7 @@ def edit_recipe(recipe_id):
         recipe.cook_time = request.form['cook_time']
         recipe.image_url = request.form['image_url'] 
 
+       
         recipe.ingredients = []
         index = 0
         while True:
@@ -204,6 +210,7 @@ def edit_recipe(recipe_id):
 
         db.session.commit()
         
+        flash('Recipe updated successfully', 'success')
         return redirect(url_for('manage_recipes'))
     
     categories = [
@@ -216,10 +223,11 @@ def edit_recipe(recipe_id):
     return render_template('edit_recipe.html', username=session['username'], recipe=recipe, categories=categories, ingredientCounter=len(recipe.ingredients))
 
 
+
 @app.route('/delete_recipe/<int:recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):
-   
     if 'username' not in session:
+        flash('You must be logged in to delete recipes.', 'danger')
         return redirect(url_for('login')) 
     
     user_id = session.get('user_id')
@@ -227,21 +235,26 @@ def delete_recipe(recipe_id):
     recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
     
     if not recipe:
+        flash('Recipe not found or you are not authorized to delete it.', 'danger')
         return redirect(url_for('manage_recipes'))
     
     try:
-       
+        
         Comment.query.filter_by(recipe_id=recipe_id).delete()
         Rating.query.filter_by(recipe_id=recipe_id).delete()
-       
+        
         db.session.commit()
         db.session.delete(recipe)
         db.session.commit()
+        
+        flash('Recipe deleted successfully.', 'success')
 
     except Exception as e:
-       
+        flash('An error occurred while deleting the recipe.', 'danger')
         db.session.rollback()
+
     return redirect(url_for('manage_recipes'))
+
 
 
 app.url_map.converters['uuid'] = UUIDConverter
@@ -493,6 +506,37 @@ def user_dashboard(user_id):
 
     stats = get_user_dashboard_stats(user_id)
     return render_template('user_dashboard.html', user=user, stats=stats, username=username)
+
+
+
+@app.route('/change_password', methods=['GET', 'POST'])
+def change_password():
+    username = session.get('username')
+    
+    if request.method == 'POST':
+        if not username:
+            flash('You must be logged in to change your password', 'danger')
+            return redirect(url_for('login'))
+        
+        old_password = request.form['old_password']
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+        
+        user = User.query.filter_by(username=username).first()  
+        
+        if user and user.password == old_password:
+            if new_password == confirm_password:
+                user.password = new_password  
+                db.session.commit()
+                flash('Password updated successfully', 'success')
+                return redirect(url_for('user_dashboard', user_id=user.id))
+
+            else:
+                flash('New passwords do not match', 'danger')
+        else:
+            flash('Invalid old password', 'danger')
+    
+    return render_template('change_password.html', username=username)
 
 
 if __name__ == "__main__":
