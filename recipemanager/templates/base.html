@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="https://kit.fontawesome.com/45b8f34d90.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     {% block css %}{% endblock %}
 </head>
@@ -17,8 +18,11 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" id="logo" href="{{ url_for('home') }}"><i class="fas fa-utensils"></i> Yummy Hub
-                Where Every Bite Tells a Story</a>
+            <a class="navbar-brand" id="logo" href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/Yummy_Hub.png') }}" alt="Yummy Hub Logo" >
+            </a>
+            
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">

@@ -1,17 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Metal&display=swap');
+
+.metal-regular {
+    font-family: "Metal", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
 body {
     color: #6D2932;
     background-color: #C7B7A3;
+    font-family: 'Metal', sans-serif; 
+    font-size:large;
 }
+
 
 .navbar {
     background-color: #561C24;
     color: #E8D8C4;
 }
 
-#logo {
-    color: #E8D8C4;
-    font-weight: bold;
+
+#logo img {
+    width: 100px; 
+    height: auto;
+    padding-top: 0;
+    padding-bottom: 0; 
+    margin-top: -15px;
+    margin-bottom: -15px;
 }
+
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0; 
+}
+
+
 
 .navbar-brand,
 .navbar-brand:hover,
@@ -240,3 +263,39 @@ a {
     margin-left: 10px;
 }
 
+
+@media (max-width: 768px) {
+
+    @media (max-width: 768px) {
+        .carousel-inner img {
+            max-height: 250px; 
+        }
+    }
+    .carousel {
+        max-height: 280px; 
+    }
+}
+
+
+#featured-recipes {
+    color: #561C24; 
+    font-family: 'Metal', sans-serif ; 
+    font-weight: bold; 
+    font-size: 60px;
+    letter-spacing: 2px; 
+}
+
+
+#featured-recipes .text-primary {
+    color: #010e27 !important ;
+    font-weight: bold;
+    font-size: 60px;
+}
+
+
+#featured-recipes .fas.fa-utensils {
+    font-size: 30px; 
+    vertical-align: middle; 
+}
+
+#about_image{height: 90%;}

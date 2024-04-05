@@ -22,11 +22,6 @@
         {% endwith %}
       </div>
 
-
-
-
-
-
     </div>
   </div>
 </div>
@@ -35,7 +30,7 @@
     <div class="col-md-8">
       <div class="card mb-4">
         <div class="card-body">
-          <h2 class="card-title">{{ recipe.title }} <a
+          <h2 class="card-title fw-bold">{{ recipe.title }} <a
               href="{{ url_for('share_recipe', unique_identifier=recipe.unique_identifier) }}" class="btn"><i
                 class="fa-solid fa-share"></i></a></h2>
           <img src="{{ recipe.image_url }}" alt="Recipe Image" class="card-img-top recipe-image">

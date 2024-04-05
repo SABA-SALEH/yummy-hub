@@ -10,7 +10,7 @@
             <div class="card">
                 <img src="{{ recipe.image_url }}" class="card-img-top" alt="Recipe Image">
                 <div class="card-body">
-                    <h5 class="card-title">{{ recipe.title }}</h5>
+                    <h5 class="card-title fw-bold">{{ recipe.title }}</h5>
                     {% if recipe.average_rating is not none %}
                     <p><strong><i class="fa-sharp fa-solid fa-star"></i> Average Rating:</strong> {{ '%.1f' % recipe.average_rating }}</p>
                     {% else %}
