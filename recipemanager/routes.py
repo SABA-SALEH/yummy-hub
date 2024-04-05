@@ -4,8 +4,8 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 from recipemanager import app, db
 from recipemanager.models import User, Recipe, Rating, Comment
 from datetime import datetime
-from sqlalchemy import func
 from werkzeug.routing import UUIDConverter
+from sqlalchemy import or_, func, cast, Text
 
 
 app.secret_key = 'saba'
@@ -362,14 +362,43 @@ def update_comment(comment_id):
 @app.route('/search', methods=['GET'])
 def search():
     username = session.get('username')
-    return render_template('search.html', username=username)
+    categories = [
+        {'id': 1, 'name': 'Around the World'},
+        {'id': 2, 'name': 'Quick & Easy'},
+        {'id': 3, 'name': 'Healthy Food'},
+        {'id': 4, 'name': 'Sweet Treats'}
+    ]
+    return render_template('search.html', username=username, categories=categories)
+
 
 
 @app.route('/search_results', methods=['GET'])
 def search_results():
     username = session.get('username')
     query = request.args.get('query')
-    search_results = Recipe.query.filter(Recipe.title.ilike(f'%{query}%')).all()
+    category = request.args.get('category')
+    ingredients = request.args.get('ingredients')
+    cooking_time = request.args.get('cooking_time')
+    
+    query_filters = []
+
+    if query:
+        query_filters.append(Recipe.title.ilike(f'%{query}%'))
+    if category:
+        query_filters.append(Recipe.category_name.ilike(f'%{category}%'))
+    if ingredients:
+        query_filters.append(cast(Recipe.ingredients, Text).ilike(f'%{ingredients}%'))
+    if cooking_time:
+       
+        try:
+            cooking_time = int(cooking_time)
+        except ValueError:
+            flash('Invalid cooking time format', 'error')
+            return redirect(url_for('search'))  
+    
+        query_filters.append(Recipe.cook_time <= cooking_time)
+
+    search_results = Recipe.query.filter(or_(*query_filters)).all()
 
     return render_template('search_results.html', search_results=search_results, query=query, username=username)
 
@@ -549,8 +578,6 @@ def change_password():
     
     return render_template('change_password.html', username=username)
 
-
-from flask import flash, redirect, url_for
 
 @app.route('/subscribe', methods=['POST'])
 def subscribe():

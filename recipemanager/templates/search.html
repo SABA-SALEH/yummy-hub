@@ -1,17 +1,38 @@
 {% extends "base2.html" %}
 
 {% block content %}
-<h2 class="mt-5 mb-3">Search Recipes</h2>
-<hr>
-<div class="input-group mt-3">
-    <div class="form-outline w-100" data-mdb-input-init>
-        <form action="{{ url_for('search_results') }}" method="GET" class="d-flex">
-            <input id="search-input" type="text" class="form-control me-1" name="query"
-                placeholder="Enter your search query" />
-            <button id="search-button" type="submit" class="btn ">
-                <i class="fas fa-search"></i> Search
-            </button>
-        </form>
+<div class="container mt-3 mb-3">
+    <div class="row">
+        <div class="col-md-9 offset-md-1">
+            <h2 class="mt-5 mb-3">Advanced Search Recipes</h2>
+            <hr>
+            <form action="{{ url_for('search_results') }}" method="GET" class="search-form">
+                <div class="form-group mb-3">
+                    <label for="query"><i class="fas fa-search"></i> Search:</label>
+                    <input type="text" id="query" name="query" placeholder="Enter keywords" class="form-control">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="category"><i class="fas fa-tag"></i> Category:</label>
+                    <select class="form-select" id="category" name="category" required>
+                        <option selected disabled>Select a category</option>
+                        {% for category in categories %}
+                        <option value="{{ category['name'] }}">{{ category['name'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="ingredients"><i class="fas fa-utensils"></i> Ingredients:</label>
+                    <input type="text" id="ingredients" name="ingredients" placeholder="Enter ingredients"
+                        class="form-control">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="cooking_time"><i class="fas fa-clock"></i> Cooking Time (in minutes):</label>
+                    <input type="number" id="cooking_time" name="cooking_time" placeholder="Enter maximum cooking time"
+                        class="form-control">
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-search"></i> Search</button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
