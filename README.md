@@ -141,3 +141,122 @@ The application is developed using the following technologies and frameworks:
 - **PostgreSQL** (ElephantSQL): ElephantSQL provides a PostgreSQL database for storing user accounts, recipes, comments, and other application data. It enhances scalability and performance compared to SQLite, facilitating seamless application operation.
 
 - **Heroku:** Heroku is utilized as the deployment platform, enabling easy deployment and scaling of the Flask application. It also hosts the PostgreSQL database add-on provided by ElephantSQL, ensuring robustness and reliability of the application's data storage.
+
+## Getting Started
+
+### Prerequisites
+- Python 3.x
+- pip (Python package manager)
+
+### Installation
+1. Clone the repository to local machine:
+   ```sh
+   git clone https://github.com/SABA-SALEH/yummy-hub.git
+
+2. Navigate to the project directory:
+   ```sh
+   cd yummy-hub
+
+3. Install the required dependencies:
+    ```sh
+   pip install -r requirements.txt
+
+### Setting Up the Database
+1. Create a PostgreSQL database either locally or using a cloud service like ElephantSQL.
+2. Update the database connection URI in the __init__.py file:
+SQLALCHEMY_DATABASE_URI = 'postgresql://'
+
+### Running the Application
+1. Start the Flask development server:
+   ```sh
+   python run.py
+2. Open a web browser and navigate to http://localhost:5000 to access the application.
+
+## Deployment
+
+To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps:
+
+1. Sign up for Heroku:
+
+    - Navigate to Heroku.com in web browser.
+    - Click on "Sign Up" and create a new account.
+    - Fill out the registration form with  details and verify the account through the confirmation 
+    email sent by Heroku.
+
+2. Create a new app on Heroku:
+
+    - Once logged in, click on the "New" button on the dashboard.
+    - Choose a unique name for app (e.g., yummy-hub).
+    - Select region preference.
+    - Click on "Create App" to create app on Heroku.
+
+3. Link  local Git repository to Heroku:
+
+    - In terminal, navigate to project directory.
+    - Add a new remote for Heroku by running the command:
+    ```csharp
+    git remote add heroku <heroku-git-url>
+    - Verify that the remote has been added by running:
+    ```csharp
+    git remote -v
+    ```
+
+4. Create a requirements.txt file:
+
+    - In terminal, run the command:
+    ```csharp
+    pip freeze > requirements.txt
+    ```
+    -This command will generate a requirements.txt file listing all Python dependencies used in project.
+
+5. Create a Procfile:
+
+    - In terminal, run the command:
+    ```bash
+    echo "web: python run.py" > Procfile
+    ```
+
+6. Commit changes and push to Heroku:
+
+    - Add the requirements.txt and Procfile to Git repository:
+    ```csharp
+    git add requirements.txt Procfile
+    ```
+    - Commit the changes:
+    ```sql
+    git commit -m "Add requirements.txt and Procfile"
+    ```
+    - Push code to Heroku:
+    ```perl
+    git push -u heroku main
+    ```
+
+7. Set up environment variables on Heroku:
+
+    - Go to Heroku dashboard and navigate to app's settings.
+    - Click on "Reveal Config Vars".
+    - Add any necessary environment variables, such as SECRET_KEY, IP, and PORT, and their respective values.
+
+8. Check logs and troubleshoot if necessary:
+
+    - Monitor the build process and check for any errors by viewing the logs on Heroku.
+    - You can access logs through the Heroku dashboard or via the command line using:
+    ```css
+    heroku logs --tail --app yummy-hub
+    ```
+9. Test deployed app:
+
+    - Once deployment is successful, visit app's URL provided by Heroku to ensure that it is working as expected.
+
+(Optional) Set up automatic deployment from GitHub:
+
+    - In Heroku app's dashboard, navigate to the "Deploy" tab.
+    - Connect GitHub repository to Heroku app.
+    - Enable automatic deployments from chosen branch (e.g., main).
+
+
+
+
+
+
+
