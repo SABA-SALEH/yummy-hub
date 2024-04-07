@@ -62,7 +62,7 @@
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-star"></i> Average Rating</h5>
                 <p class="card-text">The average rating received by your recipes</p>
-                <p class="card-value"><strong>{{ stats.average_rating }}</strong></p>
+                <p class="card-value"><strong>{{ stats.average_rating |round(2)|float }}</strong></p>
             </div>
         </div>
     </div>

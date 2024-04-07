@@ -5,7 +5,7 @@ from recipemanager import app, db
 from recipemanager.models import User, Recipe, Rating, Comment
 from datetime import datetime
 from werkzeug.routing import UUIDConverter
-from sqlalchemy import or_, func, cast, Text
+from sqlalchemy import or_, func, cast, Text , desc
 
 
 app.secret_key = 'saba'
@@ -15,10 +15,17 @@ def inject_categories():
     categories = ['Around the World', 'Quick & Easy', 'Healthy Food', 'Sweet Treats']
     return dict(categories=categories)
 
+
+
 @app.route('/')
 def home():
     recipes = Recipe.query.all()  
-    return render_template('home.html', recipes=recipes)
+    top_rated_recipes = db.session.query(
+        Recipe,
+        func.avg(Rating.rating).label('avg_rating')
+    ).join(Rating).group_by(Recipe.id).order_by(desc('avg_rating')).limit(3).all()
+    return render_template('home.html', top_rated_recipes=top_rated_recipes)
+
 
 
 @app.route('/about')

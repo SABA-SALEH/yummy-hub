@@ -49,33 +49,34 @@
     </button>
 </div>
 
-
 <div class="row justify-content-center">
     <h1 class="card-title text-center mb-3 mt-3" id="featured-recipes">
-        <span class="text-primary">Featured</span> Recipes
-        <i class="fas fa-utensils ml-2"></i>
+        <span class="text-primary "> Top Rated</span> Recipes
     </h1>
-    
 
     <hr>
-    {% for recipe in recipes[:3] %}
+    {% for recipe, avg_rating in top_rated_recipes %}
     <div class="col-md-4 mb-4">
         <div class="card">
             <img src="{{ recipe.image_url }}" class="card-img-top" alt="{{ recipe.title }}">
             <div class="card-body">
                 <h5 class="card-title fw-bold">{{ recipe.title }}</h5>
+
                 <p class="card-text">{{ recipe.description }}</p>
+                <p class="text-muted"><i class="fa-sharp fa-solid fa-star"></i>Average Rating:
+                    {{ avg_rating|round(2)|float }}</p>
                 <small class="text-muted ">
                     <i class="fas fa-calendar-alt"></i> Posted on {{ recipe.created_at.strftime('%Y-%m-%d') }} by
                     <i class="fas fa-user"></i> {{ recipe.author.username }}
                 </small>
                 <br>
                 <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}"
-                    class="btn mt-3">Read
-                    More <i class="fas fa-chevron-right"></i></a>
+                    class="btn mt-3">Read More <i class="fas fa-chevron-right"></i></a>
+
             </div>
         </div>
     </div>
     {% endfor %}
+
 </div>
 {% endblock %}

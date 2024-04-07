@@ -152,14 +152,17 @@ The application is developed using the following technologies and frameworks:
 1. Clone the repository to local machine:
    ```sh
    git clone https://github.com/SABA-SALEH/yummy-hub.git
+   ```
 
 2. Navigate to the project directory:
    ```sh
    cd yummy-hub
+   ```
 
 3. Install the required dependencies:
     ```sh
    pip install -r requirements.txt
+   ```
 
 ### Setting Up the Database
 1. Create a PostgreSQL database either locally or using a cloud service like ElephantSQL.
@@ -196,6 +199,7 @@ To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps
     - Add a new remote for Heroku by running the command:
     ```csharp
     git remote add heroku <heroku-git-url>
+    ```
     - Verify that the remote has been added by running:
     ```csharp
     git remote -v
@@ -248,11 +252,174 @@ To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps
 
     - Once deployment is successful, visit app's URL provided by Heroku to ensure that it is working as expected.
 
-(Optional) Set up automatic deployment from GitHub:
+   (Optional) Set up automatic deployment from GitHub:
 
     - In Heroku app's dashboard, navigate to the "Deploy" tab.
     - Connect GitHub repository to Heroku app.
     - Enable automatic deployments from chosen branch (e.g., main).
+
+## Testing
+### Manual Testing
+#### User Authentication:
+1.	User Registration:
+	- Test registering with unique usernames and email addresses.
+    - Ensure successful registration redirects users appropriately.
+
+
+2.	User Login:
+	- Test logging in with valid credentials.
+	- Ensure login fails with incorrect credentials.
+	- Verify that users are redirected to the appropriate pages after login.
+
+#### Recipe Management:
+3.	Adding Recipes:
+	- Add new recipes with all required fields.
+	- Verify that all recipe details are correctly saved in the database.
+
+4.	Editing Recipes:
+	- Edit existing recipes and ensure changes are updated correctly.
+	- Test updating recipe details such as ingredients, instructions, and images.
+
+5.	Deleting Recipes:
+	- Delete recipes and confirm they are removed from the database.
+
+#### Recipe Viewing and Browsing:
+6.	Home Page Display:
+	- Check if recipes are displayed on the home page.
+
+7.	Recipe Details:
+	- View detailed information about each recipe.
+	- Test navigation to individual recipe pages.
+
+8.	Category Browsing:
+	- Browse recipes by categories and verify correct filtering.
+
+#### Search Functionality:
+9.	Keyword Search:
+	- Test searching for recipes using various keywords.
+	- Confirm that search results are relevant and accurate.
+
+#### User Interaction:
+10.	Rating Recipes:
+	- Rate recipes and verify that ratings are saved and displayed correctly.
+
+11.	Adding Comments:
+	- Add comments to recipes and ensure they are associated 
+    - Test displaying comments alongside recipes.
+
+#### User Dashboard:
+12.	Viewing Statistics:
+    - Check if users can view statistics and insights about their recipe usage.
+	- Verify that statistics such as total recipes, total comments, and average rating are accurate.
+
+13.	User Profile:
+	- Edit user profile information such as username and email address.
+	- Ensure changes are saved correctly.
+
+14. Change Password:
+    - Test changing the password from the user dashboard.
+    - Verify that users can update their passwords successfully.
+    - Confirm that users receive appropriate feedback messages after changing their passwords.
+
+#### Comments Management:
+15. Adding Comments:
+    - Add comments to recipes and ensure they are associated correctly.
+    - Verify that comments are displayed alongside recipes.
+
+16. Editing Comments:
+    - Edit existing comments and ensure changes are updated correctly.
+    - Test updating comment content.
+
+17. Deleting Comments:
+    - Delete comments and confirm they are removed from the database.
+    - Verify that associated recipes are updated accordingly.
+
+#### Error Handling:
+18.	Invalid Inputs:
+	- Test submitting forms with invalid data and verify appropriate error messages.
+
+19.	Flash Messages:
+	- Confirm that flash messages are displayed for successful actions and errors.
+
+#### Responsive Design:
+16.	Desktop and Mobile Devices:
+	- Test the application on different screen sizes to ensure responsiveness.
+	- Verify that all features and functionalities work well on both desktop and mobile devices.
+
+### Automated Testing
+#### Code Validation:
+1.	HTML Validator:
+	- Validate HTML code for all pages to ensure compliance with standards.
+
+2.	CSS Validator:
+	- Check stylesheets for compliance with CSS standards and fix any issues.
+
+3.	JS Validator:
+	- Validate JavaScript code syntax and maintain code quality.
+
+#### Lighthouse Audit:
+1.  Assess performance, accessibility, and best practices using Lighthouse.
+2.  Optimize performance and address any identified issues.
+
+### Client Stories Testing
+#### Client Story 1:
+1. Registration and Account Management:
+    - Test user registration process.
+	- Verify that users can manage their accounts effectively.
+
+#### Client Story 2:
+1. Recipe Management:
+	- Test adding, editing, and deleting recipes.
+	- Confirm that users can manage their recipe collections efficiently.
+
+#### Client Story 3:
+1. Search and Browsing:
+	- Test search functionality and category browsing.
+	- Ensure users can find recipes easily based on their preferences.
+
+#### Client Story 4:
+1. Interaction and Engagement:
+	- Test rating recipes and adding comments.
+	- Verify that users can interact with recipes and engage with the community.
+
+#### Client Story 5:
+1.	Personalization and Insights:
+	- Check if users can view statistics and insights about their recipe usage.
+	- Ensure personalized experience based on user activity.
+
+#### Client Story 6:
+1. Error Handling and User Experience:
+	- Test error handling and user feedback mechanisms.
+	- Verify that users receive clear and informative messages.
+
+### Compatibility and Responsive Testing
+#### Browser Testing:
+1.	Google Chrome:
+	- Test the application thoroughly on Google Chrome to ensure compatibility and functionality.
+
+2.	Mozilla Firefox:
+	- Verify compatibility and functionality on Mozilla Firefox.
+
+3.	Microsoft Edge:
+	- Test on Microsoft Edge to ensure seamless user experience.
+    
+#### Mobile Testing:
+1.	iPhone and Android Devices:
+	- Test the application on various mobile devices to ensure compatibility and responsiveness.
+	- Verify that all features work well on mobile browsers such as Chrome and Safari.
+
+
+       
+
+
+
+
+
+
+
+
+
+
 
 
 
