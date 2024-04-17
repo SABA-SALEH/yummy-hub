@@ -4,13 +4,13 @@
     font-family: "Metal", serif;
     font-weight: 400;
     font-style: normal;
-  }
+}
 
 body {
     color: #6D2932;
     background-color: #C7B7A3;
-    font-family: 'Metal', sans-serif; 
-    font-size:large;
+    font-family: 'Metal', sans-serif;
+    font-size: large;
 }
 
 
@@ -21,17 +21,17 @@ body {
 
 
 #logo img {
-    width: 100px; 
+    width: 100px;
     height: auto;
     padding-top: 0;
-    padding-bottom: 0; 
+    padding-bottom: 0;
     margin-top: -15px;
     margin-bottom: -15px;
 }
 
 .navbar {
     padding-top: 0;
-    padding-bottom: 0; 
+    padding-bottom: 0;
 }
 
 
@@ -238,13 +238,14 @@ a {
     background-color: #E8D8C4;
 }
 
-.list-group-item:active , option{
+.list-group-item:active,
+option {
     background-color: #C7B7A3;
 }
 
 
 #category option:hover {
-    background-color: #C7B7A3; 
+    background-color: #C7B7A3;
 }
 
 
@@ -268,34 +269,67 @@ a {
 
     @media (max-width: 768px) {
         .carousel-inner img {
-            max-height: 250px; 
+            max-height: 250px;
         }
     }
+
     .carousel {
-        max-height: 280px; 
+        max-height: 280px;
     }
 }
 
 
 #featured-recipes {
-    color: #561C24; 
-    font-family: 'Metal', sans-serif ; 
-    font-weight: bold; 
+    color: #561C24;
+    font-family: 'Metal', sans-serif;
+    font-weight: bold;
     font-size: 60px;
-    letter-spacing: 2px; 
+    letter-spacing: 2px;
 }
 
 
 #featured-recipes .text-primary {
-    color: #010e27 !important ;
+    color: #010e27 !important;
     font-weight: bold;
     font-size: 60px;
 }
 
 
 #featured-recipes .fas.fa-utensils {
-    font-size: 30px; 
-    vertical-align: middle; 
+    font-size: 30px;
+    vertical-align: middle;
 }
 
-#about_image{height: 90%;}
+#about_image {
+    height: 90%;
+}
+
+.comments-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.comments {
+    margin-bottom: 16px;
+}
+
+
+.comments-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+.comments-container::-webkit-scrollbar-thumb {
+    background-color: #561C24;
+    border-radius: 5px;
+}
+
+
+.comments-container::-webkit-scrollbar-track:hover {
+    background-color: #C7B7A3;
+}
+
+
+.comments-container::-webkit-scrollbar-thumb:hover {
+    background-color: #561C24;
+}

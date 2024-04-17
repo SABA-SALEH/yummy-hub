@@ -4,10 +4,10 @@ function addIngredientField() {
     ingredientCounter++;
 
     var ingredientRow = document.createElement("div");
-    ingredientRow.classList.add("row"); 
+    ingredientRow.classList.add("row");
 
     var ingredientNameField = document.createElement("div");
-    ingredientNameField.classList.add("col-md-6"); 
+    ingredientNameField.classList.add("col-md-6");
     ingredientNameField.innerHTML = `
         <div class="mb-3">
             <label for="ingredient_name_${ingredientCounter}" class="form-label"><i class="fas fa-shopping-basket"></i> Ingredient Name</label>
@@ -16,7 +16,7 @@ function addIngredientField() {
     `;
 
     var ingredientQuantityField = document.createElement("div");
-    ingredientQuantityField.classList.add("col-md-6"); 
+    ingredientQuantityField.classList.add("col-md-6");
     ingredientQuantityField.innerHTML = `
         <div class="mb-3">
             <label for="ingredient_quantity_${ingredientCounter}" class="form-label"><i class="fas fa-weight-hanging"></i> Ingredient Quantity</label>
@@ -41,17 +41,17 @@ var ingredientCounter2 = 1;
 
 function addIngredientField2() {
     var ingredientRow = document.createElement("div");
-    ingredientRow.classList.add("row"); 
+    ingredientRow.classList.add("row");
 
     var ingredientNameField = document.createElement("div");
-    ingredientNameField.classList.add("col-md-6"); 
+    ingredientNameField.classList.add("col-md-6");
     ingredientNameField.innerHTML = '<div class="mb-3">' +
         '<label for="new_ingredient_name_' + ingredientCounter2 + '" class="form-label"><i class="fas fa-shopping-basket"></i> New Ingredient Name</label>' +
         '<input type="text" class="form-control" id="new_ingredient_name_' + ingredientCounter2 + '" name="new_ingredient_name">' +
         '</div>';
 
     var ingredientQuantityField = document.createElement("div");
-    ingredientQuantityField.classList.add("col-md-6"); 
+    ingredientQuantityField.classList.add("col-md-6");
     ingredientQuantityField.innerHTML = '<div class="mb-3">' +
         '<label for="new_ingredient_quantity_' + ingredientCounter2 + '" class="form-label"><i class="fas fa-weight-hanging"></i> New Ingredient Quantity</label>' +
         '<input type="text" class="form-control" id="new_ingredient_quantity_' + ingredientCounter2 + '" name="new_ingredient_quantity">' +
@@ -123,5 +123,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+function printRecipe() {
+
+    var recipeDetails = document.getElementById('recipe-details');
+    var printWindow = window.open('', '_blank');
+
+    printWindow.document.write('<html><head><title>Recipe Details</title></head><body>');
+    printWindow.document.write(recipeDetails.innerHTML);
+    printWindow.document.write('</body></html>');
+
+    printWindow.document.close();
+    printWindow.print();
+}
 
 

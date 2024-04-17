@@ -29,7 +29,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card mb-4">
-        <div class="card-body">
+        <div class="card-body" id="recipe-details">
           <h2 class="card-title fw-bold">{{ recipe.title }} <a
               href="{{ url_for('share_recipe', unique_identifier=recipe.unique_identifier) }}" class="btn"><i
                 class="fa-solid fa-share"></i></a></h2>
@@ -56,6 +56,9 @@
             <p><strong><i class="fas fa-list-ul"></i> Instructions:</strong> {{ recipe.instructions }}</p>
             <p><strong><i class="far fa-clock"></i> Preparation Time:</strong> {{ recipe.preparation_time }} minutes</p>
             <p><strong><i class="far fa-clock"></i> Cook Time:</strong> {{ recipe.cook_time }} minutes</p>
+            <button class="btn" onclick="printRecipe()">
+              <i class="fas fa-print"></i> Print Recipe
+            </button>
           </div>
         </div>
       </div>
@@ -67,27 +70,30 @@
         <button type="submit" class="btn"><i class="fa-solid fa-solid fa-star"></i> Submit Rating</button>
       </form>
       <h3 class="text-center mt-5"><strong>Comments</strong></h3>
-      <div class="mb-3">
-        {% for comment in comments %}
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <div>
-                {% if comment.user %}
-                <span class="badge  me-2">{{ comment.user.username[0] }}</span>
-                <span class="fw-bold">{{ comment.user.username }}</span>
-                {% else %}
-                <span class="badge  me-2">U</span>
-                <span class="fw-bold">{{ comment.name }}</span>
-                {% endif %}
+      <div class="comments-container mb-3">
+        <div class="comments">
+          {% for comment in comments %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  {% if comment.user %}
+                  <span class="badge  me-2">{{ comment.user.username[0] }}</span>
+                  <span class="fw-bold">{{ comment.user.username }}</span>
+                  {% else %}
+                  <span class="badge  me-2">U</span>
+                  <span class="fw-bold">{{ comment.name }}</span>
+                  {% endif %}
+                </div>
+                <div class="text-muted">{{ comment.created_at }}</div>
               </div>
-              <div class="text-muted">{{ comment.created_at }}</div>
+              <p class="card-text">{{ comment.content }}</p>
             </div>
-            <p class="card-text">{{ comment.content }}</p>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
+      
       {% if 'user_id' in session %}
       <form action="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" method="POST"
         class="mt-4">
@@ -114,6 +120,7 @@
     </div>
   </div>
 </div>
+
 
 <div class="container mt-3">
   <div class="row justify-content-center">
