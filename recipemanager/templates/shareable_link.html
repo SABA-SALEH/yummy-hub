@@ -1,17 +1,24 @@
 <!-- shareable_link.html -->
 {% extends 'base.html' %}
 {% block content %}
+<!-- Container for the shareable link section -->
 <div class="container mt-5 mb-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
+      <!-- Card to display the shareable link -->
       <div class="card mb-2 p-2">
         <div class="card-body">
+          <!-- Title for the shareable link section -->
           <h2 class="card-title">Shareable Link</h2>
+          <!-- Description for the shareable link section -->
           <p class="card-text">Copy the link below to share this recipe:</p>
+          <!-- Input field to display the shareable link -->
           <div class="input-group mb-3">
             <input type="text" class="form-control" id="shareableLink"
               value="{{ url_for('recipe_details', unique_identifier=unique_identifier, _external=True) }}" readonly>
-            <button class="btn btn-outline-secondary" type="button" onclick="copyShareableLink()"> <i class="fas fa-copy"></i> Copy</button>
+            <!-- Button to copy the shareable link -->
+            <button class="btn btn-outline-secondary" type="button" onclick="copyShareableLink()"> <i
+                class="fas fa-copy"></i> Copy</button>
           </div>
         </div>
       </div>

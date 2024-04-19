@@ -1,28 +1,38 @@
 <!-- search_results.html -->
+<!-- Extend the base2.html template -->
 {% extends "base2.html" %}
 
 {% block content %}
+<!-- Container for the search results -->
 <div class="container mt-5">
+    <!-- Title for the search results -->
     <h2 class="mb-3">Advanced Search Results</h2>
     <hr>
+    <!-- Check if there are search results -->
     {% if search_results %}
     <div class="row">
+        <!-- Loop through each recipe in the search results -->
         {% for recipe in search_results %}
         <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-body">
+                    <!-- Recipe title -->
                     <h5 class="card-title"><strong>{{ recipe.title }}</strong></h5>
+                    <!-- Recipe description -->
                     <p class="card-text">{{ recipe.description }}</p>
+                    <!-- Recipe preparation time -->
                     <p class="card-text"><strong>Preparation Time:</strong> {{ recipe.preparation_time }} minutes</p>
+                    <!-- Recipe cook time -->
                     <p class="card-text"><strong>Cook Time:</strong> {{ recipe.cook_time }} minutes</p>
+                    <!-- Link to view recipe details -->
                     <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}"
                         class="btn "><i class="fas fa-utensils"></i> View Recipe</a>
-
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+    <!-- If there are no search results -->
     {% else %}
     <p>No results found.</p>
     {% endif %}

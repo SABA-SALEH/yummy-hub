@@ -2,77 +2,94 @@
 
 {% block content %}
 <div class="container mt-3 mb-3">
+    <!-- Title and container for editing a recipe -->
     <div class="row">
         <div class="col-md-9 offset-md-1">
+            <!-- Heading for the edit recipe section -->
             <h2 class="mb-3"><i class="fas fa-edit"></i> Edit Recipe</h2>
             <hr>
+            <!-- Form for editing the recipe -->
             <form method="POST">
+                <!-- Input field for the recipe title -->
                 <div class="mb-3">
                     <label for="title" class="form-label"><i class="fas fa-heading"></i> Title</label>
                     <input type="text" class="form-control" id="title" name="title" value="{{ recipe.title }}" required>
                 </div>
+                <!-- Textarea for the recipe description -->
                 <div class="mb-3">
                     <label for="description" class="form-label"><i class="fas fa-info-circle"></i> Description</label>
                     <textarea class="form-control" id="description" name="description" rows="3"
                         required>{{ recipe.description }}</textarea>
                 </div>
+                <!-- Textarea for the recipe instructions -->
                 <div class="mb-3">
                     <label for="instructions" class="form-label"><i class="fas fa-list"></i> Instructions</label>
                     <textarea class="form-control" id="instructions" name="instructions" rows="6"
                         required>{{ recipe.instructions }}</textarea>
                 </div>
+                <!-- Input field for the image URL -->
                 <div class="mb-3">
                     <label for="image_url" class="form-label"><i class="fas fa-image"></i> Image URL</label>
-                    <input type="text" class="form-control" id="image_url" name="image_url" value="{{ recipe.image_url }}">
+                    <input type="text" class="form-control" id="image_url" name="image_url"
+                        value="{{ recipe.image_url }}">
                 </div>
+                <!-- Input fields for preparation time and cook time -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="preparation_time" class="form-label"><i class="fas fa-stopwatch"></i> Preparation Time (minutes)</label>
+                            <label for="preparation_time" class="form-label"><i class="fas fa-stopwatch"></i>
+                                Preparation Time (minutes)</label>
                             <input type="number" class="form-control" id="preparation_time" name="preparation_time"
                                 value="{{ recipe.preparation_time }}" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="cook_time" class="form-label"><i class="fas fa-utensils"></i> Cook Time (minutes)</label>
-                            <input type="number" class="form-control" id="cook_time" name="cook_time" value="{{ recipe.cook_time }}"
-                                required>
+                            <label for="cook_time" class="form-label"><i class="fas fa-utensils"></i> Cook Time
+                                (minutes)</label>
+                            <input type="number" class="form-control" id="cook_time" name="cook_time"
+                                value="{{ recipe.cook_time }}" required>
                         </div>
                     </div>
                 </div>
-
+                <!-- Dropdown menu for selecting recipe category -->
                 <div class="mb-3">
                     <label for="category" class="form-label"><i class="fas fa-tag"></i> Category</label>
                     <select class="form-select" id="category" name="category" required>
                         <option disabled>Select a category</option>
+                        <!-- Loop to populate category options -->
                         {% for category in categories %}
-                        <option value="{{ category.name }}" {% if recipe.category_name == category.name %} selected {% endif %}>
+                        <option value="{{ category.name }}" {% if recipe.category_name == category.name %} selected
+                            {% endif %}>
                             {{ category.name }}</option>
                         {% endfor %}
                     </select>
                 </div>
-
+                <!-- Loop to display existing ingredient fields -->
                 {% for ingredient in recipe.ingredients|default([]) %}
                 <div class="mb-3 row">
                     <div class="col-md-6">
-                        <label for="ingredient_name_{{ loop.index0 }}" class="form-label"><i class="fas fa-shopping-basket"></i> Ingredient Name</label>
+                        <label for="ingredient_name_{{ loop.index0 }}" class="form-label"><i
+                                class="fas fa-shopping-basket"></i> Ingredient Name</label>
                         <input type="text" class="form-control" id="ingredient_name_{{ loop.index0 }}"
                             name="ingredient_name_{{ loop.index0 }}" value="{{ ingredient.name }}">
                     </div>
                     <div class="col-md-6">
-                        <label for="ingredient_quantity_{{ loop.index0 }}" class="form-label"><i class="fas fa-weight-hanging"></i> Ingredient Quantity</label>
+                        <label for="ingredient_quantity_{{ loop.index0 }}" class="form-label"><i
+                                class="fas fa-weight-hanging"></i> Ingredient Quantity</label>
                         <input type="text" class="form-control" id="ingredient_quantity_{{ loop.index0 }}"
                             name="ingredient_quantity_{{ loop.index0 }}" value="{{ ingredient.quantity }}">
                     </div>
                 </div>
-                
                 {% endfor %}
-
+                <!-- Container for additional ingredient fields -->
                 <div id="ingredientFields"></div>
-                <button type="button" class="btn " onclick="addIngredientField2()"><i class="fas fa-plus"></i> Add Ingredient</button>
-
-                <button type="submit" class="btn " onclick="validateForm()"><i class="fas fa-save"></i> Update Recipe</button>
+                <!-- Button to add more ingredient fields -->
+                <button type="button" class="btn " onclick="addIngredientField2()"><i class="fas fa-plus"></i> Add
+                    Ingredient</button>
+                <!-- Button to submit the form for updating the recipe -->
+                <button type="submit" class="btn " onclick="validateForm()"><i class="fas fa-save"></i> Update
+                    Recipe</button>
             </form>
         </div>
     </div>

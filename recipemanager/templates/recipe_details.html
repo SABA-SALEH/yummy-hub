@@ -85,7 +85,7 @@
                   <span class="fw-bold">{{ comment.name }}</span>
                   {% endif %}
                 </div>
-                <div class="text-muted">{{ comment.created_at }}</div>
+                <div class="text-muted">{{ comment.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
               </div>
               <p class="card-text">{{ comment.content }}</p>
             </div>

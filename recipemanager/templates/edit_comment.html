@@ -2,15 +2,19 @@
 
 {% block content %}
 <div class="container mt-3">
+    <!-- Title for the Edit Comment page -->
     <h2 class="mb-4">Edit Comment</h2>
     <hr>
     <div class="row">
         <div class="col-md-8">
+            <!-- Form for updating the comment -->
             <form action="{{ url_for('update_comment', comment_id=comment_id) }}" method="POST">
+                <!-- Input field for editing the comment content -->
                 <div class="mb-3">
                     <label for="content" class="form-label">Content:</label>
                     <textarea id="content" name="content" class="form-control" rows="4">{{ comment_content }}</textarea>
                 </div>
+                <!-- Button to submit the form for updating the comment -->
                 <button type="submit" class="btn"><i class="fas fa-edit"></i> Update Comment</button>
             </form>
         </div>

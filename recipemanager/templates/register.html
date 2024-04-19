@@ -3,27 +3,34 @@
 {% block title %}Register - Food Fair{% endblock %}
 
 {% block content %}
+<!-- Registration section -->
 <section class="vh-200 section-bg mb-4">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-8">
                 <div class="card card-border-radius">
                     <div class="card-body p-4 p-lg-5 card-text-black">
+                        <!-- Registration form title -->
                         <h1 class="fw-bold text-center mb-3 pb-3 form-label-spacing">Register</h1>
 
+                        <!-- Registration form -->
                         <form method="post" class="register-form">
+                            <!-- Username input field -->
                             <div class="form-group">
                                 <label for="username"><i class="fas fa-user"></i> Username</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
                             </div>
+                            <!-- Email input field -->
                             <div class="form-group">
                                 <label for="email"><i class="fas fa-envelope"></i> Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
+                            <!-- Password input field -->
                             <div class="form-group">
                                 <label for="password"><i class="fas fa-lock"></i> Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
+                            <!-- Submit button -->
                             <button class="btn btn-lg btn-block " type="submit"><i class="fas fa-user-plus"></i>
                                 Register</button>
                         </form>

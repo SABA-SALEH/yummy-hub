@@ -1,27 +1,31 @@
 {% extends "base2.html" %}
 
 {% block content %}
+<!-- Container for managing recipes -->
 <div class="container mt-5 mb-4">
     <h2 class="mb-3">Manage Your Recipes</h2>
     <hr>
     <div>
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
+        <!-- Display flashed messages -->
         {% for category, message in messages %}
         <div class="alert alert-{{ category }} d-flex justify-content-between align-items-center" role="alert">
             {{ message }}
+            <!-- Button to close the alert -->
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
         {% endif %}
         {% endwith %}
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     {% if recipes %}
+                    <!-- Table to display recipes -->
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -34,11 +38,17 @@
                             <tbody>
                                 {% for recipe in recipes %}
                                 <tr>
+                                    <!-- Display recipe title and description -->
                                     <td>{{ recipe.title }}</td>
                                     <td>{{ recipe.description }}</td>
                                     <td>
-                                        <a href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}" class="btn mb-3"><i class="fas fa-edit"></i> Edit</a><br>
-                                        <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ recipe.id }}"><i class="fas fa-trash"></i> Delete</button>
+                                        <!-- Link to edit recipe -->
+                                        <a href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}" class="btn mb-3"><i
+                                                class="fas fa-edit"></i> Edit</a><br>
+                                        <!-- Button to trigger delete confirmation modal -->
+                                        <button type="button" class="btn " data-bs-toggle="modal"
+                                            data-bs-target="#confirmDeleteModal{{ recipe.id }}"><i
+                                                class="fas fa-trash"></i> Delete</button>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -46,6 +56,7 @@
                         </table>
                     </div>
                     {% else %}
+                    <!-- Message displayed when no recipes are found -->
                     <p>No recipes found.</p>
                     {% endif %}
                 </div>
@@ -54,19 +65,25 @@
     </div>
 </div>
 
+<!-- Modals for confirming recipe deletion -->
 {% for recipe in recipes %}
-<div class="modal fade" id="confirmDeleteModal{{ recipe.id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ recipe.id }}" aria-hidden="true">
+<div class="modal fade" id="confirmDeleteModal{{ recipe.id }}" tabindex="-1"
+    aria-labelledby="confirmDeleteModalLabel{{ recipe.id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="confirmDeleteModalLabel{{ recipe.id }}">Confirm Delete</h5>
+                <!-- Button to close the modal -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <!-- Confirmation message with recipe title -->
                 Are you sure you want to delete the recipe "{{ recipe.title }}"?
             </div>
             <div class="modal-footer">
+                <!-- Button to cancel recipe deletion -->
                 <button type="button" class="btn " data-bs-dismiss="modal">Cancel</button>
+                <!-- Form to submit recipe deletion -->
                 <form action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}" method="post">
                     <input type="hidden" name="confirm_delete" value="yes">
                     <button type="submit" class="btn ">Delete</button>

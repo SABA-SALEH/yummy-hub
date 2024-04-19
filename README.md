@@ -151,46 +151,60 @@ The application is developed using the following technologies and frameworks:
 
 - **Heroku:** Heroku is utilized as the deployment platform, enabling easy deployment and scaling of the Flask application. It also hosts the PostgreSQL database add-on provided by ElephantSQL, ensuring robustness and reliability of the application's data storage.
 
+### Wireframe
+My initial ideas, after conducting research, were sketched out using Balsamiq. This method proved effective as it allowed me to gather my thoughts and assess which ideas worked best. However, during the project's completion, I found myself not entirely satisfied with my initial proposals and opted for different ideas. Nonetheless, the overall structure of the wireframes remained consistent and was reflected in the final design.
 
 ## Database Structure:
 The database consists of the following tables:
 
-#### users:
-- id (Primary Key): Integer, Autoincrement
-- username: String(50), Unique, Not Null
-- email: String(100), Unique, Not Null
-- password: String(100), Not Null
-- created_at: Timestamp, Default: Current Timestamp
+### users:
+
+| Column        | Data Type                    | Constraints                  |
+|---------------|------------------------------|------------------------------|
+| id            | Integer                      | Primary Key, Autoincrement   |
+| username      | String(50)                   | Unique, Not Null             |
+| email         | String(100)                  | Unique, Not Null             |
+| password      | String(100)                  | Not Null                     |
+| created_at    | Timestamp                    | Default: Current Timestamp   |
 
 ### recipes:
-- id (Primary Key): Integer
-- title: String(100), Not Null
-- description: Text
-- instructions: Text
-- user_id (Foreign Key to users.id): Integer
-- category_name: String(50)
-- image_url: String(255)
-- preparation_time: Integer
-- cook_time: Integer
-- created_at: Timestamp, Default: Current Timestamp
-- ingredients: JSON
-- unique_identifier: String(36), Unique, Not Null, Default: UUID
+
+| Column             | Data Type                    | Constraints                                          |
+|--------------------|------------------------------|------------------------------------------------------|
+| id                 | Integer                      | Primary Key                                          |
+| title              | String(100)                  | Not Null                                             |
+| description        | Text                         |                                                      |
+| instructions       | Text                         |                                                      |
+| user_id            | Integer                      | Foreign Key to users.id                              |
+| category_name      | String(50)                   |                                                      |
+| image_url          | String(255)                  |                                                      |
+| preparation_time   | Integer                      |                                                      |
+| cook_time          | Integer                      |                                                      |
+| created_at         | Timestamp                    | Default: Current Timestamp                           |
+| ingredients        | JSON                         |                                                      |
+| unique_identifier  | String(36)                   | Unique, Not Null, Default: UUID                      |
 
 ### ratings:
-- id (Primary Key): Integer
-- rating: Integer
-- user_id (Foreign Key to users.id): Integer
-- recipe_id (Foreign Key to recipes.id): Integer
-- created_at: Timestamp, Default: Current Timestamp
+
+| Column      | Data Type                    | Constraints                                          |
+|-------------|------------------------------|------------------------------------------------------|
+| id          | Integer                      | Primary Key                                          |
+| rating      | Integer                      |                                                      |
+| user_id     | Integer                      | Foreign Key to users.id                              |
+| recipe_id   | Integer                      | Foreign Key to recipes.id                            |
+| created_at  | Timestamp                    | Default: Current Timestamp                           |
 
 ### comments:
-- id (Primary Key): Integer
-- content: Text, Not Null
-- created_at: Timestamp, Default: Current Timestamp
-- user_id (Foreign Key to users.id): Integer
-- recipe_id (Foreign Key to recipes.id): Integer
-- name: String(100)
-- email: String(255)
+
+| Column      | Data Type                    | Constraints                                          |
+|-------------|------------------------------|------------------------------------------------------|
+| id          | Integer                      | Primary Key                                          |
+| content     | Text                         | Not Null                                             |
+| created_at  | Timestamp                    | Default: Current Timestamp                           |
+| user_id     | Integer                      | Foreign Key to users.id                              |
+| recipe_id   | Integer                      | Foreign Key to recipes.id                            |
+| name        | String(100)                  |                                                      |
+| email       | String(255)                  |                                                      |
 
 
 ## Getting Started

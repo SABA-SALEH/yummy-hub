@@ -3,9 +3,11 @@
 {% block title %}Home - Yummy Hub{% endblock %}
 
 {% block content %}
+<!-- Container for the search form -->
 <div class="container mt-3">
     <div class="row justify-content-end">
         <div class="col-md-6">
+            <!-- Form for searching recipes -->
             <form action="{{ url_for('search_results_home') }}" method="GET" class="input-group">
                 <input id="search-input" type="text" class="form-control me-1" name="query"
                     placeholder="Enter your search query">
@@ -17,8 +19,10 @@
     </div>
 </div>
 
+<!-- Carousel for displaying images -->
 <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
     <div class="carousel-indicators">
+        <!-- Carousel indicators buttons -->
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
             aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
@@ -26,7 +30,9 @@
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
             aria-label="Slide 3"></button>
     </div>
+    <!-- Carousel inner items -->
     <div class="carousel-inner">
+        <!-- Individual carousel items -->
         <div class="carousel-item active">
             <img src="{{ url_for('static', filename='images/slide1.jpg') }}" class="d-block w-100" alt="Slide 1">
         </div>
@@ -37,6 +43,7 @@
             <img src="{{ url_for('static', filename='images/slide3.jpg') }}" class="d-block w-100" alt="Slide 3">
         </div>
     </div>
+    <!-- Carousel control buttons -->
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -49,27 +56,39 @@
     </button>
 </div>
 
+<!-- Section for displaying top rated recipes -->
 <div class="row justify-content-center">
+    <!-- Header for top rated recipes -->
     <h1 class="card-title text-center mb-3 mt-3" id="featured-recipes">
         <span class="text-primary "> Top Rated</span> Recipes
     </h1>
 
     <hr>
+    <!-- Loop through top rated recipes -->
     {% for recipe, avg_rating in top_rated_recipes %}
+    <!-- Individual recipe card -->
     <div class="col-md-4 mb-4">
         <div class="card">
+            <!-- Recipe image -->
             <img src="{{ recipe.image_url }}" class="card-img-top" alt="{{ recipe.title }}">
             <div class="card-body">
+                <!-- Recipe title -->
                 <h5 class="card-title fw-bold">{{ recipe.title }}</h5>
 
+                <!-- Recipe description -->
                 <p class="card-text">{{ recipe.description }}</p>
+
+                <!-- Average rating of the recipe -->
                 <p class="text-muted"><i class="fa-sharp fa-solid fa-star"></i>Average Rating:
                     {{ avg_rating|round(2)|float }}</p>
+
+                <!-- Metadata: Date and author -->
                 <small class="text-muted ">
                     <i class="fas fa-calendar-alt"></i> Posted on {{ recipe.created_at.strftime('%Y-%m-%d') }} by
                     <i class="fas fa-user"></i> {{ recipe.author.username }}
                 </small>
                 <br>
+                <!-- Button to view recipe details -->
                 <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}"
                     class="btn mt-3">Read More <i class="fas fa-chevron-right"></i></a>
 
