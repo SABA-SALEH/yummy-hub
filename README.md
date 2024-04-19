@@ -30,11 +30,13 @@ The business goal of Yummy Hub Recipe Manager is to attract and retain users by 
 
 - As a user, I want to add, edit, and delete recipes, so I can manage my recipe collection according to my preferences.
 
-- As a user, I want to search for recipes based on keywords, so I can easily find recipes that match my preferences.
+- As a user, I want to search for recipes using keywords and advanced search criteria, such as category, ingredients, and cooking time, enabling me to quickly discover recipes that align with my preferences.
 
 - As a user, I want to rate recipes and add comments, so I can share my feedback and experiences with other users.
 
 - As a user, I want to view statistics and insights about my recipe usage, so I can track my activity and engagement on the platform.
+
+-  As a user, I want to print recipes so I can easily refer to them while cooking.
 
 ### Features
 
@@ -58,8 +60,8 @@ The business goal of Yummy Hub Recipe Manager is to attract and retain users by 
 
 **Search Functionality:**
 
-- Users can search for recipes using keywords, which returns relevant results matching the search query.
-- Search results are displayed in a user-friendly format, allowing users to quickly find recipes of interest.
+- Users can search for recipes using keywords and advanced search criteria, such as category, ingredients, and cooking time, enabling them to quickly discover recipes that match their preferences.
+- Search results are displayed in a user-friendly format, allowing users to easily navigate through the list of relevant recipes and find those of interest.
 
 **User Interaction:**
 
@@ -76,6 +78,13 @@ The business goal of Yummy Hub Recipe Manager is to attract and retain users by 
 
 - Users can view and edit their profile information, including username and email address.
 - Profile information is stored securely and can be updated as needed.
+
+
+**Print Recipe Functionality:**
+
+- Users can print recipes directly from the web application, allowing them to access recipes offline or share them with others.
+- Printed recipes are formatted in a user-friendly layout, ensuring clear and concise presentation of ingredients, instructions, and other details.
+- This functionality provides users with the flexibility to conveniently reference recipes without requiring access to the online platform.
 
 **Session Management:**
 
@@ -141,6 +150,48 @@ The application is developed using the following technologies and frameworks:
 - **PostgreSQL** (ElephantSQL): ElephantSQL provides a PostgreSQL database for storing user accounts, recipes, comments, and other application data. It enhances scalability and performance compared to SQLite, facilitating seamless application operation.
 
 - **Heroku:** Heroku is utilized as the deployment platform, enabling easy deployment and scaling of the Flask application. It also hosts the PostgreSQL database add-on provided by ElephantSQL, ensuring robustness and reliability of the application's data storage.
+
+
+## Database Structure:
+The database consists of the following tables:
+
+#### users:
+- id (Primary Key): Integer, Autoincrement
+- username: String(50), Unique, Not Null
+- email: String(100), Unique, Not Null
+- password: String(100), Not Null
+- created_at: Timestamp, Default: Current Timestamp
+
+### recipes:
+- id (Primary Key): Integer
+- title: String(100), Not Null
+- description: Text
+- instructions: Text
+- user_id (Foreign Key to users.id): Integer
+- category_name: String(50)
+- image_url: String(255)
+- preparation_time: Integer
+- cook_time: Integer
+- created_at: Timestamp, Default: Current Timestamp
+- ingredients: JSON
+- unique_identifier: String(36), Unique, Not Null, Default: UUID
+
+### ratings:
+- id (Primary Key): Integer
+- rating: Integer
+- user_id (Foreign Key to users.id): Integer
+- recipe_id (Foreign Key to recipes.id): Integer
+- created_at: Timestamp, Default: Current Timestamp
+
+### comments:
+- id (Primary Key): Integer
+- content: Text, Not Null
+- created_at: Timestamp, Default: Current Timestamp
+- user_id (Foreign Key to users.id): Integer
+- recipe_id (Foreign Key to recipes.id): Integer
+- name: String(100)
+- email: String(255)
+
 
 ## Getting Started
 
