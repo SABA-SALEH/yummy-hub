@@ -347,7 +347,7 @@ def share_recipe(unique_identifier):
         return redirect(url_for('home'))
 
     # Query the recipe by its unique identifier
-    recipe = Recipe.query.filter(func.cast(Recipe.unique_identifier, Text) == str(unique_identifier)).first()
+    recipe = Recipe.query.filter(Recipe.unique_identifier == unique_identifier).first()
 
     # If the recipe is found
     if recipe:
