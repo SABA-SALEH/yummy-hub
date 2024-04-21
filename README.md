@@ -473,14 +473,191 @@ To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps
 	- Test the application on various mobile devices to ensure compatibility and responsiveness.
 	- Verify that all features work well on mobile browsers such as Chrome and Safari.
 
+## Bugs and Fixes:
 
+### Issue 1: Creating a Special Shareable Link for Each Recipe
+
+- Bug: While developing the application, I encountered an issue where there was no functionality to create a unique shareable link for each recipe. This limitation made it challenging for users to share specific recipes with others.
+
+- Fix: To address this issue, I implemented a solution within my codebase. I created a new route /share_recipe/<unique_identifier> to handle the generation of special shareable links. This route takes a unique_identifier parameter, which represents a unique identifier associated with each recipe. Inside the route, I queried the recipe using its unique identifier. If the recipe was found, I rendered the shareable_link.html template, passing the unique identifier as a parameter. This template would display the shareable link for the recipe. If the recipe was not found, I redirected the user to the home page with a flash message indicating that the recipe was not found.
+
+Here's the relevant code snippet from my application:
+```bash
+# Route for sharing a recipe
+@app.route('/share_recipe/<unique_identifier>', methods=['GET'])
+def share_recipe(unique_identifier):
+    # Query the recipe by its unique identifier
+    recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
+
+    # If the recipe is found
+    if recipe:
+        # Render the shareable link template with the unique identifier
+        return render_template('shareable_link.html', unique_identifier=unique_identifier)
+    else:
+        # If the recipe is not found, redirect to the home page with a flash message
+        flash('Recipe not found!', 'danger')
+        return redirect(url_for('home'))
+
+```
        
+### Issue 2: Allowing Users and Guests to Add Comments and Associate Them with Recipes
 
+- Bug: During development, it was identified that there was no functionality for both registered users and guests to add comments to recipes. Additionally, there was no association between the comments and the specific recipes they were related to.
 
+- Fix: To address this issue, I implemented a solution that allows both users and guests to add comments and associate them with recipes. First, I created a route /recipe/<uuid:unique_identifier> to handle the display of recipe details, including any existing comments. Then, I modified this route to handle both GET and POST requests. For GET requests, it retrieves the recipe details and associated comments from the database. For POST requests, it checks whether the user is authenticated. If the user is authenticated, it adds the comment to the database with the user's ID. If the user is not authenticated (guest user), it adds the comment with the provided name and email. This ensures that comments are associated with the correct recipe and attributed to the appropriate user or guest.
 
+Here's the relevant code snippet from my application:
+```bash
+# Route for viewing recipe details
+@app.route('/recipe/<uuid:unique_identifier>', methods=['GET', 'POST'])
+def recipe_details(unique_identifier):
+    # Query the recipe by its unique identifier
+    recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
 
+    # If the recipe is not found, redirect to the home page with a flash message
+    if not recipe:
+        flash('Recipe not found!', 'danger')
+        return redirect(url_for('home'))
 
+    # If the request method is POST
+    if request.method == 'POST':
+        # If the user is authenticated
+        if 'user_id' in session:
+            user_id = session['user_id']
+            content = request.form.get('comment_content')
+            # Check if the comment content is provided
+            if content:
+                # Create a new comment associated with the user
+                new_comment = Comment(content=content, user_id=user_id, recipe_id=recipe.id)
+                db.session.add(new_comment)
+                db.session.commit()
+                flash('Comment added successfully!', 'success')
+            else:
+                flash('Comment cannot be empty!', 'warning')
+        else:
+            # If the user is not authenticated (guest user)
+            name = request.form.get('name')
+            email = request.form.get('email')
+            content = request.form.get('comment_content')
+            # Check if name, email, and content are provided
+            if name and email and content:
+                # Create a new comment associated with the provided name and email
+                new_comment = Comment(content=content, name=name, email=email, recipe_id=recipe.id)
+                db.session.add(new_comment)
+                db.session.commit()
+                flash('Comment added successfully!', 'success')
+            else:
+                flash('Name, email, and comment content are required!', 'danger')
 
+    # Render the recipe details template with the recipe, comments, and authentication status
+    return render_template('recipe_details.html', recipe=recipe, authenticated='user_id' in sessio
+
+```
+
+### Issue 3: Adding Multiple Ingredients to a Recipe
+
+- Bug: While implementing the functionality to add a new recipe, it was noticed that there was no support for adding multiple ingredients to a recipe. Only a single ingredient could be added at a time, limiting the flexibility and usability of the application.
+
+- Fix: To resolve this issue and allow users to add multiple ingredients to a recipe, I extended the functionality of the recipe creation form to include fields for multiple ingredients. In the HTML form (add_recipe.html), I added input fields for ingredient names and quantities, allowing users to dynamically add more fields for additional ingredients if needed. Then, in the Flask route handling the submission of the form (/add_recipe), I modified the logic to iterate over the submitted form data to extract all ingredient names and quantities and add them to the recipe object before saving it to the database.
+
+Here's the relevant code snippet from my application:
+```bash
+# Route for adding a new recipe
+@app.route('/add_recipe', methods=['GET', 'POST'])
+def add_recipe():
+    # Redirect to login page if not logged in
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    username = session['username']
+    if request.method == 'POST':
+        # Retrieving form data
+        title = request.form['title']
+        description = request.form['description']
+        instructions = request.form['instructions']
+        category_name = request.form['category']
+        preparation_time = request.form['preparation_time']
+        cook_time = request.form['cook_time']
+        image_url = request.form['image_url']
+        user_id = session.get('user_id')
+        
+        # Creating a new recipe object
+        new_recipe = Recipe(
+            title=title,
+            description=description,
+            instructions=instructions,
+            user_id=user_id,
+            category_name=category_name,
+            image_url=image_url,
+            preparation_time=preparation_time,
+            cook_time=cook_time
+        )
+
+        # Extracting multiple ingredients from the form
+        ingredients = []
+        for i in range(1, 11):
+            ingredient_name = request.form.get(f'ingredient_name_{i}')
+            ingredient_quantity = request.form.get(f'ingredient_quantity_{i}')
+            if ingredient_name and ingredient_quantity:
+                ingredients.append({"name": ingredient_name, "quantity": ingredient_quantity})
+        
+        # Adding the extracted ingredients to the recipe object
+        for ingredient in ingredients:
+            new_recipe.add_ingredient(ingredient['name'], ingredient['quantity'])
+        
+        # Adding the new recipe to the database
+        db.session.add(new_recipe)
+        db.session.commit()
+
+        return redirect(url_for('view_recipes', user_id=user_id))
+
+    # Preparing categories for rendering in the template
+    categories = [
+        {'id': 1, 'name': 'Around the World'},
+        {'id': 2, 'name': 'Quick & Easy'},
+        {'id': 3, 'name': 'Healthy Food'},
+        {'id': 4, 'name': 'Sweet Treats'}
+    ]
+    return render_template('add_recipe.html', categories=categories, username=username)
+```
+
+### Issue 4: Deleting a Recipe with Associated Ratings and Comments
+
+- Bug: When attempting to delete a recipe, there was a missing functionality to also delete the associated ratings and comments for that recipe. This resulted in inconsistencies in the database and potential orphaned records.
+
+- Fix: To address this issue and ensure data integrity when deleting a recipe, I enhanced the delete recipe functionality to also delete all associated ratings and comments before deleting the recipe itself. This ensures that there are no orphaned records left behind in the database.
+
+Here's the updated code snippet from the Flask route handling the deletion of a recipe (/delete_recipe/<int:recipe_id>):
+
+```bash
+# Route for deleting a recipe
+@app.route('/delete_recipe/<int:recipe_id>', methods=['POST'])
+def delete_recipe(recipe_id):
+    if 'username' not in session:
+        flash('You must be logged in to delete recipes.', 'danger')
+        return redirect(url_for('login'))
+    user_id = session.get('user_id')
+    # Query the recipe to be deleted
+    recipe = Recipe.query.filter_by(id=recipe_id, user_id=user_id).first()
+    if not recipe:
+        flash('Recipe not found or you are not authorized to delete it.', 'danger')
+        return redirect(url_for('manage_recipes'))
+    try:
+        # Deleting associated comments and ratings before deleting the recipe
+        Comment.query.filter_by(recipe_id=recipe_id).delete()
+        Rating.query.filter_by(recipe_id=recipe_id).delete()
+        db.session.commit()
+        db.session.delete(recipe)
+        db.session.commit()
+        flash('Recipe deleted successfully.', 'success')
+
+    except Exception as e:
+        # Handle errors
+        flash('An error occurred while deleting the recipe.', 'danger')
+        db.session.rollback()
+
+    return redirect(url_for('manage_recipes'))
+```
 
 
 

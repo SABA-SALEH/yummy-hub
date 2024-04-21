@@ -334,9 +334,17 @@ def recipe_details(unique_identifier):
 
 
 # Route for sharing a recipe
-@app.route('/share_recipe/<unique_identifier>', methods=['GET'])
+@app.route('/share_recipe/<string:unique_identifier>', methods=['GET'])
 def share_recipe(unique_identifier):
     print("Share Recipe Route Accessed")
+    try:
+        # Try to convert the unique_identifier to UUID
+        unique_identifier = UUID(unique_identifier)
+    except ValueError:
+        # If conversion fails, handle the error 
+        flash('Invalid recipe identifier!', 'danger')
+        return redirect(url_for('home'))
+
     # Query the recipe by its unique identifier
     recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
 
