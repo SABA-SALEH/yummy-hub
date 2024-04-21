@@ -6,6 +6,7 @@ from recipemanager.models import User, Recipe, Rating, Comment
 from datetime import datetime
 from werkzeug.routing import UUIDConverter
 from sqlalchemy import or_, func, cast, Text, desc
+from uuid import UUID
 
 # Setting the secret key for the Flask app
 app.secret_key = 'saba'
