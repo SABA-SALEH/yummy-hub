@@ -287,8 +287,10 @@ app.url_map.converters['uuid'] = UUIDConverter
 # # Route for viewing recipe details
 @app.route('/recipe/<uuid:unique_identifier>', methods=['GET', 'POST'])
 def recipe_details(unique_identifier):
+    # Convert UUID to string
+    unique_identifier_str = str(unique_identifier)
     # Query the recipe by its unique identifier
-    recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
+    recipe = Recipe.query.filter_by(unique_identifier=unique_identifier_str).first()
 
     # If the recipe is not found, redirect to the home page with a flash message
     if not recipe:
