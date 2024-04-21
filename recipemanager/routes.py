@@ -284,22 +284,26 @@ def delete_recipe(recipe_id):
 app.url_map.converters['uuid'] = UUIDConverter
 
 
-# Route for viewing recipe details
+# # Route for viewing recipe details
 @app.route('/recipe/<uuid:unique_identifier>', methods=['GET', 'POST'])
 def recipe_details(unique_identifier):
     # Query the recipe by its unique identifier
     recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
-    # Calculate the average rating for the recipe
-    average_rating = Rating.query.filter_by(recipe_id=recipe.id).with_entities(func.avg(Rating.rating)).scalar()
 
     # If the recipe is not found, redirect to the home page with a flash message
     if not recipe:
         flash('Recipe not found!', 'danger')
         return redirect(url_for('home'))
+
+    # Calculate the average rating for the recipe
+    average_rating = Rating.query.filter_by(recipe_id=recipe.id).with_entities(func.avg(Rating.rating)).scalar()
+
     # Query comments associated with the recipe
     comments = Comment.query.filter_by(recipe_id=recipe.id).all()
+
     # Check if the user is authenticated (logged in)
     authenticated = 'user_id' in session
+
     # If the request method is POST
     if request.method == 'POST':
         # If the user is authenticated
