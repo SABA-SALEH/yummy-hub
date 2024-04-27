@@ -15,7 +15,8 @@
                 <h5 class="card-title fw-bold">{{ recipe.title }}</h5>
                 <!-- Display average rating if available -->
                 {% if recipe.average_rating is not none %}
-                <p><strong><i class="fa-sharp fa-solid fa-star"></i> Average Rating:</strong>
+                <p><strong><i class="fas fa-star"></i>
+                        Average Rating:</strong>
                     {{ '%.1f' % recipe.average_rating }}</p>
                 {% else %}
                 <p><strong>No ratings yet</strong></p>

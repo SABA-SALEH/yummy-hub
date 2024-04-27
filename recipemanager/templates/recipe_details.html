@@ -32,11 +32,12 @@
         <div class="card-body" id="recipe-details">
           <h2 class="card-title fw-bold">{{ recipe.title }} <a
               href="{{ url_for('share_recipe', unique_identifier=recipe.unique_identifier) }}" class="btn"><i
-                class="fa-solid fa-share"></i></a></h2>
+                class="fas fa-share"></i>
+            </a></h2>
           <img src="{{ recipe.image_url }}" alt="Recipe Image" class="card-img-top recipe-image">
           <div class="recipe-details">
             {% if average_rating is not none %}
-            <p><strong><i class="fa-sharp fa-solid fa-star"></i> Average Rating:</strong> {{ '%.1f' % average_rating }}
+            <p><strong><i class="fas fa-star"></i> Average Rating:</strong> {{ '%.1f' % average_rating }}
             </p>
             {% else %}
             <p><strong>No ratings yet</strong></p>
@@ -67,7 +68,8 @@
         <div class="mb-3">
           <input type="number" class="form-control" name="rating" min="1" max="5" placeholder="Rate this recipe (1-5)">
         </div>
-        <button type="submit" class="btn"><i class="fa-solid fa-solid fa-star"></i> Submit Rating</button>
+        <button type="submit" class="btn"><i class="fas fa-star"></i>
+          Submit Rating</button>
       </form>
       <h3 class="text-center mt-5"><strong>Comments</strong></h3>
       <div class="comments-container mb-3">
@@ -93,14 +95,14 @@
           {% endfor %}
         </div>
       </div>
-      
+
       {% if 'user_id' in session %}
       <form action="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" method="POST"
         class="mt-4">
         <div class="mb-3">
           <textarea class="form-control" name="comment_content" placeholder="Add your comment here" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn"><i class="fa-solid fa-solid fa-comment-alt"></i> Submit</button>
+        <button type="submit" class="btn"><i class="fas fa-comment"></i> Submit</button>
       </form>
       {% else %}
       <form action="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" method="POST"
@@ -114,7 +116,8 @@
         <div class="mb-3">
           <textarea class="form-control" name="comment_content" placeholder="Add your comment here" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn"><i class="fa-solid fa-solid fa-comment-alt"></i> Submit</button>
+        <button type="submit" class="btn"><i class="fas fa-comment"></i>
+          Submit</button>
       </form>
       {% endif %}
     </div>

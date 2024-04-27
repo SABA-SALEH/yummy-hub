@@ -1,11 +1,16 @@
+/* jshint esversion: 6 */
 var ingredientCounter = 1;
+var ingredientCounter2 = 1;
 
+/**
+ * Function to add a new ingredient field dynamically
+ */
 function addIngredientField() {
     ingredientCounter++;
-
+    // Create a new row for the ingredient
     var ingredientRow = document.createElement("div");
     ingredientRow.classList.add("row");
-
+    // Create a field for the ingredient name
     var ingredientNameField = document.createElement("div");
     ingredientNameField.classList.add("col-md-6");
     ingredientNameField.innerHTML = `
@@ -14,7 +19,7 @@ function addIngredientField() {
             <input type="text" class="form-control" id="ingredient_name_${ingredientCounter}" name="ingredient_name_${ingredientCounter}">
         </div>
     `;
-
+    // Create a field for the ingredient quantity
     var ingredientQuantityField = document.createElement("div");
     ingredientQuantityField.classList.add("col-md-6");
     ingredientQuantityField.innerHTML = `
@@ -31,14 +36,9 @@ function addIngredientField() {
     ingredientFieldsContainer.appendChild(ingredientRow);
 }
 
-
-
-
-
-var ingredientCounter2 = 1;
-
-
-
+/**
+ * Function to add a new ingredient field (variant 2)
+ */
 function addIngredientField2() {
     var ingredientRow = document.createElement("div");
     ingredientRow.classList.add("row");
@@ -66,7 +66,9 @@ function addIngredientField2() {
     ingredientCounter2++;
 }
 
-
+/**
+ * Function to validate the form before submission
+ */
 function validateForm() {
     var title = document.getElementById("title").value;
     var description = document.getElementById("description").value;
@@ -84,6 +86,9 @@ function validateForm() {
     return true;
 }
 
+/**
+ * Function to copy shareable link to clipboard
+ */
 function copyShareableLink() {
     const input = document.getElementById('shareableLink');
     input.select();
@@ -91,18 +96,18 @@ function copyShareableLink() {
     alert('Shareable link copied to clipboard!');
 }
 
-
-
-
+/**
+ * Function to handle category selection
+ */
 document.addEventListener("DOMContentLoaded", function () {
     var categorySelect = document.getElementById('categorySelect');
     var categoryForm = document.getElementById('categoryForm');
-
+    // Event listener for category selection
     if (categorySelect && categoryForm) {
         categorySelect.addEventListener('change', function () {
             var category = this.value;
             console.log("Selected category:", category);
-
+            // Construct the URL based on the selected category
             var baseUrl = categoryForm.getAttribute('data-base-url');
             var routeName = categoryForm.getAttribute('data-route-name');
             var url = baseUrl + "/" + category;
@@ -111,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
             categoryForm.submit();
         });
     }
-
+    // Event listener for delete comment button
     document.addEventListener("click", function (event) {
         if (event.target && event.target.classList.contains("delete-comment")) {
             var button = event.target;
@@ -124,12 +129,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
+/**
+ * Function to print the recipe details
+ */
 function printRecipe() {
 
     var recipeDetails = document.getElementById('recipe-details');
     var printWindow = window.open('', '_blank');
-
+    // Write the recipe details to the print window
     printWindow.document.write('<html><head><title>Recipe Details</title></head><body>');
     printWindow.document.write(recipeDetails.innerHTML);
     printWindow.document.write('</body></html>');
@@ -137,5 +144,3 @@ function printRecipe() {
     printWindow.document.close();
     printWindow.print();
 }
-
-
