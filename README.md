@@ -492,10 +492,24 @@ To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps
 
     ![alt text](recipemanager/static/images/documentation/screenshots/Picture41.png)
 
+4. Python Linter:
+   - Use a Python linter to validate Python code syntax and maintain code quality.
+
+   ![alt text](recipemanager/static/images/documentation/screenshots/Picture43.png)
+   ![alt text](recipemanager/static/images/documentation/screenshots/Picture44.png)
+   ![alt text](recipemanager/static/images/documentation/screenshots/Picture45.png)
+
+
+   
+
+
 
 #### Lighthouse Audit:
 1.  Assess performance, accessibility, and best practices using Lighthouse.
 2.  Optimize performance and address any identified issues.
+
+ ![alt text](recipemanager/static/images/documentation/screenshots/Picture42.png)
+
 
 ### Client Stories Testing
 #### Client Story 1:
@@ -729,6 +743,40 @@ def delete_recipe(recipe_id):
 
     return redirect(url_for('manage_recipes'))
 ```
+
+## Credits
+- Project developed by SABA SALEH
+
+- GitHub: Used for version control of project files.
+
+- GitPod: An integrated development environment (IDE) used for coding.
+
+- Heroku: Heroku - Platform-as-a-Service (PaaS) used for deploying and hosting the application.
+
+- ElephantSQL: ElephantSQL - PostgreSQL database hosting service used for storing application data.
+
+- Balsamiq: Used to create effective wireframes easily.
+
+- W3Schools: For providing valuable resources and tutorials for web development.
+
+- Favicon.io: Favicon.io - Source of the favicon used in the project.
+
+- Bootstrap: Bootstrap - Framework for building responsive and visually appealing web pages.
+
+- Font Awesome: Font Awesome - Icon toolkit used for adding scalable icons to the project.
+
+## Contributing
+If you have ideas for improvements or new features, I welcome contributions. Fork the repository, make your changes, and submit a pull request. Together, let's enhance Yummy Hub and make it an even more useful tool for all users. Thank you for your contributions!
+
+## Acknowledgements
+I would like to express my sincere gratitude to the following individuals and organizations who have contributed to this project in various ways:
+
+- Oluwafemi Medale: My mentor, for their guidance and valuable suggestions throughout the development of this project.
+
+- Code Institute: For their support in providing resources for this project.
+
+Finally, I want to express my appreciation to all the users and contributors who have provided feedback and helped improve this project.
+
 
 
 
