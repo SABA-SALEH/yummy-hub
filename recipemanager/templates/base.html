@@ -21,8 +21,8 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <div class="container ">
             <!-- Logo -->
             <a class="navbar-brand" id="logo" href="{{ url_for('home') }}">
                 <img src="{{ url_for('static', filename='images/Yummy_Hub.png') }}" alt="Yummy Hub Logo">
@@ -48,7 +48,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categories
+                            Recipes
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <!-- Loop through categories -->
@@ -56,6 +56,7 @@
                             <a class="dropdown-item" id="category_{{ loop.index }}"
                                 href="{{ url_for('recipes_by_category', category=category) }}">{{ category }}</a>
                             {% endfor %}
+                            <a class="dropdown-item" href="{{ url_for('all_recipes') }}">All Recipes</a>
                         </div>
                     </li>
                 </ul>
@@ -138,7 +139,7 @@
                         <p class="text-center join"><strong class="important">Don't Miss Out!</strong> Join our mailing
                             list to receive all of our delicious recipes</p>
                     </div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-md-4 col-sm-4 ">
                         <!-- Email Input and Subscribe Button -->
                         <div class="input-group">
                             <input type="email" class="form-control" name="email" placeholder="Enter your email here"

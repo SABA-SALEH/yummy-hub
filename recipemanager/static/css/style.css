@@ -11,6 +11,7 @@ body {
     background-color: #C7B7A3;
     font-family: 'Metal', sans-serif;
     font-size: large;
+    overflow-x: hidden;
 }
 
 

@@ -1,0 +1,35 @@
+<!-- all_recipes.html -->
+{% extends "base.html" %}
+
+{% block title %}About - Yummy Hub{% endblock %}
+
+{% block content %}
+<!-- Row to display recipe cards -->
+<div class="row">
+    {% for recipe in recipes %}
+    <!-- Recipe card column -->
+    <div class="col-md-4 mb-4 mt-4">
+      <div class="card">
+        <!-- Recipe image -->
+        <img src="{{ recipe.image_url }}" class="card-img-top" alt="{{ recipe.title }}">
+        <div class="card-body">
+          <!-- Recipe title -->
+          <h5 class="card-title fw-bold">{{ recipe.title }}</h5>
+          <!-- Recipe description -->
+          <p class="card-text">{{ recipe.description }}</p>
+          <!-- Recipe details: creation date and author -->
+          <p class="card-text">
+            <small class="text-muted">
+              <i class="fas fa-calendar-alt"></i> Posted on {{ recipe.created_at.strftime('%Y-%m-%d') }} by
+              <i class="fas fa-user"></i> {{ recipe.author.username }}
+            </small>
+          </p>
+          <!-- Button to view recipe details -->
+          <a href="{{ url_for('recipe_details', unique_identifier=recipe.unique_identifier) }}" class="btn "><i
+              class="fas fa-book"></i> Read More</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

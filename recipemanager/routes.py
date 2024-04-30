@@ -68,8 +68,8 @@ def register():
             session['username'] = username
             session['user_id'] = new_user.id
             flash('Registration successful! Welcome, ' + username, 'success')
-            # Redirecting to user dashboard
-            return redirect(url_for('user_dashboard', user_id=new_user.id))
+            # Redirecting to home
+            return redirect(url_for('home', user_id=new_user.id))
     return render_template('register.html')
 
 
@@ -284,7 +284,7 @@ def delete_recipe(recipe_id):
 app.url_map.converters['uuid'] = UUIDConverter
 
 
-# # Route for viewing recipe details
+# Route for viewing recipe details
 @app.route('/recipe/<uuid:unique_identifier>', methods=['GET', 'POST'])
 def recipe_details(unique_identifier):
     # Convert UUID to string
@@ -292,7 +292,6 @@ def recipe_details(unique_identifier):
     # Query the recipe by its unique identifier
     recipe = Recipe.query.filter_by(unique_identifier=unique_identifier_str).first()
 
-    # If the recipe is not found, redirect to the home page with a flash message
     if not recipe:
         flash('Recipe not found!', 'danger')
         return redirect(url_for('home'))
@@ -306,19 +305,16 @@ def recipe_details(unique_identifier):
     # Check if the user is authenticated (logged in)
     authenticated = 'user_id' in session
 
-    # If the request method is POST
     if request.method == 'POST':
-        # If the user is authenticated
         if authenticated:
             user_id = session.get('user_id')
             content = request.form.get('comment_content')
-            # Check if the comment content is provided
             if content:
-                # Create a new comment associated with the user
                 new_comment = Comment(content=content, user_id=user_id, recipe_id=recipe.id)
                 db.session.add(new_comment)
                 db.session.commit()
                 flash('Comment added successfully!', 'success')
+                return redirect(url_for('recipe_details', unique_identifier=unique_identifier)) 
             else:
                 flash('Comment cannot be empty!', 'warning')
         else:
@@ -326,17 +322,15 @@ def recipe_details(unique_identifier):
             name = request.form.get('name')
             email = request.form.get('email')
             content = request.form.get('comment_content')
-            # Check if name, email, and content are provided
             if name and email and content:
-                # Create a new comment associated with the provided name and email
                 new_comment = Comment(content=content, name=name, email=email, recipe_id=recipe.id)
                 db.session.add(new_comment)
                 db.session.commit()
                 flash('Comment added successfully!', 'success')
+                return redirect(url_for('recipe_details', unique_identifier=unique_identifier))  
             else:
                 flash('Name, email, and comment content are required!', 'danger')
 
-    # Render the recipe details template with the recipe, comments, authentication status, and average rating
     return render_template('recipe_details.html', recipe=recipe, comments=comments, authenticated=authenticated, average_rating=average_rating)
 
 
@@ -556,6 +550,11 @@ def recipes_by_category(category):
     recipes = Recipe.query.filter_by(category_name=category).all()
     return render_template('recipes_by_category.html', recipes=recipes, category=category)
 
+# Route for displaying all recipes
+@app.route('/all_recipes')
+def all_recipes():
+    all_recipes = Recipe.query.all()
+    return render_template('all_recipes.html', recipes=all_recipes)
 
 # Function to retrieve statistics for the user dashboard
 def get_user_dashboard_stats(user_id):

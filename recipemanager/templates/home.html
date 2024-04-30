@@ -3,6 +3,20 @@
 {% block title %}Home - Yummy Hub{% endblock %}
 
 {% block content %}
+<!-- Container for displaying flash messages -->
+<div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <!-- Alert to display flash messages -->
+    <div class="alert alert-{{ category }} d-flex justify-content-between align-items-center mt-3" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
 <!-- Container for the search form -->
 <div class="container mt-3">
     <div class="row justify-content-end">
