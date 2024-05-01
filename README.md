@@ -214,6 +214,18 @@ The application is developed using the following technologies and frameworks:
 ### Wireframe
 My initial ideas, after conducting research, were sketched out using Balsamiq. This method proved effective as it allowed me to gather my thoughts and assess which ideas worked best. However, during the project's completion, I found myself not entirely satisfied with my initial proposals and opted for different ideas. Nonetheless, the overall structure of the wireframes remained consistent and was reflected in the final design.
 
+#### Desktop
+![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide1.PNG)
+![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide2.PNG)
+![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide3.PNG)
+![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide4.PNG)
+![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide5.PNG)
+
+#### Small Screens
+![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide6.PNG)
+![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide7.PNG)
+![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide8.PNG)
+
 ## Database Structure:
 The database consists of the following tables:
 

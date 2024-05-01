@@ -550,11 +550,13 @@ def recipes_by_category(category):
     recipes = Recipe.query.filter_by(category_name=category).all()
     return render_template('recipes_by_category.html', recipes=recipes, category=category)
 
-# Route for displaying all recipes
+# Route for displaying all recipes with pagination
 @app.route('/all_recipes')
 def all_recipes():
-    all_recipes = Recipe.query.all()
-    return render_template('all_recipes.html', recipes=all_recipes)
+    page = request.args.get('page', 1, type=int)
+    per_page = 6
+    recipes = Recipe.query.paginate(page, per_page, error_out=False)
+    return render_template('all_recipes.html', recipes=recipes)
 
 # Function to retrieve statistics for the user dashboard
 def get_user_dashboard_stats(user_id):
