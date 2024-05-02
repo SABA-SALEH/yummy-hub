@@ -109,7 +109,57 @@
             </div>
         </div>
     </div>
-
+    <!-- Footer -->
+    <footer class="text-center footer mt-5">
+        <div class="container-fluid ">
+            <!-- Social Media Links -->
+            <div class="mb-4">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com" class="btn btn-floating m-1 socialbtn" role="button"
+                    target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <!-- Twitter -->
+                <a href="https://twitter.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
+                        class="fab fa-twitter"></i></a>
+                <!-- Google -->
+                <a href="https://www.google.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
+                        class="fab fa-google"></i></a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com" class="btn btn-floating m-1 socialbtn" role="button"
+                    target="_blank"><i class="fab fa-instagram"></i></a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com" class="btn btn-floating m-1 socialbtn" role="button"
+                    target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <!-- Subscription Form -->
+            <div class="mb-4">
+                <form action="{{ url_for('subscribe') }}" method="POST">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <!-- Subscription Message -->
+                            <p class="text-center join"><strong class="important">Don't Miss Out!</strong> Join our
+                                mailing
+                                list to receive all of our delicious recipes</p>
+                        </div>
+                        <div class="col-md-4 col-sm-4 ">
+                            <!-- Email Input and Subscribe Button -->
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="email"
+                                    placeholder="Enter your email here" aria-label="Email"
+                                    aria-describedby="button-addon2" required>
+                                <button class="btn subscribebtn" type="submit" id="button-addon2">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Copyright -->
+        <div class="text-center p-3 copyright ">
+            © 2020 Copyright:
+            <!-- Yummy Hub Link -->
+            <a href="{{ url_for('home') }}">Yummy Hub</a>
+        </div>
+    </footer>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

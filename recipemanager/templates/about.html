@@ -3,68 +3,70 @@
 
 {% block title %}About - Yummy Hub{% endblock %}
 
+{% block css %}
+
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5 mb-5">
     <!-- Story Section -->
     <div class="card mb-4">
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- Story Content -->
-                    <div class="container mt-3">
-                        <h2 class="card-title mb-3"><i class="fas fa-book-open"></i> Discover Our Story</h2>
-                        <hr>
-                        <!-- Introduction -->
-                        <p class="card-text">Once upon a time, in a bustling city filled with diverse culinary delights,
-                            there was a passionate group of food enthusiasts who dreamed of creating a hub where every
-                            bite told a story. Thus, Yummy Hub Recipe Manager was born.</p>
-                        <!-- Vision -->
-                        <p class="card-text">At Yummy Hub, we believe that food is more than just sustenance; it's a
-                            journey, an experience, and a way to connect with others. Our story began with a simple
-                            idea: to provide a platform where people could not only discover delicious recipes from
-                            around the world but also share their own culinary adventures.</p>
-                        <!-- Mission -->
-                        <p class="card-text">Driven by our love for food and community, we embarked on a mission to
-                            curate a collection of mouthwatering recipes that catered to every taste, dietary
-                            preference, and cooking skill level. From exotic dishes inspired by far-off lands to quick
-                            and easy meals for busy weeknights, Yummy Hub became the go-to destination for culinary
-                            inspiration.</p>
-                        <!-- Community Engagement -->
-                        <p class="card-text">But our story doesn't end there. We're more than just a recipe database;
-                            we're a vibrant community of foodies, home cooks, and professional chefs who come together
-                            to celebrate the joy of cooking and sharing delicious meals. Through our interactive
-                            features, users can connect with like-minded individuals, swap cooking tips, and even
-                            participate in virtual cooking challenges.</p>
-                        <!-- Inclusivity -->
-                        <p class="card-text">As Yummy Hub continues to grow and evolve, our commitment to fostering a
-                            welcoming and inclusive food culture remains unwavering. Join us on this gastronomic
-                            adventure, and let's create unforgettable culinary memories together. Welcome to Yummy Hub,
-                            where every bite tells a story.</p>
-                    </div>
-                </div>
-                <!-- Image Section -->
-                <div class="col-md-6 mt-5">
-                    <img src="{{ url_for('static', filename='images/about_image.png') }}"
-                        class="img-fluid rounded img-small" alt="About Image" id="about_image">
-                </div>
+            <!-- Story Content -->
+            <div class="container mt-3">
+                <h2 class="card-title mb-3"><i class="fas fa-book-open"></i> Discover Our Story</h2>
+                <hr>
 
+                <!-- Image Section -->
+                <div class="img-container">
+                    <img src="{{ url_for('static', filename='images/about_image.jpg') }}" class="img-fluid rounded"
+                        alt="About Image" id="about_image">
+                </div>
+                <br>
+                <!-- Introduction -->
+                <p class="card-text">Once upon a time, in a bustling city filled with diverse culinary delights,
+                    there was a passionate group of food enthusiasts who dreamed of creating a hub where every
+                    bite told a story. Thus, Yummy Hub Recipe Manager was born.</p>
+                <!-- Vision -->
+                <p class="card-text">At Yummy Hub, we believe that food is more than just sustenance; it's a
+                    journey, an experience, and a way to connect with others. Our story began with a simple
+                    idea: to provide a platform where people could not only discover delicious recipes from
+                    around the world but also share their own culinary adventures.</p>
+                <!-- Mission -->
+                <p class="card-text">Driven by our love for food and community, we embarked on a mission to
+                    curate a collection of mouthwatering recipes that catered to every taste, dietary
+                    preference, and cooking skill level. From exotic dishes inspired by far-off lands to quick
+                    and easy meals for busy weeknights, Yummy Hub became the go-to destination for culinary
+                    inspiration.</p>
+                <!-- Community Engagement -->
+                <p class="card-text">But our story doesn't end there. We're more than just a recipe database;
+                    we're a vibrant community of foodies, home cooks, and professional chefs who come together
+                    to celebrate the joy of cooking and sharing delicious meals. Through our interactive
+                    features, users can connect with like-minded individuals, swap cooking tips, and even
+                    participate in virtual cooking challenges.</p>
+                <!-- Inclusivity -->
+                <p class="card-text">As Yummy Hub continues to grow and evolve, our commitment to fostering a
+                    welcoming and inclusive food culture remains unwavering. Join us on this gastronomic
+                    adventure, and let's create unforgettable culinary memories together. Welcome to Yummy Hub,
+                    where every bite tells a story.</p>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Contact Section -->
-    <div class="card">
-        <div class="card-body text-center">
-            <h2 class="card-title mb-3">Contact Us <i class="fas fa-envelope"></i></h2>
-            <hr>
-            <!-- Contact Information -->
-            <p class="card-text">If you have any questions, feedback, or inquiries, feel free to reach out to us. We'd
-                love to hear from you!</p>
-            <!-- Email -->
-            <p class="card-text"><i class="fas fa-envelope"></i> <strong>Email:</strong> contact@yummyhub.com</p>
-            <!-- Phone -->
-            <p class="card-text"><i class="fas fa-phone"></i> <strong>Phone:</strong> +123-456-7890</p>
-        </div>
+<!-- Contact Section -->
+<div class="card mb-5">
+    <div class="card-body text-center">
+        <h2 class="card-title mb-3">Contact Us <i class="fas fa-envelope"></i></h2>
+        <hr>
+        <!-- Contact Information -->
+        <p class="card-text">If you have any questions, feedback, or inquiries, feel free to reach out to us. We'd
+            love to hear from you!</p>
+        <!-- Email -->
+        <p class="card-text"><i class="fas fa-envelope"></i> <strong>Email:</strong> contact@yummyhub.com</p>
+        <!-- Phone -->
+        <p class="card-text"><i class="fas fa-phone"></i> <strong>Phone:</strong> +123-456-7890</p>
     </div>
+</div>
 </div>
 {% endblock %}

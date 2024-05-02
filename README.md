@@ -3,6 +3,7 @@
 Welcome to Yummy Hub Recipe Manager! This is a web application designed to help you organize and discover delicious recipes from around the world.
 
 ## Table of Contents
+
 1. [Introduction](#introduction)
 2. [UX and UI](#ux-and-ui)
 3. [Features](#features)
@@ -11,6 +12,20 @@ Welcome to Yummy Hub Recipe Manager! This is a web application designed to help 
 6. [Presentation](#presentation)
 7. [Look and Feel](#look-and-feel)
 8. [Technologies Used](#technologies-used)
+9. [Wireframe](#wireframe)
+10. [Database Structure](#database-structure)
+11. [Getting Started](#getting-started)
+12. [Deployment](#deployment)
+13. [Testing](#testing)
+    - [Manual Testing](#manual-testing)
+    - [Automated Testing](#automated-testing)
+    - [Client Stories Testing](#client-stories-testing)
+    - [Compatibility and Responsive Testing](#compatibility-and-responsive-testing)
+    - [Bugs and Fixes](#bugs-and-fixes)
+14. [Credits](#credits)
+15. [Contributing](#contributing)
+16. [Acknowledgements](#acknowledgements)
+
 
 
 ## Introduction
@@ -69,6 +84,7 @@ The business goal of Yummy Hub Recipe Manager is to attract and retain users by 
 
 ![alt text](recipemanager/static/images/documentation/screenshots/Picture8.png)
 ![alt text](recipemanager/static/images/documentation/screenshots/Picture9.png)
+![alt text](recipemanager/static/images/documentation/screenshots/Picture46.png)
 ![alt text](recipemanager/static/images/documentation/screenshots/Picture10.png)
 ![alt text](recipemanager/static/images/documentation/screenshots/Picture11.png)
 
@@ -558,12 +574,15 @@ To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps
 #### Browser Testing:
 1.	Google Chrome:
 	- Test the application thoroughly on Google Chrome to ensure compatibility and functionality.
+![alt text](recipemanager/static/images/documentation/screenshots/Picture47.png)
 
 2.	Mozilla Firefox:
 	- Verify compatibility and functionality on Mozilla Firefox.
+![alt text](recipemanager/static/images/documentation/screenshots/Picture48.png)
 
 3.	Microsoft Edge:
 	- Test on Microsoft Edge to ensure seamless user experience.
+![alt text](recipemanager/static/images/documentation/screenshots/Picture49.png)    
     
 #### Mobile Testing:
 1.	iPhone and Android Devices:
@@ -581,19 +600,20 @@ To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps
 Here's the relevant code snippet from my application:
 ```bash
 # Route for sharing a recipe
-@app.route('/share_recipe/<unique_identifier>', methods=['GET'])
+@app.route('/share_recipe/<string:unique_identifier>', methods=['GET'])
 def share_recipe(unique_identifier):
-    # Query the recipe by its unique identifier
-    recipe = Recipe.query.filter_by(unique_identifier=unique_identifier).first()
-
-    # If the recipe is found
-    if recipe:
-        # Render the shareable link template with the unique identifier
-        return render_template('shareable_link.html', unique_identifier=unique_identifier)
-    else:
-        # If the recipe is not found, redirect to the home page with a flash message
-        flash('Recipe not found!', 'danger')
+    print("Share Recipe Route Accessed")
+    try:
+        # Try to convert the unique_identifier to UUID
+        unique_identifier = UUID(unique_identifier)
+    except ValueError:
+        # If conversion fails, handle the error 
+        flash('Invalid recipe identifier!', 'danger')
         return redirect(url_for('home'))
+
+    # Query the recipe by its unique identifier
+    recipe = Recipe.query.filter(cast(Recipe.unique_identifier, String) == str(unique_identifier)).first()
+
 
 ```
        
@@ -776,6 +796,8 @@ def delete_recipe(recipe_id):
 - Bootstrap: Bootstrap - Framework for building responsive and visually appealing web pages.
 
 - Font Awesome: Font Awesome - Icon toolkit used for adding scalable icons to the project.
+
+- Logo designed using Canva
 
 ## Contributing
 If you have ideas for improvements or new features, I welcome contributions. Fork the repository, make your changes, and submit a pull request. Together, let's enhance Yummy Hub and make it an even more useful tool for all users. Thank you for your contributions!

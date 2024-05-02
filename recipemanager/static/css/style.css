@@ -18,7 +18,7 @@ body {
 .navbar {
     background-color: #561C24;
     color: #E8D8C4;
-    
+
 }
 
 
@@ -347,25 +347,28 @@ option {
 }
 
 .pagination .page-link {
-    color:#E8D8C4; 
-    background-color: #561C24; 
-    
+    color: #E8D8C4;
+    background-color: #561C24;
+
 }
 
 .pagination .page-link:hover {
-    color:#561C24; 
-    background-color: #E8D8C4; 
-    border-color: #E8D8C4; 
+    color: #561C24;
+    background-color: #E8D8C4;
+    border-color: #E8D8C4;
 }
 
 .pagination .page-item.active .page-link {
-    background-color:#561C24; 
-    border-color: #561C24; 
+    background-color: #561C24;
+    border-color: #561C24;
 }
 
-@media (max-width: 575.98px) {
-    .img-small {
-        max-width: 390px;
-        height: auto;
-    }
+
+.img-container {
+    text-align: center;
+}
+
+.img-container img {
+    max-width: 100%;
+    height: 20%;
 }
