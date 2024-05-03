@@ -370,4 +370,5 @@ option {
 
 .img-container img {
     max-width: 100%;
+    height: auto;
 }
