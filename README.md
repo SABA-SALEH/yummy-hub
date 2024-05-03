@@ -1,3 +1,5 @@
+<img src="recipemanager/static/images/Yummy_Hub.png" alt="alt text" style="width:300px;height:300px;">
+
 # Yummy Hub Recipe Manager
 
 Welcome to Yummy Hub Recipe Manager! This is a web application designed to help you organize and discover delicious recipes from around the world.
@@ -588,6 +590,8 @@ To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps
 1.	iPhone and Android Devices:
 	- Test the application on various mobile devices to ensure compatibility and responsiveness.
 	- Verify that all features work well on mobile browsers such as Chrome and Safari.
+    
+      ![alt text](recipemanager/static/images/documentation/screenshots/phone.jpg) 
 
 ## Bugs and Fixes:
 
