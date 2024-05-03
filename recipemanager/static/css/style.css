@@ -362,13 +362,3 @@ option {
     background-color: #561C24;
     border-color: #561C24;
 }
-
-
-.img-container {
-    text-align: center;
-}
-
-.img-container img {
-    max-width: 100%;
-    height: auto;
-}
