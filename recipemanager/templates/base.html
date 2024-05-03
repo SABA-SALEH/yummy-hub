@@ -91,21 +91,7 @@
             </div>
         </div>
     </nav>
-    <!-- Subscription Messages -->
-    <div class="subscription-messages ">
-        {% with messages = get_flashed_messages(category_filter=["subscription_success", "subscription_error"]) %}
-        {% if messages %}
-        {% for message in messages %}
-        <!-- Flash Message -->
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message }}
-            <!-- Close Button -->
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-    </div>
+   
     <!-- Main Content -->
     <div class="container">
         {% block content %}{% endblock %}

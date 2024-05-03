@@ -665,7 +665,7 @@ def change_password():
 def subscribe():
     email = request.form.get('email')
 
-    flash('You have successfully subscribed to our mailing list!', 'subscription_success')
+    flash('You have successfully subscribed to our mailing list!', 'success')
     return redirect(url_for('home'))
 
 
