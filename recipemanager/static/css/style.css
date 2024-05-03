@@ -362,3 +362,17 @@ option {
     background-color: #561C24;
     border-color: #561C24;
 }
+
+@media only screen and (max-width: 767px) {
+   
+    .img-container {
+        text-align: center;
+        height: auto; 
+    }
+
+    .img-container img {
+        max-width: 100%; 
+        height: auto; 
+    }
+}
+
