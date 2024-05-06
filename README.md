@@ -4,6 +4,10 @@
 
 Welcome to Yummy Hub Recipe Manager! This is a web application designed to help you organize and discover delicious recipes from around the world.
 
+[Live view for Yummy Hub](https://yummy-hub-777593069f12.herokuapp.com/)
+
+![Yummy Hub](recipemanager/static/images/documentation/screenshots/Picture53.png)
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
@@ -32,6 +36,7 @@ Welcome to Yummy Hub Recipe Manager! This is a web application designed to help 
 
 ## Introduction
 Yummy Hub Recipe Manager is a convenient tool for storing, managing, and exploring recipes. Whether you're a cooking enthusiast, a professional chef, or someone looking to try out new dishes, this platform has got you covered.
+
 
 ## UX and UI
 ### Project and Customer Goals:
@@ -63,20 +68,21 @@ The business goal of Yummy Hub Recipe Manager is to attract and retain users by 
 - Existing users can log in securely using their credentials.
 - Sessions are managed to keep users authenticated across different pages.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture1.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture2.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture3.png)
+![User Authentication](recipemanager/static/images/documentation/screenshots/Picture1.png)
+![User Authentication](recipemanager/static/images/documentation/screenshots/Picture2.png)
+![User Authentication](recipemanager/static/images/documentation/screenshots/Picture3.png)
 
 **Recipe Management:**
 
 - Users can add new recipes with titles, descriptions, instructions, images, preparation time, and cooking time.
 - Recipes can be edited or deleted by the user who created them.
 - Ingredients can be added to recipes, including names and quantities.
-![alt text](recipemanager/static/images/documentation/screenshots/Picture25.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture4.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture5.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture6.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture7.png)
+![Recipe Management](recipemanager/static/images/documentation/screenshots/Picture25.png)
+![Recipe Management](recipemanager/static/images/documentation/screenshots/Picture50.png)
+![Recipe Management](recipemanager/static/images/documentation/screenshots/Picture4.png)
+![Recipe Management](recipemanager/static/images/documentation/screenshots/Picture5.png)
+![Recipe Management](recipemanager/static/images/documentation/screenshots/Picture6.png)
+![Recipe Management](recipemanager/static/images/documentation/screenshots/Picture7.png)
 
 **Recipe Viewing and Browsing:**
 
@@ -84,18 +90,18 @@ The business goal of Yummy Hub Recipe Manager is to attract and retain users by 
 - Users can view detailed information about each recipe, including ingredients, instructions, and images.
 - Recipes can be categorized into predefined categories for easier browsing.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture8.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture9.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture46.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture10.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture11.png)
+![Recipe Viewing and Browsing](recipemanager/static/images/documentation/screenshots/Picture8.png)
+![Recipe Viewing and Browsing](recipemanager/static/images/documentation/screenshots/Picture9.png)
+![Recipe Viewing and Browsing](recipemanager/static/images/documentation/screenshots/Picture46.png)
+![Recipe Viewing and Browsing](recipemanager/static/images/documentation/screenshots/Picture10.png)
+![Recipe Viewing and Browsing](recipemanager/static/images/documentation/screenshots/Picture11.png)
 
 **Share Recipe:**
 - Users can share their favorite recipes with friends and family through social media platforms or email.
 - The share feature allows users to generate a unique link to a recipe that they can easily share with others.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture23.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture24.png)
+![Share Recipe](recipemanager/static/images/documentation/screenshots/Picture23.png)
+![Share Recipe](recipemanager/static/images/documentation/screenshots/Picture24.png)
 
 
 **Search Functionality:**
@@ -103,48 +109,50 @@ The business goal of Yummy Hub Recipe Manager is to attract and retain users by 
 - Users can search for recipes using keywords and advanced search criteria, such as category, ingredients, and cooking time, enabling them to quickly discover recipes that match their preferences.
 - Search results are displayed in a user-friendly format, allowing users to easily navigate through the list of relevant recipes and find those of interest.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture12.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture14.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture13.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture15.png)
+![Search Functionality](recipemanager/static/images/documentation/screenshots/Picture12.png)
+![Search Functionality](recipemanager/static/images/documentation/screenshots/Picture14.png)
+![Search Functionality](recipemanager/static/images/documentation/screenshots/Picture13.png)
+![Search Functionality](recipemanager/static/images/documentation/screenshots/Picture15.png)
 
 
 **User Interaction:**
 
 - Users can rate recipes to provide feedback on their experiences.
 - Both registered users and guests can add comments. Guests can do so by entering their name and email.
+- Users have the ability to create, read, update, and delete (CRUD) comments associated with recipes.
 - Comments can be added to recipes, allowing users to share tips, modifications, and reviews.
 - Comments are associated with user accounts and displayed alongside recipes.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture19.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture21.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture20.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture17.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture18.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture16.png)
+![Rate](recipemanager/static/images/documentation/screenshots/Picture19.png)
+![Comments](recipemanager/static/images/documentation/screenshots/Picture21.png)
+![Comments](recipemanager/static/images/documentation/screenshots/Picture20.png)
+![Comments](recipemanager/static/images/documentation/screenshots/Picture17.png)
+![Comments](recipemanager/static/images/documentation/screenshots/Picture18.png)
+![Comments](recipemanager/static/images/documentation/screenshots/Picture16.png)
+![Comments](recipemanager/static/images/documentation/screenshots/Picture51.png)
 
 **User Dashboard:**
 
 - Users have access to a personalized dashboard where they can view statistics and insights about their recipe usage.
 - Statistics may include total recipes, total comments, average rating, most commented recipe, etc.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture27.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture22.png)
+![User Dashboard](recipemanager/static/images/documentation/screenshots/Picture27.png)
+![User Dashboard](recipemanager/static/images/documentation/screenshots/Picture22.png)
 
 **User Profile:**
 
 - Users can view and edit their profile information, including username and email address.
 - Profile information is stored securely and can be updated as needed.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture28.png)
+![User Profile](recipemanager/static/images/documentation/screenshots/Picture28.png)
 
 **Change Password:**
 
 - Users can securely change their passwords to enhance account security.
 - Password change functionality ensures that users can update their passwords easily and efficiently.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture29.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture31.png)
+![Change Password](recipemanager/static/images/documentation/screenshots/Picture29.png)
+![Change Password](recipemanager/static/images/documentation/screenshots/Picture31.png)
 
 
 
@@ -154,20 +162,22 @@ The business goal of Yummy Hub Recipe Manager is to attract and retain users by 
 - Printed recipes are formatted in a user-friendly layout, ensuring clear and concise presentation of ingredients, instructions, and other details.
 - This functionality provides users with the flexibility to conveniently reference recipes without requiring access to the online platform.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture32.png)
-![alt text](recipemanager/static/images/documentation/screenshots/Picture33.png)
+![Print Recipe](recipemanager/static/images/documentation/screenshots/Picture32.png)
+![Print Recipe](recipemanager/static/images/documentation/screenshots/Picture33.png)
 
 **Session Management:**
 
 - Sessions are managed securely to ensure user data privacy and prevent unauthorized access.
 - Users are redirected to appropriate pages based on their authentication status and actions performed.
 
+![Session Management](recipemanager/static/images/documentation/screenshots/Picture52.png)
+
 **Error Handling:**
 
 - Error handling is implemented to provide users with clear and informative error messages in case of invalid inputs or other issues.
 - Flash messages are used to display notifications, such as successful actions or errors, to users.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture34.png)
+![Error Handling](recipemanager/static/images/documentation/screenshots/Picture34.png)
 
 
 
@@ -175,7 +185,7 @@ The business goal of Yummy Hub Recipe Manager is to attract and retain users by 
 
 - The web application is designed with a responsive layout, ensuring optimal viewing and interaction experiences across various devices and screen sizes.
 
-![alt text](recipemanager/static/images/documentation/screenshots/Picture35.png)
+![Responsive Design](recipemanager/static/images/documentation/screenshots/Picture35.png)
 
 
 These features collectively contribute to the functionality and usability of the Yummy Hub Recipe Manager web application, providing users with a seamless experience for managing, exploring, and sharing recipes.
@@ -233,16 +243,16 @@ The application is developed using the following technologies and frameworks:
 My initial ideas, after conducting research, were sketched out using Balsamiq. This method proved effective as it allowed me to gather my thoughts and assess which ideas worked best. However, during the project's completion, I found myself not entirely satisfied with my initial proposals and opted for different ideas. Nonetheless, the overall structure of the wireframes remained consistent and was reflected in the final design.
 
 #### Desktop
-![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide1.PNG)
-![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide2.PNG)
-![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide3.PNG)
-![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide4.PNG)
-![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide5.PNG)
+![Desktop](recipemanager/static/images/documentation/screenshots/wireframe/Slide1.PNG)
+![Desktop](recipemanager/static/images/documentation/screenshots/wireframe/Slide2.PNG)
+![Desktop](recipemanager/static/images/documentation/screenshots/wireframe/Slide3.PNG)
+![Desktop](recipemanager/static/images/documentation/screenshots/wireframe/Slide4.PNG)
+![Desktop](recipemanager/static/images/documentation/screenshots/wireframe/Slide5.PNG)
 
 #### Small Screens
-![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide6.PNG)
-![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide7.PNG)
-![alt text](recipemanager/static/images/documentation/screenshots/wireframe/Slide8.PNG)
+![Small Screens](recipemanager/static/images/documentation/screenshots/wireframe/Slide6.PNG)
+![Small Screens](recipemanager/static/images/documentation/screenshots/wireframe/Slide7.PNG)
+![Small Screens](recipemanager/static/images/documentation/screenshots/wireframe/Slide8.PNG)
 
 ## Database Structure:
 The database consists of the following tables:
@@ -506,39 +516,35 @@ To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps
 1.	HTML Validator:
 	- Validate HTML code for all pages to ensure compliance with standards.
 
-    ![alt text](recipemanager/static/images/documentation/screenshots/Picture37.png)
-    ![alt text](recipemanager/static/images/documentation/screenshots/Picture38.png)
-    ![alt text](recipemanager/static/images/documentation/screenshots/Picture39.png)
+    ![HTML Validator](recipemanager/static/images/documentation/screenshots/Picture37.png)
+    ![HTML Validator](recipemanager/static/images/documentation/screenshots/Picture38.png)
+    ![HTML Validator](recipemanager/static/images/documentation/screenshots/Picture39.png)
 
 
 2.	CSS Validator:
 	- Check stylesheets for compliance with CSS standards and fix any issues.
 
-    ![alt text](recipemanager/static/images/documentation/screenshots/Picture40.png)
+    ![CSS Validator](recipemanager/static/images/documentation/screenshots/Picture40.png)
 
 
 3.	JS Validator:
 	- Validate JavaScript code syntax and maintain code quality.
 
-    ![alt text](recipemanager/static/images/documentation/screenshots/Picture41.png)
+    ![JS Validato](recipemanager/static/images/documentation/screenshots/Picture41.png)
 
 4. Python Linter:
    - Use a Python linter to validate Python code syntax and maintain code quality.
 
-   ![alt text](recipemanager/static/images/documentation/screenshots/Picture43.png)
-   ![alt text](recipemanager/static/images/documentation/screenshots/Picture44.png)
-   ![alt text](recipemanager/static/images/documentation/screenshots/Picture45.png)
-
-
-   
-
+   ![Python Linter](recipemanager/static/images/documentation/screenshots/Picture43.png)
+   ![Python Linter](recipemanager/static/images/documentation/screenshots/Picture44.png)
+   ![Python Linter](recipemanager/static/images/documentation/screenshots/Picture45.png)
 
 
 #### Lighthouse Audit:
 1.  Assess performance, accessibility, and best practices using Lighthouse.
 2.  Optimize performance and address any identified issues.
 
- ![alt text](recipemanager/static/images/documentation/screenshots/Picture42.png)
+ ![Lighthouse](recipemanager/static/images/documentation/screenshots/Picture42.png)
 
 
 ### Client Stories Testing
@@ -576,22 +582,22 @@ To deploy Yummy Hub Recipe Manager web application to Heroku, follow these steps
 #### Browser Testing:
 1.	Google Chrome:
 	- Test the application thoroughly on Google Chrome to ensure compatibility and functionality.
-![alt text](recipemanager/static/images/documentation/screenshots/Picture47.png)
+![Google Chrome](recipemanager/static/images/documentation/screenshots/Picture47.png)
 
 2.	Mozilla Firefox:
 	- Verify compatibility and functionality on Mozilla Firefox.
-![alt text](recipemanager/static/images/documentation/screenshots/Picture48.png)
+![Mozilla Firefox](recipemanager/static/images/documentation/screenshots/Picture48.png)
 
 3.	Microsoft Edge:
 	- Test on Microsoft Edge to ensure seamless user experience.
-![alt text](recipemanager/static/images/documentation/screenshots/Picture49.png)    
+![Microsoft Edge](recipemanager/static/images/documentation/screenshots/Picture49.png)    
     
 #### Mobile Testing:
 1.	iPhone and Android Devices:
 	- Test the application on various mobile devices to ensure compatibility and responsiveness.
 	- Verify that all features work well on mobile browsers such as Chrome and Safari.
     
-      ![alt text](recipemanager/static/images/documentation/screenshots/phone.jpg) 
+      ![Chrome and Safari](recipemanager/static/images/documentation/screenshots/phone.jpg) 
 
 ## Bugs and Fixes:
 
@@ -720,7 +726,7 @@ def add_recipe():
             ingredient_name = request.form.get(f'ingredient_name_{i}')
             ingredient_quantity = request.form.get(f'ingredient_quantity_{i}')
             if ingredient_name and ingredient_quantity:
-                ingredients.append({"name": ingredient_name, "quantity": ingredient_quantity})
+                ingredients.append({ "name": ingredient_name, "quantity": ingredient_quantity})
         
         # Adding the extracted ingredients to the recipe object
         for ingredient in ingredients:

@@ -43,8 +43,8 @@
                             <td>{{ comment.content }}</td>
                             <td>
                                 <!-- Button to delete comment -->
-                                <button type="button" class="btn  delete-comment mb-2" data-comment-id="{{ comment.id }}"><i
-                                        class="fas fa-trash"></i> Delete</button>
+                                <button type="button" class="btn  delete-comment mb-2"
+                                    data-comment-id="{{ comment.id }}"><i class="fas fa-trash"></i> Delete</button>
                                 <!-- Link to edit comment -->
                                 <a href="{{ url_for('edit_comment', comment_id=comment.id) }}" class="btn"><i
                                         class="fas fa-edit"></i> Edit</a>

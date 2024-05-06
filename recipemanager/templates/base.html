@@ -5,6 +5,8 @@
     <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Yummy Hub Recipe Manager: This is a web application designed to help you organize and discover delicious recipes from around the world.">
     <!-- Page title -->
     <title>{% block title %}YUMMY HUB{% endblock %}</title>
     <!-- Bootstrap CSS -->
@@ -15,7 +17,7 @@
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    
+
     {% block css %}{% endblock %}
 </head>
 
@@ -91,7 +93,7 @@
             </div>
         </div>
     </nav>
-   
+
     <!-- Main Content -->
     <div class="container">
         {% block content %}{% endblock %}
@@ -99,46 +101,48 @@
     <!-- Footer -->
     <footer class="text-center footer">
         <div class="container-fluid ">
-        <!-- Social Media Links -->
-        <div class="mb-4">
-            <!-- Facebook -->
-            <a href="https://www.facebook.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-facebook-f"></i></a>
-            <!-- Twitter -->
-            <a href="https://twitter.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-twitter"></i></a>
-            <!-- Google -->
-            <a href="https://www.google.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-google"></i></a>
-            <!-- Instagram -->
-            <a href="https://www.instagram.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-instagram"></i></a>
-            <!-- LinkedIn -->
-            <a href="https://www.linkedin.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
-                    class="fab fa-linkedin-in"></i></a>
-        </div>
-        <!-- Subscription Form -->
-        <div class="mb-4">
-            <form action="{{ url_for('subscribe') }}" method="POST">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <!-- Subscription Message -->
-                        <p class="text-center join"><strong class="important">Don't Miss Out!</strong> Join our mailing
-                            list to receive all of our delicious recipes</p>
-                    </div>
-                    <div class="col-md-4 col-sm-4 ">
-                        <!-- Email Input and Subscribe Button -->
-                        <div class="input-group">
-                            <input type="email" class="form-control" name="email" placeholder="Enter your email here"
-                                aria-label="Email" aria-describedby="button-addon2" required>
-                            <button class="btn subscribebtn" type="submit" id="button-addon2">Subscribe</button>
+            <!-- Social Media Links -->
+            <div class="mb-4">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com" class="btn btn-floating m-1 socialbtn" role="button"
+                    target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <!-- Twitter -->
+                <a href="https://twitter.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
+                        class="fab fa-twitter"></i></a>
+                <!-- Google -->
+                <a href="https://www.google.com" class="btn btn-floating m-1 socialbtn" role="button" target="_blank"><i
+                        class="fab fa-google"></i></a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com" class="btn btn-floating m-1 socialbtn" role="button"
+                    target="_blank"><i class="fab fa-instagram"></i></a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com" class="btn btn-floating m-1 socialbtn" role="button"
+                    target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <!-- Subscription Form -->
+            <div class="mb-4">
+                <form action="{{ url_for('subscribe') }}" method="POST">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <!-- Subscription Message -->
+                            <p class="text-center join"><strong class="important">Don't Miss Out!</strong> Join our
+                                mailing
+                                list to receive all of our delicious recipes</p>
+                        </div>
+                        <div class="col-md-4 col-sm-4 ">
+                            <!-- Email Input and Subscribe Button -->
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="email"
+                                    placeholder="Enter your email here" aria-label="Email"
+                                    aria-describedby="button-addon2" required>
+                                <button class="btn subscribebtn" type="submit" id="button-addon2">Subscribe</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-         </div>
-          <!-- Copyright -->
+        <!-- Copyright -->
         <div class="text-center p-3 copyright ">
             © 2020 Copyright:
             <!-- Yummy Hub Link -->
@@ -151,7 +155,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    
+
     {% block javascript %}{% endblock %}
 </body>
 
