@@ -222,6 +222,11 @@ The application is presented through a web interface with a clean and modern des
 ### Look and Feel:
 The application features a visually appealing design with a clean layout, modern typography, and vibrant colors. The user interface is designed to be user-friendly and accessible, with clear navigation, intuitive controls, and consistent visual elements throughout the application.
 
+I utilized Color Hunt to select my color palette for the app.
+
+![Responsive Design](recipemanager/static/images/documentation/screenshots/Picture54.png)
+![Responsive Design](recipemanager/static/images/documentation/screenshots/Picture55.png)
+
 ### Technologies Used:
 The application is developed using the following technologies and frameworks:
 
